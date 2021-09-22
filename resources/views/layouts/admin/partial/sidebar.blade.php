@@ -1,9 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{asset('user')}}/images/gmail.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="{{asset('/images/icon.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Google Product(Gmail)
+      <span class="brand-text font-weight-light">
+        Inventory(POS)
     </span>
     </a>
 
@@ -15,7 +16,7 @@
           <img src="{{asset('admin')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ url('admin.dashboard') }}" class="d-block">admin</a>
+          <a href="{{ url('admin.dashboard') }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -26,7 +27,7 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="{{url('admin.dashboard')}}" class="nav-link">
+            <a href="{{url('/')}}" class="nav-link">
                 <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -44,20 +45,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('admin/category') }}" class="nav-link">
+                <a href="@route('category.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Categorie's</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{url('admin/category/create')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Category</p>
-                </a>
-              </li>
             </ul>
-          {{-- </li>
-
+           </li>
+{{--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
