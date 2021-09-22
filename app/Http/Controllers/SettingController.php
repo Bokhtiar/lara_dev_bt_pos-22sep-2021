@@ -12,7 +12,8 @@ class SettingController extends Controller
 
     public function index()
     {
-        return view('setting.subAdmin.index');
+        $admins = User::paginate(5);
+        return view('setting.subAdmin.index', compact('admins'));
     }
 
     public function create()
@@ -29,5 +30,11 @@ class SettingController extends Controller
         $user->save();
         Session::flash('insert','ADDED Sucessfully...');
         return back();
+    }
+
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route('subAdmin.index');
     }
 }

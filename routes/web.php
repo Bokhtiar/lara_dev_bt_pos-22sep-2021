@@ -21,3 +21,4 @@ Route::resource('category', CategoryController::class);
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');
 Route::get('/subAdmin/create', [SettingController::class, 'create'])->name('subAdmin.create');
 Route::post('/subAdmin/store', [SettingController::class, 'store'])->name('subAdmin.store');
+Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name('subAdmin.delete');

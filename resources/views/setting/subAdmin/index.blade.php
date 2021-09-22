@@ -1,58 +1,46 @@
-<div class="card">
+@extends('layouts.admin.app')
+@section('title', 'Dashboard')
+
+    @section('admin_content')
+        <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Condensed Full Width Table</h3>
+                <h3 class="card-title text-center"><span class="h3">List Of All Users</span></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table table-condensed">
+                <table class="table table-condensed text-center">
+                @if(!empty($admins))
                   <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Task</th>
-                    <th>Progress</th>
-                    <th style="width: 40px">Label</th>
+                    <th style="width: 10px">Actions</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
                   </tr>
-                  <tr>
-                    <td>1.</td>
-                    <td>Update software</td>
+                @endif
+                  @forelse ($admins as $item)
+                    <tr>
                     <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                      </div>
+                        <a id="delete" href="@route('subAdmin.delete', $item->id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                     </td>
-                    <td><span class="badge bg-danger">55%</span></td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td>Clean database</td>
+                    <td>{{ $item->name }}</td>
                     <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" style="width: 70%"></div>
-                      </div>
+                      {{ $item->email }}
                     </td>
-                    <td><span class="badge bg-warning">70%</span></td>
                   </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td>Cron job running</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar bg-primary" style="width: 30%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-primary">30%</span></td>
-                  </tr>
-                  <tr>
-                    <td>4.</td>
-                    <td>Fix and squish bugs</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar bg-success" style="width: 90%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-success">90%</span></td>
-                  </tr>
+                  @empty
+                  <p class="text-center">User Not Found</p>
+                  @endforelse
+
                 </table>
+                <div>
+                    @php
+                        echo $admins->links();
+                    @endphp
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+    @endsection
+
+@section('js')
+@endsection
