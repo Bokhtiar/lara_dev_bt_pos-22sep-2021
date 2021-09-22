@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
 {
 
     public function index()
     {
-        dd('test');
+        return view('setting.subAdmin.index');
     }
 
     public function create()
@@ -19,6 +22,12 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = hash::make($request->password);
+        $user->save();
+        Session::flash('insert','ADDED Sucessfully...');
+        return back();
     }
 }
