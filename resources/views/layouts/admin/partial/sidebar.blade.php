@@ -39,7 +39,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                Category
+                Products
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
@@ -48,6 +48,12 @@
                 <a href="@route('category.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Categorie's</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('subcategory.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Sub Categorie's</p>
                 </a>
               </li>
             </ul>

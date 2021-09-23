@@ -91,13 +91,9 @@
   </script>
 @endif
 
-@if(Session::has('inactive'))
-  <script type="text/javascript">
-    swal("Incomplate","Incomplate Unsuccessfully","success")
-  </script>
-@endif
 
-@if(Session::has('Active'))
+
+@if(Session::has('status'))
   <script type="text/javascript">
     swal("Complate","Status Update Successfully","success")
   </script>

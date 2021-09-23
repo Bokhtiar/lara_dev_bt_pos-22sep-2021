@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class CategoryController extends Controller
+class SubcategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get(['id', 'category_name','category_description','status']);
-        return view('modules.product.category.index', compact('categories'));
+        $subcategories = Subcategory::get(['category_id', 'subcategory_name', 'subcategory_description', 'status','id']);
+        $categories = Category::all();
+        return view('modules.product.subcategory.index', compact('subcategories', 'categories'));
     }
 
     /**
@@ -39,20 +41,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'category_name'=>' string |required | unique:categories| max:30 | min:2 ',
+            'subcategory_name'=> 'string |required | unique:subcategories| max:30 | min:2 ',
+            'category_id'=> 'required | integer'
         ]);
 
         if($validated){
             try{
                 DB::beginTransaction();
-                $category = Category::create([
-                    'category_name' => $request->category_name,
-                    'category_description' => $request->category_description,
+                $subcategory = Subcategory::create([
+                    'subcategory_name' => $request->subcategory_name,
+                    'category_id' => $request->category_id,
+                    'subcategory_description' => $request->subcategory_description,
                 ]);
-                if (!empty($category)) {
+                if (!empty($subcategory)) {
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');
-                    return redirect()->route('category.index');
+                    return redirect()->route('subcategory.index');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -93,21 +97,23 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'category_name'=>' string |required | unique:categories| max:30 | min:2 '.$id,
+            'subcategory_name'=> 'string |required | unique:subcategories| max:30 | min:2 ',
+            'category_id'=> 'required | integer'
         ]);
 
         if($validated){
             try{
-                $category = Category::find($id);
+                $subcategory = Subcategory::find($id);
                 DB::beginTransaction();
-                $categoryU = $category->update([
-                    'category_name' => $request->category_name,
-                    'category_description' => $request->category_description,
+                $subcategoryU = $subcategory->update([
+                    'subcategory_name' => $request->subcategory_name,
+                    'category_id' => $request->category_id,
+                    'subcategory_description' => $request->subcategory_description,
                 ]);
-                if (!empty($categoryU)) {
+                if (!empty($subcategoryU)) {
                     DB::commit();
-                    Session::flash('update','update Sucessfully...');
-                    return redirect()->route('category.index');
+                    Session::flash('update','Added Sucessfully...');
+                    return redirect()->route('subcategory.index');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -124,27 +130,18 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        SubCategory::find($id)->delete();
         Session::flash('delete','update Sucessfully...');
-        return redirect()->route('category.index');
-
+        return redirect()->route('subcategory.index');
     }
 
-
-    /**
-     * Status change  the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function status($id)
     {
-        $category = Category::find($id);
-        Category::query()->Status($category);
+        $subcategory = Subcategory::find($id);
+        SubCategory::query()->Status($subcategory);
         Session::flash('status','update Sucessfully...');
-        return redirect()->route('category.index');
+        return redirect()->route('subcategory.index');
 
     }
-
 
 }
