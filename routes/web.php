@@ -27,7 +27,7 @@ Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryControll
 
 //brand
 Route::resource('brand', BrandController::class);
-Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryController::class, 'status'])->name('subcategory.status');
+Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, 'status'])->name('brand.status');
 
 //setting
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');

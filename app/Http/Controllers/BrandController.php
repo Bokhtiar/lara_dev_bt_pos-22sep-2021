@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class BrandController extends Controller
 {
@@ -13,7 +16,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('modules.product.brand.index');
+        $brands = Brand::all();
+        return view('modules.product.brand.index', compact('brands'));
     }
 
     /**
@@ -24,18 +28,27 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-    }
+        $validated = $request->validate([
+            'brand_name'=>' string |required | unique:brands| max:30 | min:2 ',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $brand = Brand::create([
+                    'brand_name' => $request->brand_name,
+                    'brand_description' => $request->brand_description,
+                ]);
+                if (!empty($brand)) {
+                    DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
+                    return redirect()->route('brand.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -46,7 +59,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+         $edit = Brand::find($id);
+         $brands = Brand::all();
+        return view('modules.product.brand.index', compact('edit','brands'));
     }
 
     /**
@@ -58,7 +73,28 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $validated = $request->validate([
+            'brand_name'=>' string |required | unique:brands| max:30 | min:2 ',
+        ]);
+
+        if($validated){
+            try{
+                $brand = Brand::find($id);
+                DB::beginTransaction();
+                $brandU = $brand->update([
+                    'brand_name' => $request->brand_name,
+                    'brand_description' => $request->brand_description,
+                ]);
+                if (!empty($brandU)) {
+                    DB::commit();
+                    Session::flash('update','Added Sucessfully...');
+                    return redirect()->route('brand.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -69,6 +105,17 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Brand::find($id)->delete();
+        Session::flash('delete','Added Sucessfully...');
+        return redirect()->route('brand.index');
     }
+
+    public function status($id)
+    {
+        $brand = Brand::find($id);
+        Brand::query()->Status($brand);
+        Session::flash('status','Added Sucessfully...');
+        return redirect()->route('brand.index');
+    }
+
 }
