@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -13,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('modules.product.category.index');
+        $categories = Category::get(['id', 'category_name','category_description','status']);
+        return view('modules.product.category.index', compact('categories'));
     }
 
     /**
@@ -34,7 +38,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'category_name'=>' string |required | unique:categories| max:30 | min:2 ',
+        ]);
+
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $category = Category::create([
+                    'category_name' => $request->category_name,
+                    'category_description' => $request->category_description,
+                ]);
+                if (!empty($category)) {
+                    DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
+                    return redirect()->route('category.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -68,7 +92,28 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'category_name'=>' string |required | unique:categories| max:30 | min:2 '.$id,
+        ]);
+
+        if($validated){
+            try{
+                $category = Category::find($id);
+                DB::beginTransaction();
+                $categoryU = $category->update([
+                    'category_name' => $request->category_name,
+                    'category_description' => $request->category_description,
+                ]);
+                if (!empty($categoryU)) {
+                    DB::commit();
+                    Session::flash('update','update Sucessfully...');
+                    return redirect()->route('category.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -79,6 +124,27 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::find($id)->delete();
+        Session::flash('delete','update Sucessfully...');
+        return redirect()->route('category.index');
+
     }
+
+
+    /**
+     * Status change  the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function status($id)
+    {
+        $category = Category::find($id);
+        Category::query()->Status($category);
+        Session::flash('delete','update Sucessfully...');
+        return redirect()->route('category.index');
+
+    }
+
+
 }

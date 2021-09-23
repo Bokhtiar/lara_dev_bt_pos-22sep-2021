@@ -121,6 +121,9 @@ bootbox.confirm("are you want to delete",function(confirmed){
 };
 });
 });
+
+
+
 </script>
 @yield('js')
 

@@ -16,6 +16,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //category
 Route::resource('category', CategoryController::class);
+Route::get('/category/status/{id}', [App\Http\Controllers\CategoryController::class, 'status'])->name('category.status');
 
 //setting
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');
