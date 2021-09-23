@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::get('/category/status/{id}', [App\Http\Controllers\CategoryController::cl
 
 //subcategory
 Route::resource('subcategory', SubcategoryController::class);
+Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryController::class, 'status'])->name('subcategory.status');
+
+//brand
+Route::resource('brand', BrandController::class);
 Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryController::class, 'status'])->name('subcategory.status');
 
 //setting
