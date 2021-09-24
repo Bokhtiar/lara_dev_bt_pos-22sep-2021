@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
@@ -27,6 +28,10 @@ Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryControll
 
 //brand
 Route::resource('brand', BrandController::class);
+Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, 'status'])->name('brand.status');
+
+//product
+Route::resource('product', ProductController::class);
 Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, 'status'])->name('brand.status');
 
 //setting

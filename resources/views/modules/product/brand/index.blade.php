@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-lg-9 col-md-9">
-            <div class="card-body">
+        <div class="card-body">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
