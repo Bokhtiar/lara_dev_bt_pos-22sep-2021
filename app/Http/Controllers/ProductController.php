@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,7 +27,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        dd('test');
+        $categories = Category::Active()->get();
+        $brands = Brand::query()->Active()->get();
+        $subcategories = Subcategory::query()->Active()->get();
+        return view('modules.product.create_update', compact('categories', 'brands', 'subcategories'));
     }
 
     /**

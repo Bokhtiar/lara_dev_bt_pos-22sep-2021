@@ -13,9 +13,14 @@ trait CrudTrait
         return $q->get();
     }
 
-        public function scopeInActive($q)
+    public function scopeInActive($q)
     {
         return $q->where('status',0);
+    }
+
+    public function scopeActive($q)
+    {
+        return $q->where('status',1);
     }
 
     public function scopeSearchBy($q, $search_key)
