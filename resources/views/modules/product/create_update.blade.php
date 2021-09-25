@@ -7,14 +7,29 @@
 @endsection
 
 @section('admin_content')
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     <x-product></x-product>
     <section class="">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">  <i class="far fa-box"></i>   Product Create</h4>
+                <h4 class="card-title">  <i class="far fa-box"></i>  {{ @$edit ? 'Product Update' : 'Product Create' }} </h4>
             </div>
             <div class="card-body">
-                <form class="form-gorup" action="">
+                @if (isset($edit))
+                <form class="form-gorup" action="@route('product.update',$edit->id)" method="POST">
+                    @method('PUT')
+                    @else
+                    <form class="form-gorup" action="@route('product.store')" method="POST">
+                @endif
+                    @csrf
                     <div class="row">
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                             <label for="">Product Name: <span class="text-danger"> * </span></label>
@@ -33,26 +48,26 @@
                             <label for="">Select Category: <span class="text-danger">*</span> </label>
                             <select name="category_id" id="" class="form-control select2">
                                 <option value="">--Select Category--</option>
-                                @foreach ($categories as $item)
-                                <option value="">{{ $item->category_name }}</option>
+                                @foreach ($categories as $cat)
+                                <option value="{{ $cat->id }}" {{ $cat->id == @$edit->category_id ? 'selected' : '' }}>{{ $cat->category_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                             <label for="">Select Sub-Category: <span class="text-danger"> * </span> </label>
-                            <select name="category_id" id="" class="form-control select2">
+                            <select name="subcategory_id" id="" class="form-control select2">
                                 <option value="">--Select Sub-Category--</option>
-                                @foreach ($subcategories as $item)
-                                <option value="">{{ $item->subcategory_name }}</option>
+                                @foreach ($subcategories as $sub)
+                                <option value="{{ $sub->id }}" {{ $sub->id == @$edit->subcategory_id ? 'selected' : '' }}>{{ $sub->subcategory_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                             <label for="">Select Brands: <span class="text-danger"> * </span> </label>
-                            <select name="category_id" id="" class="form-control select2">
+                            <select name="brand_id" id="" class="form-control select2">
                                 <option value="">--Select Brands--</option>
-                                @foreach ($brands as $item)
-                                <option value="">{{ $item->brand_name }}</option>
+                                @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}" {{ $brand->id == @$edit->brand_id ? 'selected' : '' }}>{{ $brand->brand_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -63,15 +78,22 @@
                             <label for="">Select Warranty</label>
                             <select name="warranty_id" id="" class="form-control select2">
                                 <option value="1">6months</option>
-                                <option value="1">1year</option>
+                                <option value="2">1year</option>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Porduct Image</label>
-                            <input type="file" class="form-control" value="">
+                            <input type="file" class="form-control" name="product_image" value="">
                         </div>
                     </div>
                     {{-- warranty and image --}}
+                    <div class="form-group">
+                        <label for="">Select Unite: <span class="text-danger">*</span></label>
+                            <select name="unit_id" id="" class="form-control select2">
+                                <option value="1">pc</option>
+                                <option value="2">package</option>
+                            </select>
+                    </div>
                     <div class="form-gorup">
                        <div class="card">
                                 <div class="card-header">
@@ -95,8 +117,8 @@
                                     <!-- /.card-header -->
                                     <div class="card-body pad">
                                         <div class="mb-3">
-                                            <textarea class="textarea" name="description" placeholder="Place some text here"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$blog->description  !!}</textarea>
+                                            <textarea class="textarea" name="product_description" placeholder="Place some text here"
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$edit->product_description  !!}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +130,12 @@
                             <i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger" type="reset" name="" id="">
                         </span>
                         <span class="btn btn-primary">
-                           <i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Product" id="">
+                            @if (isset($edit))
+                                <i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Update Product" id="">
+                                @else
+                                <i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Product" id="">
+                                @endif
+
                         </span>
                     </div>
                 </form>

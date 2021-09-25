@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
@@ -32,10 +33,14 @@ Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, '
 
 //product
 Route::resource('product', ProductController::class);
-Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, 'status'])->name('brand.status');
+Route::get('/product/status/{id}', [App\Http\Controllers\ProductController::class, 'status'])->name('product.status');
 
 //setting
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');
 Route::get('/subAdmin/create', [SettingController::class, 'create'])->name('subAdmin.create');
 Route::post('/subAdmin/store', [SettingController::class, 'store'])->name('subAdmin.store');
 Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name('subAdmin.delete');
+
+//purchase product
+Route::resource('purchase', PurchaseController::class);
+Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'show']);

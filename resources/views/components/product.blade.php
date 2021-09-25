@@ -1,6 +1,6 @@
 <div class="card">
 <div class="card-header">
-        <h3 class="card-title"> <i class="fas fa-list"></i> LIST OF BRAND</h3>
+        <h3 class="card-title"> <i class="fas fa-list"></i> LIST OF PRODUCTS</h3>
         <div class="card-tools">
             <div class="input-group form-inline input-group-sm" style="width: 100%;">
                 <p class="form-inline">
