@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Product;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class PurchaseController extends Controller
     }
     public function create()
     {
+        $suppliers = Contact::where('contact_info', 'Supplier')->get();
         $products = Product::Active()->get();
-        return view('modules.purchase.create', compact('products'));
+        return view('modules.purchase.create', compact('products', 'suppliers'));
     }
 
     public function show($id)
