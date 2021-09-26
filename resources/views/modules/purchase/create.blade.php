@@ -6,9 +6,11 @@
     @endsection
 
     @section('admin_content')
-        <section class="">
-            <div>
+        <section class="card">
+            <x-purchase></x-purchase>
+            <div class="card-body">
                 <form action="@route('purchase.store')" method="POST">
+
                     @csrf
                     <div>
                         <label for="">Product Select</label>
