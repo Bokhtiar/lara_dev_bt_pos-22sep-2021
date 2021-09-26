@@ -8,7 +8,8 @@
     @section('admin_content')
         <section class="">
             <div>
-                <form action="">
+                <form action="@route('purchase.store')" method="POST">
+                    @csrf
                     <div>
                         <label for="">Product Select</label>
                         <select name="product_id" class="form-control select2" id="product_id">
@@ -39,6 +40,7 @@
                             </tbody>
                             </table>
                     </div>
+                    <input type="submit" class="btn btn-primary" value="submit">
                 </form>
             </div>
         </section>

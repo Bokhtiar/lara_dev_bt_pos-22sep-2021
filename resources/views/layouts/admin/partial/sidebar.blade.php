@@ -88,6 +88,27 @@
               </li>
             </ul>
            </li>
+
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
+              <p>
+                Contact
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  @php
+                      $customer = 'customer'
+                  @endphp
+                <a href="@route('contact.create')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Create Contact List</p>
+                </a>
+              </li>
+            </ul>
+           </li>
 {{--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

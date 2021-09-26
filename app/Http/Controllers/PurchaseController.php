@@ -23,4 +23,9 @@ class PurchaseController extends Controller
         $product = Product::find($id);
         return response()->json($product, 200);
     }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

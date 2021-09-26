@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Auth;
@@ -44,3 +45,7 @@ Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name
 //purchase product
 Route::resource('purchase', PurchaseController::class);
 Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'show']);
+
+//contact controller
+Route::resource('contact', ContactController::class);
+Route::get('/contact/status/{id}', [App\Http\Controllers\ContactController::class, 'status'])->name('contact.status');
