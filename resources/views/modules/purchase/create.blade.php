@@ -70,13 +70,26 @@
                         type: 'GET',
                         dataType: 'json',
                         success:function(data){
-                            $('#table_value').append('<tr>   <td>'+data.product_name+'</td>    <td> <input class="form-control form-control-sm" type="number" value="1" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discrount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax"> </td>          <td> <input class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin"> </td>       <td> <input class="form-control form-control-sm" type="number" value="19023" name="selling_price" id="selling_price"> </td>                </tr>')
+                            $('#table_value').append('<tr>   <td>'+data.product_name+'</td>    <td> <input class="form-control form-control-sm" type="number" value="0" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discrount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value="5"> </td>          <td> <input type="number" class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>       <td> <input class="form-control form-control-sm" type="number" value="" name="selling_price" id="selling_price"> </td>                </tr>')
 
 
-                               $("#").on('input', function(){
-                                   var quantity = $(this).val();
 
-                               })
+                            $("input").keyup(function(){
+                                var quantity = $('#purchase_quantity').val();
+                                var unit_cost_before_discount = $('#unit_cost_before_discount').val();
+                                var tax = $('#tax').val();
+                                var total = quantity * unit_cost_before_discount + tax
+                                $('#line_total').val(total)
+
+                                var profit_margin = $('#profit_margin').val();
+                                var profitSellingTotal = total + profit_margin;
+                                $('#selling_price').val(profitSellingTotal)
+
+                            });
+
+
+
+
 
 
 
