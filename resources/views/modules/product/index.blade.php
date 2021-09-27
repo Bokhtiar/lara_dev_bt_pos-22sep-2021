@@ -40,7 +40,7 @@
                                 <button type="submit" class="dropdown-item "><i
                                         class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="@route('purchase.product',$item->id)" class="dropdown-item">Purchase</a>
+                            
                         </div>
                     </div>
 

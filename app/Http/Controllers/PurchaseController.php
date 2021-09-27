@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\Purchase;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
+use Session;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
     public function index( )
     {
-        return view('modules.purchase.index');
+        $purchases = Purchase::get(['id','product_id', 'supplier_id', 'amount', 'line_total']);
+        return view('modules.purchase.index',compact('purchases'));
     }
     public function create()
     {
@@ -22,12 +26,70 @@ class PurchaseController extends Controller
 
     public function show($id)
     {
+        $purchase = Purchase::find($id);
+        return view('modules.purchase.show', compact('purchase'));
+    }
+
+    public function product_show($id)
+    {
         $product = Product::find($id);
         return response()->json($product, 200);
     }
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $validated = $request->validate([
+            'supplier_id'=>'required',
+            'purchase_date'=>'required',
+            'reference_no'=>'required',
+            'product_id' => 'required',
+            'purchase_quantity' => 'required',
+            'unit_cost_before_discount' => 'required',
+            'amount' => 'required',
+            'purchase_date' => 'required',
+            'paid_on_date' => 'required',
+            'payment_method'=> 'required'
+        ]);
+
+        if($validated){
+
+            try{
+
+                DB::beginTransaction();
+                $purchase = Purchase::create([
+                    'supplier_id' => $request->supplier_id,
+                    'reference_no' => $request->reference_no,
+                    'purchase_date' => $request->purchase_date,
+                    'attech_file' => 'NOT FILE',
+                    'note' => $request->note,
+                    'product_id' => $request->product_id,
+                    'purchase_quantity' => $request->purchase_quantity,
+                    'unit_cost_before_discount' => $request->unit_cost_before_discount,
+                    'discount_percent' => $request->discount_percent,
+                    'unit_cost_before_tax' => $request->unit_cost_before_tax,
+                    'tax' => $request->tax,
+                    'line_total' => $request->line_total,
+                    'profit_margin' => $request->profit_margin,
+                    'unit_selling_price' => $request->unit_selling_price,
+                    'amount' => $request->amount,
+                    'paid_on_date' => $request->paid_on_date,
+                    'payment_method' => $request->payment_method,
+                    'bkash' => $request->bkash,
+                    'rocket' => $request->rocket,
+                    'nagud' => $request->nagud,
+                    'bank' => $request->bank,
+                ]);
+                if (!empty($purchase)) {
+                    DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
+                    return redirect()->route('purchase.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
+
+
 }

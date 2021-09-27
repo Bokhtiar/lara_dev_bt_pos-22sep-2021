@@ -44,7 +44,7 @@ Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name
 
 //purchase product
 Route::resource('purchase', PurchaseController::class);
-Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'show']);
+Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
 
 //contact controller
 Route::resource('contact', ContactController::class);

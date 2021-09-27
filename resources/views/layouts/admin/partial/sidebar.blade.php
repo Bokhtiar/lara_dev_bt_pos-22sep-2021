@@ -83,7 +83,7 @@
               <li class="nav-item">
                 <a href="@route('purchase.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Purchase Create</p>
+                  <p>Purchase</p>
                 </a>
               </li>
             </ul>
