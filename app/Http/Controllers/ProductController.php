@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Session;
@@ -21,7 +22,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('modules.product.index', compact('products'));
+        $purchase = Purchase::all();
+        foreach($purchase as $p){
+            $par = $p->product_id;
+            $par = $p->purchase_quantity;
+        }
+        return view('modules.product.index', compact('products', 'purchase','par'));
     }
 
     /**
@@ -168,6 +174,16 @@ class ProductController extends Controller
         Product::query()->Status($product);
         Session::flash('status','update Sucessfully...');
         return redirect()->route('product.index');
-
     }
+
+    public function aleart()
+    {
+        $purchase = Purchase::all();
+        foreach($purchase as $p){
+                $products = Product::where('alert_quantity', '>=', $p->purchase_quantity)->get();
+        }
+        return view('modules.product.alert', compact('products'));
+    }
+
+
 }

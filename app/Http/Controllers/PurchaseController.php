@@ -79,6 +79,10 @@ class PurchaseController extends Controller
                     'nagud' => $request->nagud,
                     'bank' => $request->bank,
                 ]);
+                $product = Product::find($request->product_id);
+                $product['purchase_id'] = $purchase->id;
+                $product->save();
+
                 if (!empty($purchase)) {
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');

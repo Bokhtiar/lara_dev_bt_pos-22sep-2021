@@ -10,9 +10,9 @@ class Product extends Model
 {
     use HasFactory;
     use CrudTrait;
-    
+
     protected $fillable = [
-        'product_name', 'product_sku', 'alert_quantity', 'category_id', 'subcategory_id','brand_id','unit_id','warranty_id','product_image','product_description','status'
+        'product_name', 'purchase_id', 'product_sku', 'alert_quantity', 'category_id', 'subcategory_id','brand_id','unit_id','warranty_id','product_image','product_description','status'
     ];
     public function category()
     {
@@ -25,5 +25,9 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+    public function purchase()
+    {
+        return $this->belongsTo(Purchase::class);
     }
 }

@@ -34,6 +34,8 @@ Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, '
 
 //product
 Route::resource('product', ProductController::class);
+Route::get('aleart', [App\Http\Controllers\ProductController::class, 'aleart']);
+
 Route::get('/product/status/{id}', [App\Http\Controllers\ProductController::class, 'status'])->name('product.status');
 
 //setting

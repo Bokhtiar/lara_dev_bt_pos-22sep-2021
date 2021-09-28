@@ -50,6 +50,14 @@
                   <p>Product's</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ url('aleart') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Alert Product</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="@route('category.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
@@ -86,6 +94,7 @@
                   <p>Purchase</p>
                 </a>
               </li>
+
             </ul>
            </li>
 
