@@ -8,7 +8,7 @@
 @endsection
 
 @section('admin_content')
-<x-product></x-product>
+<x-alert_quantity></x-alert_quantity>
 <div class="card-body">
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
