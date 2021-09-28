@@ -20,7 +20,7 @@ class CreatePurchasesTable extends Migration
             $table->string('purchase_date');
             $table->string('attech_file')->nullable();
             $table->longText('note')->nullable();
-            $table->integer('product_id');
+            $table->integer('product_id')->uniqid();
             $table->string('purchase_quantity');
             $table->string('unit_cost_before_discount');
             $table->string('discount_percent')->nullable();

@@ -15,7 +15,8 @@
             <tr>
                 <th>Action</th>
                 <th>Product Name </th>
-                <th>Category</th>
+                <th>Alert Quantity</th>
+                <th class="bg-danger">In-Stcok</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -28,7 +29,7 @@
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         </button>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="@route('product.edit', $item->id)"><i
+                            <a class="dropdown-item" href="@route('purchase.edit', $item->purchase->id)"><i
                                     class="btn btn-info btn-sm far fa-edit"></i></a>
                             <!-- Start Large modal -->
                             <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
@@ -46,7 +47,8 @@
 
                 </td>
                 <td>{!! $item->product_name !!}</td>
-                <td>{!! $item->category->category_name !!}</td>
+                <td>{!! $item->alert_quantity !!}</td>
+                <td class="bg-danger">{!! $item->purchase->purchase_quantity !!}</td>
                 <td>
                     @if($item->status == 1)
                     <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"
@@ -101,8 +103,9 @@
         <tfoot>
             <tr>
                 <th>Action</th>
-                <th>Brand</th>
-                <th>Description</th>
+                <th>Product Name </th>
+                <th>Alert Quantity</th>
+                <th class="bg-danger">In-Stcok</th>
                 <th>Status</th>
             </tr>
         </tfoot>
