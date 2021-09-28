@@ -91,5 +91,22 @@ class PurchaseController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $purchase = Purchase::find($id);
+        $suppliers = Contact::where('contact_info', 'Supplier')->get();
+        $products = Product::Active()->get();
+        return view('modules.purchase.edit', compact('purchase','suppliers','products'));
+    }
+
+    public function destroy($id)
+    {
+        Purchase::find($id)->delete();
+        Session::flash('delete','update Sucessfully...');
+        return redirect()->route('purchase.index');
+
+    }
+
+
 
 }

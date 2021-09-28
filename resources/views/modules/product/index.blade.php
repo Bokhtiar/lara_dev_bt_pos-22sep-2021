@@ -34,13 +34,13 @@
                             <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="btn btn-sm btn-success fas fa-eye"></i>
                             </button>
-                            <form action="@route('product.destroy',$item->id)" method="POST">
+                            <form action="@route('purchase.destroy',$item->id)" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item "><i
                                         class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                             </form>
-                            
+
                         </div>
                     </div>
 
