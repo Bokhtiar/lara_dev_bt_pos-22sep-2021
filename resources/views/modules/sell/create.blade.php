@@ -22,8 +22,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group my-3">
-                                    <p>Customer Phone : 0983982323</p>
+                                <div class="form-group my-3" id="customer_detail">
                                 </div>
                             </div><!--customer site done -->
                             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -53,8 +52,20 @@
         })
         //end of select2
 
-        $(document).ready(function {
-            alert('hi');
+        $(document).ready(function() {
+            $('#customer_id').on('change', function(e){
+                var id = e.target.value
+                if(id){
+                    $.ajax({
+                        url : '/customer/info/'+id,
+                        dataType : 'Json',
+                        type : 'GET',
+                        success:function(data){
+                            $('#customer_detail').append('<p>Customer Phone: '+data.phone+'</p> <p>Customer Email: '+data.email+'</p> <h5>Locations</h5> <p class="ml-2"> '+data.city+' '+data.state+' '+data.country+'</p> ')
+                        }//data return end
+                    })//ajax end
+                }
+            })
         })
     </script>
     @endsection

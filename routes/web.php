@@ -52,6 +52,8 @@ Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product
 //contact controller
 Route::resource('contact', ContactController::class);
 Route::get('/contact/status/{id}', [App\Http\Controllers\ContactController::class, 'status'])->name('contact.status');
+Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class, 'customer_info']);
+
 
 //sell product
 Route::resource('sell', SellProductController::class);

@@ -170,4 +170,10 @@ class ContactController extends Controller
         return redirect()->route('contact.index');
 
     }
+
+    public function customer_info($id)
+    {
+        $contact = Contact::find($id);
+        return response()->json($contact, 200);
+    }
 }
