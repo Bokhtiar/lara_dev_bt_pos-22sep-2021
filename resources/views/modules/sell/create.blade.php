@@ -25,9 +25,77 @@
                                 <div class="form-group my-3" id="customer_detail">
                                 </div>
                             </div><!--customer site done -->
-                            <div class="col-sm-12 col-md-4 col-lg-4">
-
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-6 col-md-6">
+                                        <label for="">Invoice Date</label>
+                                        <input type="date" class="form-control" name="invoice_date" id="">
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6 col-md-6">
+                                        <label for="">Invoice No.</label>
+                                        <input type="number" class="form-control" name="invoice_no" placeholder="Invoice No." id="">
+                                    </div>
+                                </div>
                             </div><!--others information-->
+                        </div>
+
+                        <div class="my-3">
+                            <div class="">
+                                <div class="card-header"></div>
+                                <div class="">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <label for="">Select Product</label>
+                                            <select name="product_id" id="product_id" class="form-control select2">
+                                                <option value="">--Select Product--</option>
+                                                @foreach ($products as $item)
+                                                <option value="{{ $item->id }}">{{ $item->product_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--table start -->
+                                        <table class="table table-striped my-3">
+                                            <thead class="bg-success">
+                                                <tr>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Unit Price</th>
+                                                <th scope="col">Discount</th>
+                                                <th scope="col">X</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>x</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>x</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                                <td>x</td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                            <div class="float-right">
+                                                <button class="btn btn-info">Items: 0.00</button>
+                                                <button class="btn btn-primary">Total Amount: 0.00</button>
+                                            </div>
+                                    <!--table start -->
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -65,7 +133,8 @@
                         }//data return end
                     })//ajax end
                 }
-            })
+            })//customer end
+
         })
     </script>
     @endsection

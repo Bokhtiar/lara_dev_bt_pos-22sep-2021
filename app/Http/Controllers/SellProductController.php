@@ -27,7 +27,7 @@ class SellProductController extends Controller
     {
         $products = Product::whereNotNull('purchase_id')->Active()->get();
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
-        return view('modules.sell.create', compact('products', 'contacts'));
+    return view('modules.sell.create', compact('products', 'contacts'));
     }
 
     /**
