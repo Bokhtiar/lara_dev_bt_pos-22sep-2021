@@ -6,7 +6,34 @@
     @endsection
 
     @section('admin_content')
-    
+        <section class="">
+            <div class="card container">
+                <x-sell></x-sell>
+                <div class="body">
+                    <form action="" class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-gorup">
+                                    <label for="">Select Customer <span class="text-danger">*</span></label>
+                                    <select name="customer_id" id="customer_id" class="form-control select2">
+                                        <option value="">--select customer--</option>
+                                        @foreach ($contacts as $item)
+                                        <option value="{{ $item->id }}">{{ $item->prefix_name .' '. $item->f_name .' '. $item->l_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group my-3">
+                                    <p>Customer Phone : 0983982323</p>
+                                </div>
+                            </div><!--customer site done -->
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+
+                            </div><!--others information-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
     @endsection
 
     @section('js')
@@ -25,5 +52,9 @@
             $('.select2').select2()
         })
         //end of select2
+
+        $(document).ready(function {
+            alert('hi');
+        })
     </script>
     @endsection

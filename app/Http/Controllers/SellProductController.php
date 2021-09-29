@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class SellProductController extends Controller
     public function create()
     {
         $products = Product::whereNotNull('purchase_id')->Active()->get();
-        return view('modules.sell.create', compact('products'));
+        $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
+        return view('modules.sell.create', compact('products', 'contacts'));
     }
 
     /**
