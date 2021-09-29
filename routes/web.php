@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SellProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
@@ -51,3 +52,7 @@ Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product
 //contact controller
 Route::resource('contact', ContactController::class);
 Route::get('/contact/status/{id}', [App\Http\Controllers\ContactController::class, 'status'])->name('contact.status');
+
+//sell product
+Route::resource('sell', SellProductController::class);
+Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);

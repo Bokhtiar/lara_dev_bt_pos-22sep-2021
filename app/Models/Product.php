@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Product extends Model
 {
@@ -30,4 +31,12 @@ class Product extends Model
     {
         return $this->belongsTo(Purchase::class);
     }
+
+    public function scopeAlert()
+    {
+        foreach(Purchase::all() as $p){
+                return Product::whereNotNull('purchase_id')->where('alert_quantity', '>=', $p->purchase_quantity)->get();
+        }
+    }
+
 }

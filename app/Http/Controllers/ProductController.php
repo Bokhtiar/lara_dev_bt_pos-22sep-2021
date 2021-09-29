@@ -178,10 +178,7 @@ class ProductController extends Controller
 
     public function aleart()
     {
-        $purchase = Purchase::all();
-        foreach($purchase as $p){
-                $products = Product::where('alert_quantity', '>=', $p->purchase_quantity)->get();
-        }
+        $products = Product::query()->Alert();
         return view('modules.product.alert', compact('products'));
     }
 
