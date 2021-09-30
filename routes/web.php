@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SellProductController;
@@ -57,4 +58,10 @@ Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class
 
 //sell product
 Route::resource('sell', SellProductController::class);
-Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
+Route::get('store/sell/{id}', [SellProductController::class, 'store']);
+Route::post('sell/quantity/{id}', [SellProductController::class, 'quantity_update'])->name('sell.quantity');
+Route::get('sell/author/all', [SellProductController::class, 'sell_author_all']);
+Route::get('quantity-update', [SellProductController::class, 'quantity_update']);
+
+//order
+Route::resource('order', OrderController::class);

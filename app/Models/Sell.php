@@ -4,26 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Sell extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'customer_id',
         'product_id',
-        'admin_id',
+        'author',
         'quantity',
         'order_id',
         'status'
     ];
 
-    public function customer()
-    {
-        return $this->belongsTo(Contact::class);
-    }
     public function product()
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Product::class);
+    }
+    public function purchase()
+    {
+        return $this->belongsTo(Purchase::class);
     }
     public function admin()
     {
@@ -33,4 +33,13 @@ class Sell extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public static function item_cart(){
+
+        $sell=Self::where('author',Auth::id())
+                ->where('order_id',NULL)
+                ->get();
+
+        return $sell;
+        }
 }

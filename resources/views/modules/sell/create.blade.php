@@ -4,13 +4,22 @@
     @section('css')
     <link rel="stylesheet" href="{{ asset('admin') }}/plugins/select2/select2.min.css">
     @endsection
-
+        @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+        @endif
     @section('admin_content')
         <section class="">
             <div class="card container">
                 <x-sell></x-sell>
                 <div class="body">
-                    <form action="" class="form-group">
+                    <form action="@route('order.store') " method="POST" class="form-group">
+                        @csrf
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-gorup">
@@ -49,7 +58,7 @@
                                             <select name="product_id" id="product_id" class="form-control select2">
                                                 <option value="">--Select Product--</option>
                                                 @foreach ($products as $item)
-                                                <option value="{{ $item->id }}">{{ $item->product_name }}</option>
+                                                <option value="{{ $item->id }}"> {{ $item->product_name }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -61,42 +70,114 @@
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Unit Price</th>
-                                                <th scope="col">Discount</th>
                                                 <th scope="col">X</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>x</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>x</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                                <td>x</td>
-                                                </tr>
+                                                @php
+                                                    $total =0;
+                                                @endphp
+                                                @foreach ($sells as $item)
+                                                    <tr>
+                                                        <td>{{ $item->product->product_name }}</td>
+                                                        <td>
+                                                            <form method="POST" action="@route('sell.quantity', $item->id)" class="form-inline">
+                                                                @csrf
+                                                                <input type="number"  name="quantity" value="{{ $item->quantity }}" id="">
+                                                                <input type="submit" name="" value="submit" id="">
+                                                            </form>
+                                                        </td>
+                                                            {{ $total += $item->product->unit_selling_price * $item->quantity }}
+                                                        <td>{{ $item->product->unit_selling_price }} Tk</td>
+                                                        <td>X</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             </table>
                                             <div class="float-right">
                                                 <button class="btn btn-info">Items: 0.00</button>
-                                                <button class="btn btn-primary">Total Amount: 0.00</button>
+                                                <button class="btn btn-primary">Total Amount: {{ $total }} Tk</button>
                                             </div>
                                     <!--table start -->
                                 </div>
                             </div>
                         </div>
+                        <br><br>
+                        <div class="">
+                            <label for="">Note</label>
+                            <textarea placeholder="note" name="note" id="" cols="10" rows="3" class="form-control"></textarea>
+                        </div>
+                        <div class="card my-4">
+                        <div class="card-header">
+                            <h4 class="card-title">Payment Info.</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <label for="">Amount. <span class="text-danger">*</span></label>
+                                    <input type="number" name="pay_amount" class="form-control" id="">
+                                </div>
+                                <input type="hidden" name="total_amount" value="{{ $total }}" id="">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <label for="">Sell on. <span class="text-danger">*</span></label>
+                                    <input type="date" name="sell_on_date" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="form-control">
+                                <label for="">Payment Methods</label>
+                                <select class="form-control select2" name="payment_method" id="payment_method">
+                                    <option value="">--select payment method--</option>
+                                    <option value="Bkash">Bkash</option>
+                                    <option value="Nagud">Nagud</option>
+                                    <option value="Rocket">Rocket</option>
+                                    <option value="Bank">Bank</option>
+                                </select>
+                            </div>
+
+                            <!--pyament mehtods start here -->
+                            <div class="form-gorup my-3 card" id="Bkash" style="display: none">
+                                <p class="card-header">
+                                    <h5 class="card-title">Bkash Payment Methods <span class="text-danger">*</span></h5>
+                                </p>
+                                <p class="card-body">
+                                <label for="">Bkash Number</label>
+                                <input type="number" class="form-control" placeholder="bkash number" name="bkash">
+                                </p>
+                            </div><!--bkash-->
+                            <div class="form-gorup my-3 card" id="Nagud" style="display: none">
+                                <p class="card-header">
+                                    <h5 class="card-title">Nagud Payment Methods</h5>
+                                </p>
+                                <p class="card-body">
+                                <label for="">Nagud Number</label>
+                                <input type="number" class="form-control" placeholder="nagud number" name="nagud">
+                                </p>
+                            </div><!--nagud-->
+                            <div class="form-gorup my-3 card" id="Rocket" style="display: none">
+                                <p class="card-header">
+                                    <h5 class="card-title">Rocket Payment Methods</h5>
+                                </p>
+                                <p class="card-body">
+                                <label for="">Rocket Number</label>
+                                <input type="number" class="form-control" placeholder="Rocket number" name="rocket">
+                                </p>
+                            </div><!--bkash-->
+                            <div class="form-gorup my-3 card" id="Bank" style="display: none">
+                                <p class="card-header">
+                                    <h5 class="card-title">Bank Payment Methods</h5>
+                                </p>
+                                <p class="card-body">
+                                <label for="">Bank Account Number</label>
+                                <input type="number" class="form-control" placeholder="bank account number" name="bank">
+                                </p>
+                            </div><!--bkash-->
+                            <!--payment methods end here -->
+
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <input type="submit" class="btn btn-primary" value="Order Confirm">
+                    </div>
                     </form>
                 </div>
             </div>
@@ -133,8 +214,66 @@
                         }//data return end
                     })//ajax end
                 }
-            })//customer end
+            });//customer end
 
-        })
+            $('#product_id').on('change', function(e){
+                var id = e.target.value
+                if(id){
+                    $.ajax({
+                        url : '/store/sell/'+id,
+                        type: 'GET',
+                        dataType: 'Json',
+                        success:function(data){
+                            alert('data added successfully');
+                        }//eend ajax url
+                    })
+                }//end if condition
+            });//product id
+
+
+
+            $('#payment_method').on('change', function(e){
+                var payment_name = e.target.value
+                $('#Bkash').hide();
+                $('#Nagud').hide();
+                $('#Rocket').hide();
+                $('#Bank').hide();
+                if(payment_name == 'Bkash'){
+                    $('#Bkash').show();
+                }else if(payment_name == 'Nagud'){
+                    $('#Nagud').show();
+                }else if(payment_name == 'Rocket'){
+                    $('#Rocket').show();
+                }else if (payment_name == 'Bank'){
+                    $('#Bank').show();
+                }
+            })
+
+            // $.ajax({
+            //     url : '/sell/author/all',
+            //     type: 'GET',
+            //     dataType: 'json',
+            //     success:function(data) {
+            //         console.log(data);
+            //         data.forEach(data => {
+            //             $('#table_row').append('<td>'+data.product.product_name+'</td> <td> <form id="qty" method="post" action=""> <input type="hidden" name="id" value="'+data.id+'">   <input id="quantity_update" type="number" value="'+data.quantity+'" name="quantity_update"> <button type="submit">Submit</button> </form> </td> <td>'+data.product.unit_selling_price+'</td> <td>x</td>')
+            //             var amount = 0
+            //             var amount += data.product.unit_selling_price * data.quantity
+            //         });
+            //         console.log(amount)
+
+            //     }
+            // });
+
+            // $("#qty").on("submit", function (e) {
+            //     e.preventDefault();
+            //     var q =  $('#quantity_update').val();
+
+            // });//form end
+
+        })//main document end
+
+
+
     </script>
     @endsection

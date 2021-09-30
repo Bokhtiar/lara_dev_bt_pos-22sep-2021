@@ -81,6 +81,7 @@ class PurchaseController extends Controller
                 ]);
                 $product = Product::find($request->product_id);
                 $product['purchase_id'] = $purchase->id;
+                $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
 
                 if (!empty($purchase)) {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\Sell;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SellProductController extends Controller
 {
@@ -26,8 +28,9 @@ class SellProductController extends Controller
     public function create()
     {
         $products = Product::whereNotNull('purchase_id')->Active()->get();
+        $sells = Sell::with('product','purchase')->where('Author', Auth::id())->where('order_id', null)->get();
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
-    return view('modules.sell.create', compact('products', 'contacts'));
+    return view('modules.sell.create', compact('products', 'contacts','sells'));
     }
 
     /**
@@ -36,9 +39,24 @@ class SellProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $sell = Sell::create([
+            'product_id' => $id,
+            'author' => Auth::id(),
+        ]);
+        return response()->json($sell, 200);
+    }
+
+    public function sell_author_all()
+    {
+        $sells = Sell::with('product','purchase')->where('Author', Auth::id())->where('order_id', null)->get();
+        return response()->json($sells, 200);
+    }
+
+    public function quantity_update(Request $request)
+    {
+        dd($request->all());
     }
 
     /**

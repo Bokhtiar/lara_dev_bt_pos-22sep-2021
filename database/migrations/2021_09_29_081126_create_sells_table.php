@@ -16,7 +16,7 @@ class CreateSellsTable extends Migration
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('admin_id');
+            $table->integer('author');
             $table->integer('quantity')->default(1);
             $table->integer('order_id')->nullable();
             $table->tinyInteger('status')->default(0);
