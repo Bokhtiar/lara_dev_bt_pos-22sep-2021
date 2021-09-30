@@ -100,11 +100,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php $total = 0; ?>
                     @foreach (App\Models\Sell::where('order_id',$item->id)->get() as $sell)
                       <tr>
                       <td>{{ $sell->quantity}}</td>
                       <td>{{ $sell->product->product_name }}</td>
                       <td>#{{ $sell->id }}</td>
+                        {{ $total += $sell->product->unit_selling_price * $sell->quantity }}
                       <td>{{ $sell->product->unit_selling_price }} Tk</td>
                     </tr>
                     @endforeach
@@ -119,38 +121,32 @@
                 <!-- accepted payments column -->
                 <div class="col-6">
                   <p class="lead">Payment Methods:</p>
-                  <img src="{{ asset('admin') }}/dist/img/credit/visa.png" alt="Visa">
-                  <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                  <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                  <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
+                  <img height="60" width="100px" src="{{ asset('admin') }}/b.png" alt="Visa">
+                  <img height="40" width="100px" src="{{ asset('admin') }}/r.png" alt="Visa">
+                  <img height="40" width="100px" src="{{ asset('admin') }}/n.png" alt="Visa">
+                  <img height="40" width="100px" src="{{ asset('admin/bb.jpg') }}" alt="Mastercard">
                   <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                   {{ $item->note }}
                   </p>
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
-                  <p class="lead">Amount Due 2/22/2014</p>
+                  <p class="lead">Amount pay : {{ $item->created_at->diffForHumans() }}</p>
 
                   <div class="table-responsive">
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
+                        <td>{{ $total }} Tk</td>
                       </tr>
-                      <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
-                      </tr>
+
                       <tr>
                         <th>Shipping:</th>
                         <td>$5.80</td>
                       </tr>
                       <tr>
                         <th>Total:</th>
-                        <td>$265.24</td>
+                        <td>{{ $total }} Tk</td>
                       </tr>
                     </table>
                   </div>
