@@ -171,6 +171,31 @@
               </li>
             </ul>
            </li>
+
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
+              <p>
+                Reports
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="@route('day.report')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Today Report</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="@route('month.report')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Month Report</p>
+                </a>
+              </li>
+            </ul>
+           </li>
 {{--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

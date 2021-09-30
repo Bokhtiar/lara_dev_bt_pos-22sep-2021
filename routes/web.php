@@ -6,12 +6,14 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SellProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Subcategory;
+use Facade\FlareClient\Report;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,3 +68,7 @@ Route::get('quantity-update', [SellProductController::class, 'quantity_update'])
 //order
 Route::resource('order', OrderController::class);
 Route::get('order/status/{id}', [OrderController::class, 'status'])->name('order.status');
+
+//report
+Route::get('day/report', [ReportController::class, 'day'])->name('day.report');
+Route::get('month/report', [ReportController::class, 'month'])->name('month.report');

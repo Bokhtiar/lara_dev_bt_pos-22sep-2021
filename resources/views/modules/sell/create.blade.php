@@ -13,7 +13,9 @@
                     </ul>
                 </div>
         @endif
+
     @section('admin_content')
+    {{ $dateE }}
         <section class="">
             <div class="card container">
                 <x-sell></x-sell>
