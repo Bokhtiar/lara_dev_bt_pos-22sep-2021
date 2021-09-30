@@ -17,8 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::all();
-        return view('moduels.order.index', compact('order'));
+        $orders = Order::all();
+        return view('modules.order.index', compact('orders'));
     }
 
     /**
@@ -72,7 +72,7 @@ class OrderController extends Controller
                     }
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');
-                    return redirect('/');
+                    return redirect()->route('order.index');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -89,7 +89,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $item  = Order::find($id);
+        return view('modules.order.detail', compact('item'));
     }
 
     /**
@@ -124,5 +125,13 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status($id)
+    {
+        $order = Order::find($id);
+        Order::query()->Status($order);
+        Session::flash('status','update Sucessfully...');
+        return redirect()->route('order.index');
     }
 }

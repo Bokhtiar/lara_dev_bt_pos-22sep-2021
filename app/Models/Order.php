@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
     use HasFactory;
+    use CrudTrait;
+
     protected $fillable = [
         'customer_id',
         'invoice_no',
@@ -23,4 +26,10 @@ class Order extends Model
         'bank',
         'status',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Contact::class);
+    }
+    
 }

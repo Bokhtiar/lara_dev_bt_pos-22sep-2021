@@ -65,3 +65,4 @@ Route::get('quantity-update', [SellProductController::class, 'quantity_update'])
 
 //order
 Route::resource('order', OrderController::class);
+Route::get('order/status/{id}', [OrderController::class, 'status'])->name('order.status');

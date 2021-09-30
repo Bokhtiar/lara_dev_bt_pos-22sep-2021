@@ -21,6 +21,10 @@ class Sell extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function purchase()
     {
         return $this->belongsTo(Purchase::class);

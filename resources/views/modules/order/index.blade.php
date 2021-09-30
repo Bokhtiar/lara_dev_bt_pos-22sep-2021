@@ -20,20 +20,19 @@
         @endif
 
     <section class="card">
-            
-
+            <x-order></x-order>
         <div class="card-body">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Action</th>
-                <th>Category Name</th>
-                <th>Category Description</th>
+                <th>Customer Name</th>
+                <th>Ordet Date</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $item)
+            @foreach ($orders as $item)
                 <tr>
                 <td>
                     <div class="btn-group">
@@ -41,11 +40,8 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->id }}">
-                        <i class="btn btn-info btn-sm far fa-edit"></i>
-                        </button>
-
-                        <form action="@route('category.destroy',$item->id)" method="POST">
+                        <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
+                        <form action="@route('order.destroy',$item->id)" method="POST">
                             @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
@@ -54,55 +50,23 @@
                   </div>
 
                 </td>
-                <td>{{ $item->category_name }}</td>
-                <td>{{ $item->category_description }}</td>
+                <td>{{$item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name }}</td>
+                <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>
                     @if($item->status == 1)
-                        <a class="" href="@route('category.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">active</span></a>
+                        <a class="" href="@route('order.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
                         @else
-                        <a class="" href="@route('category.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">inactive</span></a>
+                        <a class="" href="@route('order.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
                     @endif
-
                 </td>
                 </tr>
-
-                {{-- modal start here --}}
-                <div class="modal fade" id="staticBackdrop{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">CATEGORY EDIT FORM </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="@route('category.update',$item->id)" method="POST">
-                    @method('PUT')
-                    @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="category-name" class="col-form-label">Category Name: <span class="text-danger">*</span></label>
-                        <input type="text" value="{{ $item->category_name }}" name="category_name" placeholder=" type here category name" class="form-control" maxlength="30" minlength="2" id="category-name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Description:</label>
-                        <textarea class="form-control" name="category_description" placeholder="type here category description" id="message-text">{{ $item->category_description }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="far fa-times-circle"></i> Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-share-square"></i> Category Update</button>
-                </div>
-                </form>
-                </div>
-            </div>
-                </div>
-                {{-- modal end here --}}
             @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <th>Action</th>
-                <th>Category Name</th>
-                <th>Category Description</th>
+                <th>Customer Name</th>
+                <th>Ordet Date</th>
                 <th>Status</th>
             </tr>
         </tfoot>
