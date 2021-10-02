@@ -18,7 +18,6 @@ class ReportController extends Controller
         $orders = Order::whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))
         ->get();
-
         return view('modules.report.month', compact('orders'));
     }
 
@@ -28,4 +27,12 @@ class ReportController extends Controller
         $orders = Order::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
         return view('modules.report.week', compact('orders'));
     }
+
+    public function year()
+    {
+        //current wekk function
+        $orders = Order::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        return view('modules.report.week', compact('orders'));
+    }
+}
 }

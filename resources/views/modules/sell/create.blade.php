@@ -15,7 +15,7 @@
         @endif
 
     @section('admin_content')
-    {{ $dateE }}
+
         <section class="">
             <div class="card container">
                 <x-sell></x-sell>
@@ -76,29 +76,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $total =0;
-                                                @endphp
-                                                @foreach ($sells as $item)
-                                                    <tr>
-                                                        <td>{{ $item->product->product_name }}</td>
-                                                        <td>
-                                                            <form method="POST" action="@route('sell.quantity', $item->id)" class="form-inline">
-                                                                @csrf
-                                                                <input type="number"  name="quantity" value="{{ $item->quantity }}" id="">
-                                                                <input type="submit" name="" value="submit" id="">
-                                                            </form>
-                                                        </td>
-                                                            {{ $total += $item->product->unit_selling_price * $item->quantity }}
-                                                        <td>{{ $item->product->unit_selling_price }} Tk</td>
-                                                        <td>X</td>
-                                                    </tr>
-                                                @endforeach
+
                                             </tbody>
                                             </table>
                                             <div class="float-right">
                                                 <button class="btn btn-info">Items: 0.00</button>
-                                                <button class="btn btn-primary">Total Amount: {{ $total }} Tk</button>
+                                                <button class="btn btn-primary">Total Amount:  Tk</button>
                                             </div>
                                     <!--table start -->
                                 </div>
@@ -119,7 +102,7 @@
                                     <label for="">Amount. <span class="text-danger">*</span></label>
                                     <input type="number" name="pay_amount" class="form-control" id="">
                                 </div>
-                                <input type="hidden" name="total_amount" value="{{ $total }}" id="">
+                                <input type="hidden" name="total_amount" value="" id="">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Sell on. <span class="text-danger">*</span></label>
                                     <input type="date" name="sell_on_date" class="form-control" id="">
@@ -226,7 +209,7 @@
                         type: 'GET',
                         dataType: 'Json',
                         success:function(data){
-                            alert('data added successfully');
+                            getData()
                         }//eend ajax url
                     })
                 }//end if condition
@@ -249,23 +232,29 @@
                 }else if (payment_name == 'Bank'){
                     $('#Bank').show();
                 }
-            })
+            })//pyament methods
+            getData()
+            function getData() {
+                    $.ajax({
+                    url : '/sell/author/all',
+                    type: 'GET',
+                    dataType: 'json',
+                    success:function(response) {
+                        console.log(response)
+                        $('tbody').html("")
+                        response.forEach(data => {
+                            $('tbody').append('<tr>\
+                            <td>'+data.product_id+'</td>\
+                            <td>'+data.quantity+'</td>\
+                            <td>'+data.product_id+'</td>\
+                            <td> <a href="test">X</a> </td>\
+                            </tr>')
+                        });
 
-            // $.ajax({
-            //     url : '/sell/author/all',
-            //     type: 'GET',
-            //     dataType: 'json',
-            //     success:function(data) {
-            //         console.log(data);
-            //         data.forEach(data => {
-            //             $('#table_row').append('<td>'+data.product.product_name+'</td> <td> <form id="qty" method="post" action=""> <input type="hidden" name="id" value="'+data.id+'">   <input id="quantity_update" type="number" value="'+data.quantity+'" name="quantity_update"> <button type="submit">Submit</button> </form> </td> <td>'+data.product.unit_selling_price+'</td> <td>x</td>')
-            //             var amount = 0
-            //             var amount += data.product.unit_selling_price * data.quantity
-            //         });
-            //         console.log(amount)
+                    }//end success function
+                });
+            }//end function
 
-            //     }
-            // });
 
             // $("#qty").on("submit", function (e) {
             //     e.preventDefault();
