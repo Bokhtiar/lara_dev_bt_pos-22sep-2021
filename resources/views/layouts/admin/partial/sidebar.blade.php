@@ -82,6 +82,18 @@
                   <p>Brands</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="@route('unit.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Unit</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('warranty.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Warranty</p>
+                </a>
+              </li>
             </ul>
            </li>
 

@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Subcategory;
+use App\Models\Unit;
+use App\Models\Warranty;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\DB;
@@ -39,8 +41,10 @@ class ProductController extends Controller
     {
         $categories = Category::Active()->get();
         $brands = Brand::query()->Active()->get();
+        $units = Unit::all();
+        $warranties = Warranty::all();
         $subcategories = Subcategory::query()->Active()->get();
-        return view('modules.product.create_update', compact('categories', 'brands', 'subcategories'));
+        return view('modules.product.create_update', compact('categories', 'brands', 'subcategories', 'units', 'warranties'));
     }
 
     /**

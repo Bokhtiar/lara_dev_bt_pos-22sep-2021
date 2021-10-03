@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\WarrantyController;
 use App\Models\Subcategory;
+use App\Models\Warranty;
 use Facade\FlareClient\Report;
 
 Route::get('/', function () {
@@ -35,6 +38,12 @@ Route::get('/subcategory/status/{id}', [App\Http\Controllers\SubcategoryControll
 //brand
 Route::resource('brand', BrandController::class);
 Route::get('/brand/status/{id}', [App\Http\Controllers\BrandController::class, 'status'])->name('brand.status');
+
+//Unit
+Route::resource('unit', UnitController::class);
+
+//warranty
+Route::resource('warranty', WarrantyController::class);
 
 //product
 Route::resource('product', ProductController::class);
@@ -63,7 +72,7 @@ Route::resource('sell', SellProductController::class);
 Route::get('store/sell/{id}', [SellProductController::class, 'store']);
 Route::post('sell/quantity/{id}', [SellProductController::class, 'quantity_update'])->name('sell.quantity');
 Route::get('sell/author/all', [SellProductController::class, 'sell_author_all']);
-Route::get('quantity-update', [SellProductController::class, 'quantity_update']);
+Route::post('quantity-update/{id}', [SellProductController::class, 'quantity_update']);
 
 //order
 Route::resource('order', OrderController::class);

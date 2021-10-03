@@ -13,6 +13,7 @@
                     @csrf
                     <div class="form-gorup">
                         <div class="row">
+
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="">Select Supplier <span class="text-danger">*</span></label>
@@ -171,7 +172,7 @@
         //end of select2
 
         $(document).ready(function(){
-            $('#product_id').on('change', function(e){
+            $('#product_id').keyup('change', function(e){
                 var id = e.target.value;
                 if(id){
                     $.ajax({
@@ -211,7 +212,7 @@
                 }else if (payment_name == 'Bank'){
                     $('#Bank').show();
                 }
-            })
+            });
         });
 
 

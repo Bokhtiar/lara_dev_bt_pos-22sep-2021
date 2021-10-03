@@ -77,8 +77,11 @@
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Select Warranty</label>
                             <select name="warranty_id" id="" class="form-control select2">
-                                <option value="1">6months</option>
-                                <option value="2">1year</option>
+                                <option value="">--Select Warranties--</option>
+                                @foreach ($warranties as $item)
+                                <option value="{{ $item->id }}">{{ $item->warranty_name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
@@ -90,8 +93,10 @@
                     <div class="form-group">
                         <label for="">Select Unite: <span class="text-danger">*</span></label>
                             <select name="unit_id" id="" class="form-control select2">
-                                <option value="1">pc</option>
-                                <option value="2">package</option>
+                                <option value="">--Select Unit--</option>
+                                @foreach ($units as $item)
+                                <option value="{{ $item->id }}">{{ $item->unit_short_name }}</option>
+                                @endforeach
                             </select>
                     </div>
                     <div class="form-gorup">

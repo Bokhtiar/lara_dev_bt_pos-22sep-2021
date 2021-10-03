@@ -35,4 +35,3 @@ class ReportController extends Controller
         return view('modules.report.week', compact('orders'));
     }
 }
-}

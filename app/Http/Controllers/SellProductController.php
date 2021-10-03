@@ -56,9 +56,12 @@ class SellProductController extends Controller
         return response()->json($sells, 200);
     }
 
-    public function quantity_update(Request $request)
+    public function quantity_update(Request $request,$id)
     {
-        dd($request->all());
+        $sell = Sell::find($id);
+        $sell['quantity'] = $request->quantity;
+        $sell->save();
+        return response()->json($sell, 200);
     }
 
     /**

@@ -13,6 +13,8 @@
                     @csrf
                     <div class="form-gorup">
                         <div class="row">
+
+                             <input type="hidden" name="id" class="id" value="{{ $purchase->id }}" id="">
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="">Select Supplier <span class="text-danger">*</span></label>
@@ -211,7 +213,34 @@
                 }else if (payment_name == 'Bank'){
                     $('#Bank').show();
                 }
-            })
+            });
+
+
+            //edit product information
+
+            // if(a){
+            //         $.ajax({
+            //             url:'/product_purchase_search/'+a,
+            //             type: 'GET',
+            //             dataType: 'json',
+            //             success:function(data){
+            //                 console.log(data);
+            //                 $('#table_value').append('<tr>   <td>'+data.product_name+'</td>     <td> <input class="form-control form-control-sm" type="number" value="" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value="5"> </td>          <td> <input type="number" name="line_total" class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>       <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>                </tr>')
+            //                 $("input").keyup(function(){
+            //                     var quantity = $('#purchase_quantity').val();
+            //                     var unit_cost_before_discount = $('#unit_cost_before_discount').val();
+            //                     var tax = $('#tax').val();
+            //                     var total = quantity * unit_cost_before_discount + tax
+            //                     $('#line_total').val(total)
+
+            //                     var profit_margin = $('#profit_margin').val();
+            //                     var profitSellingTotal = total + profit_margin;
+            //                     $('#unit_selling_price').val(profitSellingTotal)
+            //                 });
+            //             }//return success function
+            //         })//this is ajax end
+            //     }
+
         });
 
 

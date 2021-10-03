@@ -244,16 +244,43 @@
                         $('tbody').html("")
                         response.forEach(data => {
                             $('tbody').append('<tr>\
-                            <td>'+data.product_id+'</td>\
-                            <td>'+data.quantity+'</td>\
-                            <td>'+data.product_id+'</td>\
-                            <td> <a href="test">X</a> </td>\
+                            <td>'+data.product.product_name+'</td>\
+                            <td>\
+                                <form action="" method="POST" class="form-inline">\
+                                    <input type="hidden" class="id" value=" '+data.id+' ">\
+                                    <input type="text" class="quantity" value="'+data.quantity+'" >\
+                                    <input class="btn btn-sm btn-success update_quantity" type="submit" value="submit">\
+                                </form>\
+                            </td>\
+                            <td>'+data.quantity * data.product.unit_selling_price+' Tk</td>\
+                            <td> <button type="submit" >X</button> </td>\
                             </tr>')
                         });
 
                     }//end success function
                 });
             }//end function
+
+
+
+            $(document).on('click', '.update_quantity', function(e){
+                e.preventDefault();
+                var id =  $('.id').val();
+                var data={
+                    'quantity' : $('.quantity').val()
+                };
+                $.ajax({
+                    url: '/quantity-update/'+id,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success:function(response){
+                        getData()
+                    }//end quantity update function
+                });//quantity update ajax end
+            });
+
+
 
 
             // $("#qty").on("submit", function (e) {
