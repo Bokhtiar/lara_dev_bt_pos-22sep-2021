@@ -17,7 +17,9 @@
                 <th>Product Name </th>
                 <th>Category</th>
                 <th>Sku Code</th>
-                <th>Selling Price</th>
+                <th>Unit</th>
+                <th>Percentage</th>
+                <th>Sell Price</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -50,6 +52,8 @@
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->category->category_name !!}</td>
                 <td>{!! $item->product_sku !!}</td>
+                <td>{!! $item->unit->unit_short_name !!}</td>
+                <td>5%</td>
                 <td>{!! $item->unit_selling_price !!} Tk</td>
                 <td>
                     @if($item->status == 1)
@@ -80,13 +84,15 @@
                                 <div class="col-sm-12 col-md-8 col-lg-8">
                                     <div class="container card">
                                         <p class="h4">{{ $item->product_name }}</p>
+                                        <p>Product Sku: {{ $item->product_sku }}</p>
                                         <p>Alert Quantity: {{ $item->alert_quantity }}</p>
                                         <p>Category : {{ $item->category->category_name }}</p>
                                         <p>SubCategory: {{ $item->subcategory->subcategory_name }}</p>
-                                        <p>brand: {{ $item->brand->brand_name }}</p>
-                                        <p>unit: {{ $item->unit_id }}</p>
-                                        <p>warranty: {{ $item->warrant_id }}</p>
-                                        <p>Description : {!! $item->product_description !!}</p>
+                                        <p>Brand: {{ $item->brand->brand_name }}</p>
+                                        <p>Unit: {{ $item->unit->unit_short_name }}</p>
+                                        <p>Unit Selling Price: {{ $item->unit_selling_price }}</p>
+                                        <p>Warranty: {{ $item->warranty->warranty_name }}</p>
+                                        <p>Description : {!! $item->product_description	 !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +112,10 @@
                 <th>Action</th>
                 <th>Product Name </th>
                 <th>Category</th>
-                <th>Selling Price</th>
+                <th>Sku Code</th>
+                <th>Unit</th>
+                <th>Percentage</th>
+                <th>Sell Price</th>
                 <th>Status</th>
             </tr>
         </tfoot>

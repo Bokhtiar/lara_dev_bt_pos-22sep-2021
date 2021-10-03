@@ -31,6 +31,15 @@ class Product extends Model
     {
         return $this->belongsTo(Purchase::class);
     }
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+    public function warranty()
+    {
+        return $this->belongsTo(Warranty::class);
+    }
+
 
     public function scopeAlert()
     {

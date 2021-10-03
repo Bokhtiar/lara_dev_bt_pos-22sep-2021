@@ -24,7 +24,7 @@
             <div class="input-group form-inline input-group-sm" style="width: 100%;">
                 <p class="form-inline">
                     <a href="@route('warranty.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
-                        List Of Warranty</a>
+                        LIST OF WARRANTY</a>
                     <a href="@route('warranty.index')" class="btn btn-primary"><i class="fas fa-plus"></i> ADD NEW Warranty</a>
                 </p>
             </div>

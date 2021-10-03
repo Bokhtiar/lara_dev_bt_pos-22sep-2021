@@ -5,7 +5,7 @@
             <div class="input-group form-inline input-group-sm" style="width: 100%;">
                 <p class="form-inline">
                     <a href="@route('product.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
-                        List Of PRODUCTS</a>
+                        LIST OF PRODUCTS</a>
                     <a href="@route('product.create')" class="btn btn-primary"><i class="fas fa-plus"></i> ADD NEW PRODUCTS</a>
                 </p>
             </div>
