@@ -16,6 +16,8 @@
                 <th>Action</th>
                 <th>Product Name </th>
                 <th>Category</th>
+                <th>Sku Code</th>
+                <th>Selling Price</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -47,6 +49,8 @@
                 </td>
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->category->category_name !!}</td>
+                <td>{!! $item->product_sku !!}</td>
+                <td>{!! $item->unit_selling_price !!} Tk</td>
                 <td>
                     @if($item->status == 1)
                     <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"
@@ -100,8 +104,9 @@
         <tfoot>
             <tr>
                 <th>Action</th>
-                <th>Brand</th>
-                <th>Description</th>
+                <th>Product Name </th>
+                <th>Category</th>
+                <th>Selling Price</th>
                 <th>Status</th>
             </tr>
         </tfoot>

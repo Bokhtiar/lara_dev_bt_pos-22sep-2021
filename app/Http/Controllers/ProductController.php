@@ -111,8 +111,10 @@ class ProductController extends Controller
         $edit = Product::find($id);
         $categories = Category::Active()->get();
         $brands = Brand::query()->Active()->get();
+        $units = Unit::all();
+        $warranties = Warranty::all();
         $subcategories = Subcategory::query()->Active()->get();
-        return view('modules.product.create_update', compact('categories', 'brands', 'subcategories','edit'));
+        return view('modules.product.create_update', compact('categories', 'brands', 'subcategories','edit', 'units', 'warranties'));
     }
 
     /**

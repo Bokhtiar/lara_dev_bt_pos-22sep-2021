@@ -78,8 +78,8 @@
                             <label for="">Select Warranty</label>
                             <select name="warranty_id" id="" class="form-control select2">
                                 <option value="">--Select Warranties--</option>
-                                @foreach ($warranties as $item)
-                                <option value="{{ $item->id }}">{{ $item->warranty_name }}</option>
+                                @foreach ($warranties as $wa)
+                                <option value="{{ $wa->id }}" {{ $wa->id == @$edit->warranty_id ? 'selected' : ''}}>{{ $wa->warranty_name }}</option>
                                 @endforeach
 
                             </select>
@@ -94,8 +94,8 @@
                         <label for="">Select Unite: <span class="text-danger">*</span></label>
                             <select name="unit_id" id="" class="form-control select2">
                                 <option value="">--Select Unit--</option>
-                                @foreach ($units as $item)
-                                <option value="{{ $item->id }}">{{ $item->unit_short_name }}</option>
+                                @foreach ($units as $u)
+                                <option value="{{ $u->id }}" {{ $u->id == @$edit->unit_id ? 'selected' : '' }}>{{ $u->unit_short_name }}</option>
                                 @endforeach
                             </select>
                     </div>
