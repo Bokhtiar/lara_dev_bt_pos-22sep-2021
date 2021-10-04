@@ -97,7 +97,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Product::find($id);
+        return view('modules.product.show', compact('item'));
     }
 
     /**

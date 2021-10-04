@@ -18,7 +18,8 @@
                 <th>Category</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
-                <th>Percentage</th>
+                <th>Percentage %</th>
+                <th>Tax %</th>
                 <th>Sell Price</th>
                 <th>Status</th>
             </tr>
@@ -35,9 +36,8 @@
                             <a class="dropdown-item" href="@route('product.edit', $item->id)"><i
                                     class="btn btn-info btn-sm far fa-edit"></i></a>
                             <!-- Start Large modal -->
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                            <i class="btn btn-sm btn-success fas fa-eye"></i>
-                            </button>
+                            <a class="btn btn-primary dropdown-item" href="@route('product.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
+
                             <form action="@route('purchase.destroy',$item->id)" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -53,7 +53,8 @@
                 <td>{!! $item->category->category_name !!}</td>
                 <td>{!! $item->product_sku !!}</td>
                 <td>{!! $item->unit->unit_short_name !!}</td>
-                <td>5%</td>
+                <td>{!! $item->discount_percent !!}</td>
+                <td>{!! $item->tax !!}</td>
                 <td>{!! $item->unit_selling_price !!} Tk</td>
                 <td>
                     @if($item->status == 1)
@@ -65,46 +66,7 @@
                     @endif
                 </td>
             </tr>
-            {{-- start here modal --}}
-            <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $item->product_name }} Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <section>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                     <img src="{{asset('admin')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                                </div>
-                                <div class="col-sm-12 col-md-8 col-lg-8">
-                                    <div class="container card">
-                                        <p class="h4">{{ $item->product_name }}</p>
-                                        <p>Product Sku: {{ $item->product_sku }}</p>
-                                        <p>Alert Quantity: {{ $item->alert_quantity }}</p>
-                                        <p>Category : {{ $item->category->category_name }}</p>
-                                        <p>SubCategory: {{ $item->subcategory->subcategory_name }}</p>
-                                        <p>Brand: {{ $item->brand->brand_name }}</p>
-                                        <p>Unit: {{ $item->unit->unit_short_name }}</p>
-                                        <p>Unit Selling Price: {{ $item->unit_selling_price }}</p>
-                                        <p>Warranty: {{ $item->warranty->warranty_name }}</p>
-                                        <p>Description : {!! $item->product_description	 !!}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Close</button>
-                </div>
-                </div>
-            </div>
-            </div>
-            {{-- end of modal --}}
+
             @endforeach
         </tbody>
         <tfoot>
@@ -114,7 +76,8 @@
                 <th>Category</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
-                <th>Percentage</th>
+                <th>Percentage %</th>
+                <th>Tax %</th>
                 <th>Sell Price</th>
                 <th>Status</th>
             </tr>
