@@ -44,7 +44,7 @@ class PurchaseController extends Controller
             'reference_no'=>'required',
             'product_id' => 'required',
             'purchase_quantity' => 'required',
-            'unit_cost_before_discount' => 'required',
+            'unit_cost' => 'required',
             'amount' => 'required',
             'purchase_date' => 'required',
             'paid_on_date' => 'required',
@@ -64,9 +64,8 @@ class PurchaseController extends Controller
                     'note' => $request->note,
                     'product_id' => $request->product_id,
                     'purchase_quantity' => $request->purchase_quantity,
-                    'unit_cost_before_discount' => $request->unit_cost_before_discount,
+                    'unit_cost' => $request->unit_cost,
                     'discount_percent' => $request->discount_percent,
-                    'unit_cost_before_tax' => $request->unit_cost_before_tax,
                     'tax' => $request->tax,
                     'line_total' => $request->line_total,
                     'profit_margin' => $request->profit_margin,
@@ -81,6 +80,8 @@ class PurchaseController extends Controller
                 ]);
                 $product = Product::find($request->product_id);
                 $product['purchase_id'] = $purchase->id;
+                $product['discount_percent'] = $request->discount_percent;
+                $product['tax'] = $request->tax;
                 $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
 

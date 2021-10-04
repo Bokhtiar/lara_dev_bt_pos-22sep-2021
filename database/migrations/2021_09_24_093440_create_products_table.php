@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->integer('subcategory_id');
             $table->integer('brand_id');
+            $table->integer('discount_percent')->nullable(); //this discount percent come form purchase table
+            $table->integer('tax')->nullable(); //this tax come form purchase table
             $table->integer('warranty_id')->nullable();
             $table->string('unit_selling_price')->nullable(); //this price come form purchase table
             $table->integer('unit_id');

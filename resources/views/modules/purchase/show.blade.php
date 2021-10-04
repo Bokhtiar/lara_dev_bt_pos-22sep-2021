@@ -26,19 +26,15 @@
                     <h4 class="card-title"> <span class="h6">Purchase Quantity : </span> {{ $purchase->purchase_quantity }} </h4>
                 </div>
                  <div class="card-header">
-                    <h4 class="card-title"> <span class="h6">Unit Cost Before Discount : </span> {{ $purchase->unit_cost_before_discount }} Tk</h4>
+                    <h4 class="card-title"> <span class="h6">Unit Cost : </span> {{ $purchase->unit_cost }} Tk</h4>
                 </div>
 
                 <div class="card-header">
                     <h4 class="card-title"> <span class="h6">Discount Percent : </span> {{ $purchase->discount_percent }}%</h4>
                 </div>
                  <div class="card-header">
-                    <h4 class="card-title"> <span class="h6">Unit Cost Before Tax : </span> {{ $purchase->unit_cost_before_tax }} TK</h4>
-                </div>
-                 <div class="card-header">
                     <h4 class="card-title"> <span class="h6">tax : </span> {{ $purchase->tax }}%</h4>
                 </div>
-
                 <div class="card-header">
                     <h4 class="card-title"> <span class="h6">Total Product Price : </span> {{ $purchase->line_total }} TK</h4>
                 </div>

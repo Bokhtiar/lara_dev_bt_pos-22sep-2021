@@ -22,9 +22,8 @@ class CreatePurchasesTable extends Migration
             $table->longText('note')->nullable();
             $table->integer('product_id')->uniqid();
             $table->string('purchase_quantity');
-            $table->string('unit_cost_before_discount');
+            $table->string('unit_cost');
             $table->string('discount_percent')->nullable();
-            $table->string('unit_cost_before_tax')->nullable();
             $table->string('tax')->nullable();
             $table->string('line_total');
             $table->string('profit_margin')->nullable();

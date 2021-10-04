@@ -63,9 +63,8 @@
                                 <tr>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Purchase Quantity</th>
-                                <th scope="col">Unite Cose<br>(before disceout)</th>
+                                <th scope="col">Unite Cost</th>
                                 <th scope="col">Discount percent</th>
-                                <th scope="col">Unite Cose<br>(before tax)</th>
                                 <th scope="col">Tax</th>
                                 <th scope="col">Line Total</th>
                                 <th scope="col">Profit Margin %</th>
@@ -172,7 +171,7 @@
         //end of select2
 
         $(document).ready(function(){
-            $('#product_id').keyup('change', function(e){
+            $('#product_id').on('change', function(e){
                 var id = e.target.value;
                 if(id){
                     $.ajax({
@@ -181,16 +180,24 @@
                         dataType: 'json',
                         success:function(data){
                             console.log(data);
-                            $('#table_value').append('<tr>   <td>'+data.product_name+'</td>     <td> <input class="form-control form-control-sm" type="number" value="0" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value="5"> </td>          <td> <input type="number" name="line_total" class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>       <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>                </tr>')
+                            $('#table_value').append('<tr>\
+                            <td>'+data.product_name+'</td>\
+                            <td><input class="form-control form-control-sm" type="number" value="0" name="purchase_quantity" id="purchase_quantity"> </td> \
+                            <td> <input class="form-control form-control-sm" type="number" value="" name="unit_cost" id="unit_cost"> </td>\
+                            <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>\
+                            <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value=""> </td>\
+                            <td> <input class="form-control form-control-sm" type="number" name="line_total" id="line_total"></td>\
+                            <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>\
+                            <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>\
+                            </tr>')
                             $("input").keyup(function(){
                                 var quantity = $('#purchase_quantity').val();
-                                var unit_cost_before_discount = $('#unit_cost_before_discount').val();
-                                var tax = $('#tax').val();
-                                var total = quantity * unit_cost_before_discount + tax
+                                var unit_cost = $('#unit_cost').val();
+                                var total = quantity * unit_cost
                                 $('#line_total').val(total)
 
                                 var profit_margin = $('#profit_margin').val();
-                                var profitSellingTotal = total + profit_margin;
+                                var profitSellingTotal = unit_cost + profit_margin;
                                 $('#unit_selling_price').val(profitSellingTotal)
                             });
                         }//return success function

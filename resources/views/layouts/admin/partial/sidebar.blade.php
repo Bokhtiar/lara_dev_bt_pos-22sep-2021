@@ -113,7 +113,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="@route('purchase.index')" class="nav-link">
+                <a href="@route('purchase.create')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Purchase Create</p>
                 </a>

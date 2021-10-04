@@ -42,7 +42,7 @@
                   </div>
 
                 </td>
-                <td>{{ $item->product->product_name }}</td>
+                <td> <a href="@route('product.show', $item->product_id)">{{ $item->product->product_name }}</a> </td>
                 <td>{{ $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name }}</td>
                 <td>{{ $item->line_total }}</td>
                 <td>{{ $item->line_total - $item->amount }}</td> <!--amount is how many send supplier amount-->
