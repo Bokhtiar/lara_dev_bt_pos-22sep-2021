@@ -81,7 +81,7 @@
                                             </table>
                                             <div class="float-right">
                                                 <button class="btn btn-info">Items: 0.00</button>
-                                                <button class="btn btn-primary">Total Amount:  Tk</button>
+                                                <button class="total btn btn-primary"></button>
                                             </div>
                                     <!--table start -->
                                 </div>
@@ -242,32 +242,35 @@
                     success:function(response) {
                         console.log(response)
                         $('tbody').html("")
+                        var total = 0;
                         response.forEach(data => {
                             $('tbody').append('<tr>\
                             <td>'+data.product.product_name+'</td>\
                             <td>\
                                 <form action="" method="POST" class="form-inline">\
                                     <input type="hidden" class="id" value=" '+data.id+' ">\
-                                    <input type="text" class="quantity" value="'+data.quantity+'" >\
-                                    <input class="btn btn-sm btn-success update_quantity" type="submit" value="submit">\
+                                    <input type="text" class="qty" value="'+data.quantity+'" >\
+                                    <button type="button" value=" '+data.id+' " class="update btn btn-success">submit</button>\
                                 </form>\
                             </td>\
                             <td>'+data.quantity * data.product.unit_selling_price+' Tk</td>\
-                            <td> <button type="submit" >X</button> </td>\
+                            total ='+data.quantity+'\
+                            console.log(total)\
+                            <td> <button type="button " value=" '+data.id+' "  class="delete btn btn-danger">X</button> </td>\
                             </tr>')
                         });
 
+                        $('.total').append(total);
                     }//end success function
                 });
             }//end function
 
 
-
-            $(document).on('click', '.update_quantity', function(e){
+            $(document).on('click', '.update', function(e){
                 e.preventDefault();
-                var id =  $('.id').val();
+                var id =  $(this).val();
                 var data={
-                    'quantity' : $('.quantity').val()
+                    'quantity' : $('.qty').val()
                 };
                 $.ajax({
                     url: '/quantity-update/'+id,
@@ -281,7 +284,21 @@
             });
 
 
-
+            $(document).on('click', '.delete', function(e){
+                e.preventDefault();
+                var id = $(this).val()
+                if(id){
+                    $.ajax({
+                        url: '/sell/delete/'+id,
+                        type: 'GET',
+                        dataType:'json',
+                        success:function(response){
+                            console.log(response)
+                            getData();
+                        }//success function
+                    })
+                }
+            })
 
             // $("#qty").on("submit", function (e) {
             //     e.preventDefault();

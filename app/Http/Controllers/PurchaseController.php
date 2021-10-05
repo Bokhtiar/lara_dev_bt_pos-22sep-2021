@@ -26,8 +26,8 @@ class PurchaseController extends Controller
 
     public function show($id)
     {
-        $purchase = Purchase::find($id);
-        return view('modules.purchase.show', compact('purchase'));
+        $item = Purchase::find($id);
+        return view('modules.purchase.show', compact('item'));
     }
 
     public function product_show($id)
@@ -50,7 +50,7 @@ class PurchaseController extends Controller
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
-
+        dd($request->all());
         if($validated){
 
             try{

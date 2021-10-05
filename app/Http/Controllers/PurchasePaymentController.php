@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Sell;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class SellProductController extends Controller
+class PurchasePaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,10 +23,7 @@ class SellProductController extends Controller
      */
     public function create()
     {
-        $products = Product::whereNotNull('purchase_id')->Active()->get();
-        $sells = Sell::with('product','purchase')->where('Author', Auth::id())->where('order_id', null)->get();
-        $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
-    return view('modules.sell.create', compact('products', 'contacts','sells'));
+        //
     }
 
     /**
@@ -41,27 +32,9 @@ class SellProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
-        $sell = Sell::create([
-            'product_id' => $id,
-            'author' => Auth::id(),
-        ]);
-        return response()->json($sell, 200);
-    }
-
-    public function sell_author_all()
-    {
-        $sells = Sell::with('product','purchase')->where('Author', Auth::id())->where('order_id', null)->get();
-        return response()->json($sells, 200);
-    }
-
-    public function quantity_update(Request $request,$id)
-    {
-        $sell = Sell::find($id);
-        $sell['quantity'] = $request->quantity;
-        $sell->save();
-        return response()->json($sell, 200);
+        //
     }
 
     /**
@@ -106,7 +79,6 @@ class SellProductController extends Controller
      */
     public function destroy($id)
     {
-        $sells = Sell::find($id)->delete();
-        return response()->json($sells, 200);
+        //
     }
 }

@@ -73,6 +73,7 @@ Route::get('store/sell/{id}', [SellProductController::class, 'store']);
 Route::post('sell/quantity/{id}', [SellProductController::class, 'quantity_update'])->name('sell.quantity');
 Route::get('sell/author/all', [SellProductController::class, 'sell_author_all']);
 Route::post('quantity-update/{id}', [SellProductController::class, 'quantity_update']);
+Route::get('sell/delete/{id}', [SellProductController::class, 'destroy']);
 
 //order
 Route::resource('order', OrderController::class);
