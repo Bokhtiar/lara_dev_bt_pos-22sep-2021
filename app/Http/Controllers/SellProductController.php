@@ -19,7 +19,8 @@ class SellProductController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('modules.sell.index', compact('orders'));
     }
 
     /**

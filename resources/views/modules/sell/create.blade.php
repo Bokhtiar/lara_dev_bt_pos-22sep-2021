@@ -272,15 +272,15 @@
                 var data={
                     'quantity' : $('.qty').val()
                 };
+
                 $.ajax({
                     url: '/quantity-update/'+id,
                     type: 'POST',
                     data: data,
                     dataType: 'json',
                     success:function(response){
-
                         getData()
-                       
+
                     }//end quantity update function
                 });//quantity update ajax end
             });

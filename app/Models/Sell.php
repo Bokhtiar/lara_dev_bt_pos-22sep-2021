@@ -21,7 +21,7 @@ class Sell extends Model
     {
         return $this->belongsTo(Product::class);
     }
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -33,6 +33,12 @@ class Sell extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Contact::class);
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);
