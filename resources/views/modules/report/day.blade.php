@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'List Of Order')
+@section('title', 'Monthly Report')
 
 @section('css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -8,17 +8,6 @@
 @endsection
 
     @section('admin_content')
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
     <section class="card">
             <x-order></x-order>
         <div class="card-body">
@@ -27,10 +16,10 @@
             <tr>
                 <th>Action</th>
                 <th>Customer Name</th>
-                <th>Pay Amount</th>
+                <th>Ordet Date</th>
                 <th>Total Amount</th>
-                <th>DUE Amonut</th>
-                <th>Order Date</th>
+                <th>Pay Payment</th>
+                <th>Due Amount</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -43,9 +32,6 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal">
-                            
-                          </button>
                         <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
                         <form action="@route('order.destroy',$item->id)" method="POST">
                             @csrf
@@ -57,10 +43,10 @@
 
                 </td>
                 <td>{{$item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name }}</td>
-                <td>{{ $item->pay_amount }}</td>
-                <td>{{ $item->total_amount }}</td>
-                <td>{{ $item->total_amount - $item->pay_amount }}</td>
                 <td>{{ $item->created_at->diffForHumans() }}</td>
+                <td>{{ $item->total_amount }} TK</td>
+                <td>{{ $item->pay_amount }} TK</td>
+                <td>{{ $item->total_amount - $item->pay_amount }}Tk</td>
                 <td>
                     @if($item->status == 1)
                         <a class="" href="@route('order.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
@@ -75,10 +61,10 @@
             <tr>
                 <th>Action</th>
                 <th>Customer Name</th>
-                <th>Pay Amount</th>
+                <th>Ordet Date</th>
                 <th>Total Amount</th>
-                <th>DUE Amonut</th>
-                <th>Order Date</th>
+                <th>Pay Payment</th>
+                <th>Due Amount</th>
                 <th>Status</th>
             </tr>
         </tfoot>

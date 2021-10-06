@@ -83,3 +83,4 @@ Route::get('order/status/{id}', [OrderController::class, 'status'])->name('order
 Route::get('day/report', [ReportController::class, 'day'])->name('day.report');
 Route::get('month/report', [ReportController::class, 'month'])->name('month.report');
 Route::get('week/report', [ReportController::class, 'week'])->name('week.report');
+Route::get('year/report', [ReportController::class, 'year'])->name('year.report');

@@ -100,7 +100,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Amount. <span class="text-danger">*</span></label>
-                                    <input type="number" name="pay_amount" class="form-control" id="">
+                                    <input type="number" placeholder="how many pay customer" name="pay_amount" class="form-control" id="">
                                 </div>
                                 <input type="hidden" name="total_amount" value="" id="">
                                 <div class="col-sm-12 col-md-6 col-lg-6">

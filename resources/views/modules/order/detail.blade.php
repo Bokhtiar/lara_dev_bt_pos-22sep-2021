@@ -139,11 +139,6 @@
                         <th style="width:50%">Subtotal:</th>
                         <td>{{ $total }} Tk</td>
                       </tr>
-
-                      <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
-                      </tr>
                       <tr>
                         <th>Total:</th>
                         <td>{{ $total }} Tk</td>

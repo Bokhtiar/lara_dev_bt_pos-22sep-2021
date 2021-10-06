@@ -10,7 +10,8 @@ class ReportController extends Controller
 {
     public function day()
     {
-        dd('day');
+        $orders = Order::whereDate('created_at', Carbon::today())->get();
+        return view('modules.report.day', compact('orders'));
     }
 
     public function month()
@@ -31,7 +32,7 @@ class ReportController extends Controller
     public function year()
     {
         //current wekk function
-        $orders = Order::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
-        return view('modules.report.week', compact('orders'));
+        $orders = Order::whereYear('created_at', date('Y'))->get();
+        return view('modules.report.year', compact('orders'));
     }
 }

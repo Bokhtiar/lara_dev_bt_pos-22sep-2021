@@ -203,7 +203,7 @@
               <li class="nav-item">
                 <a href="@route('week.report')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Week</p>
+                  <p>Week Report</p>
                 </a>
               </li>
 
@@ -211,6 +211,13 @@
                 <a href="@route('month.report')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Month Report</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="@route('year.report')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Year Report</p>
                 </a>
               </li>
             </ul>
