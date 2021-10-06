@@ -188,7 +188,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                Role Permission
+                Permission
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
@@ -196,13 +196,37 @@
               <li class="nav-item">
                 <a href="@route('permission.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create</p>
+                  <p>Permision list</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="@route('permission.create')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create</p>
+                  <p>Create Permission</p>
+                </a>
+              </li>
+            </ul>
+           </li>
+
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
+              <p>
+                Role
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="@route('role.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Role list</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('permission.create')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Create Permission</p>
                 </a>
               </li>
             </ul>

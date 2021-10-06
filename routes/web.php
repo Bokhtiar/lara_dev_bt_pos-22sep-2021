@@ -8,6 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SellProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -86,12 +87,13 @@ Route::get('month/report', [ReportController::class, 'month'])->name('month.repo
 Route::get('week/report', [ReportController::class, 'week'])->name('week.report');
 Route::get('year/report', [ReportController::class, 'year'])->name('year.report');
 
-//role and permission
+// permission
 Route::get('permission/index', [PermissionController::class, 'index'])->name('permission.index');
 Route::get('permission/create', [PermissionController::class, 'create'])->name('permission.create');
 Route::post('permission/store', [PermissionController::class, 'store']);
 Route::get('permission/edit/{id}', [PermissionController::class, 'edit']);
 Route::post('permission/update/{id}', [PermissionController::class, 'update']);
 
-
+//role
+Route::resource('role', RoleController::class);
 
