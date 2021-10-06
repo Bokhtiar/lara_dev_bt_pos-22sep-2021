@@ -278,7 +278,9 @@
                     data: data,
                     dataType: 'json',
                     success:function(response){
+
                         getData()
+                       
                     }//end quantity update function
                 });//quantity update ajax end
             });
@@ -294,7 +296,9 @@
                         dataType:'json',
                         success:function(response){
                             console.log(response)
+
                             getData();
+
                         }//success function
                     })
                 }

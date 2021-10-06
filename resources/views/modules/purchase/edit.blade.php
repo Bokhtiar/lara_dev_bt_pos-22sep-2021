@@ -9,12 +9,14 @@
         <section class="card">
             <x-purchase></x-purchase>
             <div class="card-body">
-                <form action="@route('purchase.store')" method="POST" enctype="multipart/form-data">
+                <form action="@route('purchase.update', $purchase->id)" method="POST" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div class="form-gorup">
                         <div class="row">
 
-                             <input type="hidden" name="id" class="id" value="{{ $purchase->id }}" id="">
+                             <input type="hidden" name="id" class="id" value="{{ $purchase->product_id }}" id="id">
+                             <input type="hidden" name="payment_method" class="payment_method" value="{{ $purchase->payment_method }}" id="payment_method">
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="">Select Supplier <span class="text-danger">*</span></label>
@@ -64,14 +66,12 @@
                                 <tr>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Purchase Quantity</th>
-                                <th scope="col">Unite Cose<br>(before disceout)</th>
+                                <th scope="col">Unit Cost</th>
                                 <th scope="col">Discount percent</th>
-                                <th scope="col">Unite Cose<br>(before tax)</th>
                                 <th scope="col">Tax</th>
                                 <th scope="col">Line Total</th>
                                 <th scope="col">Profit Margin %</th>
                                 <th scope="col">Unit Selling Price</th>
-                                <th scope="col">X</th>
                                 </tr>
                             </thead>
                             <tbody id="table_value">
@@ -87,22 +87,23 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <P><span class="h3">Due Amount</span> : <span class="btn btn-success">{{ $purchase->line_total - $purchase->amount }} Tk</span></P>
                                     <label for="">Amount. <span class="text-danger">*</span></label>
-                                    <input type="number" name="amount" class="form-control" id="">
+                                    <input value="{{ $purchase->amount }}" type="number" name="amount" class="form-control" id="">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Paid on. <span class="text-danger">*</span></label>
-                                    <input type="date" name="paid_on_date" class="form-control" id="">
+                                    <input type="date" value="{{ $purchase->paid_on_date }}" name="paid_on_date" class="form-control" id="">
                                 </div>
                             </div>
                             <div class="form-control">
                                 <label for="">Payment Methods</label>
                                 <select class="form-control select2" name="payment_method" id="payment_method">
                                     <option value="">--select payment method--</option>
-                                    <option value="Bkash">Bkash</option>
-                                    <option value="Nagud">Nagud</option>
-                                    <option value="Rocket">Rocket</option>
-                                    <option value="Bank">Bank</option>
+                                    <option value="Bkash" {{ 'Bkash' == $purchase->payment_method ? 'selected' : '' }}>Bkash</option>
+                                    <option value="Nagud" {{ 'Nagud' == $purchase->payment_method ? 'selected' : '' }}>Nagud</option>
+                                    <option value="Rocket" {{ 'Rocket' == $purchase->payment_method ? 'selected' : '' }}>Rocket</option>
+                                    <option value="Bank" {{ 'Bank' == $purchase->payment_method ? 'selected' : '' }}>Bank</option>
                                 </select>
                             </div>
 
@@ -113,7 +114,7 @@
                                 </p>
                                 <p class="card-body">
                                 <label for="">Bkash Number</label>
-                                <input type="number" class="form-control" placeholder="bkash number" name="bkash">
+                                <input type="number" class="form-control" placeholder="bkash number" value="{{ $purchase->bkash }}" name="bkash">
                                 </p>
                             </div><!--bkash-->
                             <div class="form-gorup my-3 card" id="Nagud" style="display: none">
@@ -122,7 +123,7 @@
                                 </p>
                                 <p class="card-body">
                                 <label for="">Nagud Number</label>
-                                <input type="number" class="form-control" placeholder="nagud number" name="nagud">
+                                <input type="number" class="form-control" placeholder="nagud number" value="{{ $purchase->nagud }}" name="nagud">
                                 </p>
                             </div><!--nagud-->
                             <div class="form-gorup my-3 card" id="Rocket" style="display: none">
@@ -131,7 +132,7 @@
                                 </p>
                                 <p class="card-body">
                                 <label for="">Rocket Number</label>
-                                <input type="number" class="form-control" placeholder="Rocket number" name="rocket">
+                                <input type="number" class="form-control" placeholder="Rocket number" value="{{ $purchase->rocket }}" name="rocket">
                                 </p>
                             </div><!--bkash-->
                             <div class="form-gorup my-3 card" id="Bank" style="display: none">
@@ -140,7 +141,7 @@
                                 </p>
                                 <p class="card-body">
                                 <label for="">Bank Account Number</label>
-                                <input type="number" class="form-control" placeholder="bank account number" name="bank">
+                                <input type="number" class="form-control" placeholder="bank account number" value="{{ $purchase->bank }}" name="bank">
                                 </p>
                             </div><!--bkash-->
                             <!--payment methods end here -->
@@ -148,7 +149,7 @@
                         </div>
                     </div>
                     <div class="float-right">
-                        <input type="submit" class="btn btn-primary" value="Add New Purchase">
+                        <input type="submit" class="btn btn-primary" value="Update Purchase">
                     </div>
                 </form>
             </div>
@@ -172,75 +173,55 @@
         })
         //end of select2
 
+        //edit option auto selelct product
+        var edit_id = $('#id').val();
+        if(edit_id){
+            $.ajax({
+                url:'/product_purchase_search/'+edit_id,
+                type: 'GET',
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    $('#table_value').append('<tr>\
+                    <td>'+data.product_name+'</td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.purchase_quantity+' " name="purchase_quantity" id="purchase_quantity"> </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.unit_cost+' " name="unit_cost" id="unit_cost"> </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.discount_percent+' "  name="discount_percent" id="discrount_percent"> </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.tax+' " name="tax" id="tax" </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.line_total+' " name="line_total" id="line_total">  </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.profit_margin+' " name="profit_margin" id="profit_margin" value=""> </td>\
+                    <td> <input class="form-control form-control-sm" type="text" value=" '+data.purchase.unit_selling_price+' " name="unit_selling_price" id="unit_selling_price"> </td>\
+                    </tr>')
+                    $("input").keyup(function(){
+                        var quantity = $('#purchase_quantity').val();
+                        var unit_cost = $('#unit_cost').val();
+                        var total = quantity * unit_cost;
+                        $('#line_total').val(total)
+                        var profitSellingTotal = unit_cost ;
+                        $('#unit_selling_price').val(profitSellingTotal)
+                    });
+                }//return success function
+            })//this is ajax end
+        }
+        //end of auto select product
+
+
+
         $(document).ready(function(){
-            $('#product_id').on('change', function(e){
-                var id = e.target.value;
-                if(id){
-                    $.ajax({
-                        url:'/product_purchase_search/'+id,
-                        type: 'GET',
-                        dataType: 'json',
-                        success:function(data){
-                            console.log(data);
-                            $('#table_value').append('<tr>   <td>'+data.product_name+'</td>     <td> <input class="form-control form-control-sm" type="number" value="" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value="5"> </td>          <td> <input type="number" name="line_total" class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>       <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>                </tr>')
-                            $("input").keyup(function(){
-                                var quantity = $('#purchase_quantity').val();
-                                var unit_cost_before_discount = $('#unit_cost_before_discount').val();
-                                var tax = $('#tax').val();
-                                var total = quantity * unit_cost_before_discount + tax
-                                $('#line_total').val(total)
-
-                                var profit_margin = $('#profit_margin').val();
-                                var profitSellingTotal = total + profit_margin;
-                                $('#unit_selling_price').val(profitSellingTotal)
-                            });
-                        }//return success function
-                    })//this is ajax end
-                }
-            });
-            $('#payment_method').on('change', function(e){
-                var payment_name = e.target.value
-                $('#Bkash').hide();
-                $('#Nagud').hide();
-                $('#Rocket').hide();
-                $('#Bank').hide();
-                if(payment_name == 'Bkash'){
-                    $('#Bkash').show();
-                }else if(payment_name == 'Nagud'){
-                    $('#Nagud').show();
-                }else if(payment_name == 'Rocket'){
-                    $('#Rocket').show();
-                }else if (payment_name == 'Bank'){
-                    $('#Bank').show();
-                }
-            });
-
-
-            //edit product information
-
-            // if(a){
-            //         $.ajax({
-            //             url:'/product_purchase_search/'+a,
-            //             type: 'GET',
-            //             dataType: 'json',
-            //             success:function(data){
-            //                 console.log(data);
-            //                 $('#table_value').append('<tr>   <td>'+data.product_name+'</td>     <td> <input class="form-control form-control-sm" type="number" value="" name="purchase_quantity" id="purchase_quantity"> </td>      <td> <input class="form-control form-control-sm" type="number" value="50" name="unit_cost_before_discount" id="unit_cost_before_discount"> </td>        <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>        <td> <input class="form-control form-control-sm" type="number" name="unit_cost_before_tax" id="unit_cost_before_tax"> </td>         <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value="5"> </td>          <td> <input type="number" name="line_total" class="line_total" id="line_total">  </td>         <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>       <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>                </tr>')
-            //                 $("input").keyup(function(){
-            //                     var quantity = $('#purchase_quantity').val();
-            //                     var unit_cost_before_discount = $('#unit_cost_before_discount').val();
-            //                     var tax = $('#tax').val();
-            //                     var total = quantity * unit_cost_before_discount + tax
-            //                     $('#line_total').val(total)
-
-            //                     var profit_margin = $('#profit_margin').val();
-            //                     var profitSellingTotal = total + profit_margin;
-            //                     $('#unit_selling_price').val(profitSellingTotal)
-            //                 });
-            //             }//return success function
-            //         })//this is ajax end
-            //     }
-
+            var payment_name = $('#payment_method').val();
+            $('#Bkash').hide();
+            $('#Nagud').hide();
+            $('#Rocket').hide();
+            $('#Bank').hide();
+            if(payment_name == 'Bkash'){
+                $('#Bkash').show();
+            }else if(payment_name == 'Nagud'){
+                $('#Nagud').show();
+            }else if(payment_name == 'Rocket'){
+                $('#Rocket').show();
+            }else if (payment_name == 'Bank'){
+                $('#Bank').show();
+            }
         });
 
 

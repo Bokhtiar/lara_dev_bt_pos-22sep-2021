@@ -32,7 +32,7 @@ class PurchaseController extends Controller
 
     public function product_show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('purchase')->find($id);
         return response()->json($product, 200);
     }
 
@@ -50,7 +50,7 @@ class PurchaseController extends Controller
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
-        dd($request->all());
+
         if($validated){
 
             try{
@@ -97,12 +97,75 @@ class PurchaseController extends Controller
         }
     }
 
+
     public function edit($id)
     {
         $purchase = Purchase::find($id);
         $suppliers = Contact::where('contact_info', 'Supplier')->get();
         $products = Product::Active()->get();
         return view('modules.purchase.edit', compact('purchase','suppliers','products'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'supplier_id'=>'required',
+            'purchase_date'=>'required',
+            'reference_no'=>'required',
+            'product_id' => 'required',
+            'purchase_quantity' => 'required',
+            'unit_cost' => 'required',
+            'amount' => 'required',
+            'purchase_date' => 'required',
+            'paid_on_date' => 'required',
+            'payment_method'=> 'required'
+        ]);
+
+        if($validated){
+
+            try{
+
+                DB::beginTransaction();
+                $purchase = Purchase::find($id);
+                $purchaseU = $purchase->update([
+                    'supplier_id' => $request->supplier_id,
+                    'reference_no' => $request->reference_no,
+                    'purchase_date' => $request->purchase_date,
+                    'attech_file' => 'NOT FILE',
+                    'note' => $request->note,
+                    'product_id' => $request->product_id,
+                    'purchase_quantity' => $request->purchase_quantity,
+                    'unit_cost' => $request->unit_cost,
+                    'discount_percent' => $request->discount_percent,
+                    'tax' => $request->tax,
+                    'line_total' => $request->line_total,
+                    'profit_margin' => $request->profit_margin,
+                    'unit_selling_price' => $request->unit_selling_price,
+                    'amount' => $request->amount,
+                    'paid_on_date' => $request->paid_on_date,
+                    'payment_method' => $request->payment_method,
+                    'bkash' => $request->bkash,
+                    'rocket' => $request->rocket,
+                    'nagud' => $request->nagud,
+                    'bank' => $request->bank,
+                ]);
+                $product = Product::find($request->id);
+                $product['purchase_id'] = $purchase->id;
+                $product['discount_percent'] = $request->discount_percent;
+                $product['tax'] = $request->tax;
+                $product['unit_selling_price'] = $request->unit_selling_price;
+                $product->save();
+
+                if (!empty($purchaseU)) {
+                    DB::commit();
+                    Session::flash('update','Added Sucessfully...');
+                    return redirect()->route('purchase.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     public function destroy($id)
@@ -112,6 +175,8 @@ class PurchaseController extends Controller
         return redirect()->route('purchase.index');
 
     }
+
+
 
 
 
