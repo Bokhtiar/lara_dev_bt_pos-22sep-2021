@@ -72,7 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($brands as $item)
+                @foreach ($roles as $item)
                 <tr>
                     <td>
                         <div class="btn-group">
@@ -99,7 +99,6 @@
                 <tr>
                     <th>Action</th>
                     <th>Brand</th>
-                    <th>Description</th>
                 </tr>
             </tfoot>
         </table>

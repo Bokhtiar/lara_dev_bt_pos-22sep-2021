@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Session;
 
 class RoleController extends Controller
 {
@@ -13,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        
+        $roles = Role::all();
+        return view('acl.role.index', compact('roles'));
     }
 
     /**
@@ -34,7 +37,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Role::create($request->all());
+        Session::flash('insert','insert Sucessfully...');
+        return redirect()->route('role.index');
     }
 
     /**
@@ -56,7 +61,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = Role::find($id);
+        $roles = Role::all();
+        return view('acl.role.index', compact('roles', 'edit'));
     }
 
     /**
@@ -68,7 +75,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role['name'] = $request->name;
+        $role->save();
+        return redirect()->route('role.index');
+        Session::flash('update','update Sucessfully...');
     }
 
     /**
