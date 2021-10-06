@@ -88,14 +88,17 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             </button>
                             <div class="dropdown-menu" role="menu">
+                                @isset(auth()->user()->role->permission['permission']['brand']['edit'])
                                 <a class="dropdown-item" href="@route('brand.edit', $item->id)"><i class="btn btn-info btn-sm far fa-edit"></i></a>
-
+                                @endisset
+                                @isset(auth()->user()->role->permission['permission']['brand']['delete'])
                                 <form action="@route('brand.destroy',$item->id)" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="dropdown-item "><i
                                             class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                                 </form>
+                                @endisset
                             </div>
                         </div>
 

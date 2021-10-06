@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
@@ -84,3 +85,13 @@ Route::get('day/report', [ReportController::class, 'day'])->name('day.report');
 Route::get('month/report', [ReportController::class, 'month'])->name('month.report');
 Route::get('week/report', [ReportController::class, 'week'])->name('week.report');
 Route::get('year/report', [ReportController::class, 'year'])->name('year.report');
+
+//role and permission
+Route::get('permission/index', [PermissionController::class, 'index'])->name('permission.index');
+Route::get('permission/create', [PermissionController::class, 'create'])->name('permission.create');
+Route::post('permission/store', [PermissionController::class, 'store']);
+Route::get('permission/edit/{id}', [PermissionController::class, 'edit']);
+Route::post('permission/update/{id}', [PermissionController::class, 'update']);
+
+
+
