@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::latest()->get();
         return view('modules.order.index', compact('orders'));
     }
 
@@ -113,7 +113,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+        $order_payment = $order->pay_amount + $request->pay_amount;
+        $order['pay_amount'] = $order_payment;
+        $order->save();
+        return back();
     }
 
     /**

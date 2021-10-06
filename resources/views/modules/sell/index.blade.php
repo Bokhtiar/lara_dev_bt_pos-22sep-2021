@@ -43,9 +43,13 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal">
-                            
+                        @if($item->pay_amount == $item->total_amount)
+                        <span class="dropdown-item">no Due</span>
+                        @else
+                        <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
+                            Due Payment
                           </button>
+                        @endif
                         <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
                         <form action="@route('order.destroy',$item->id)" method="POST">
                             @csrf
@@ -69,6 +73,36 @@
                     @endif
                 </td>
                 </tr>
+
+                <!-- payment Modal -->
+                    <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                               <span>Due Amount is :  {{ $item->total_amount - $item->pay_amount }}</span>
+                                    <form action="@route('order.update', $item->id)" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <div class="form-gorup">
+                                            <label for="">How Many pay amount</label>
+                                        <input type="number" name="pay_amount" class="form-control" placeholder="pay amount" id="">
+                                        </div>
+
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
             @endforeach
         </tbody>
         <tfoot>

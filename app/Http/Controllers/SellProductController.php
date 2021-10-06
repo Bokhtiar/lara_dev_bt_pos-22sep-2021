@@ -19,7 +19,7 @@ class SellProductController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::latest()->get();
         return view('modules.sell.index', compact('orders'));
     }
 
