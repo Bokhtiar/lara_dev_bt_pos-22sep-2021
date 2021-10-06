@@ -6,19 +6,21 @@
 
 @section('admin_content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10 my-5">
+    <div class=" ">
+        <div class="">
             <div class="card">
-
-                <div class="card-header">
-                <h3 class="card-title">Create New Sub-Admin</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <a class="btn btn-sm btn-primary" href="@route('subAdmin.index')">List Of Users</a>
-                  </div>
+            <div class="card-header">
+            <h3 class="card-title"> <i class="fas fa-list"></i> LIST OF SUB-ADMIN</h3>
+            <div class="card-tools">
+                <div class="input-group form-inline input-group-sm" style="width: 100%;">
+                    <p class="form-inline">
+                        <a href="@route('subAdmin.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
+                            LIST OF SUB-ADMIN</a>
+                        <a href="@route('subAdmin.create')" class="btn btn-primary"><i class="fas fa-plus"></i> ADD NEW SUB-ADMIN</a>
+                    </p>
                 </div>
-              </div>
+            </div>
+        </div>
                 <div class="card-body">
                     <form method="POST" action="@route('subAdmin.store')">
                         @csrf
@@ -71,13 +73,19 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
-                            <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="role"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Select Role') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                <select class="form-control" name="role_id" id="">
+                                    <option value="">--Selelct Role--</option>
+                                    @foreach ($roles as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

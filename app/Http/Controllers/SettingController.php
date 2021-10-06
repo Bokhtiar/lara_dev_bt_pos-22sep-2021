@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Session;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class SettingController extends Controller
 
     public function create()
     {
-        return view('setting.subAdmin.create');
+        $roles = Role::all();
+        return view('setting.subAdmin.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -26,10 +28,11 @@ class SettingController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role_id = $request->role_id;
         $user->password = hash::make($request->password);
         $user->save();
         Session::flash('insert','ADDED Sucessfully...');
-        return back();
+        return redirect()->route('subAdmin.index');
     }
 
     public function destroy($id)

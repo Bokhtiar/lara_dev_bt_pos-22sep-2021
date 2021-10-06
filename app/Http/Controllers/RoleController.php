@@ -78,8 +78,8 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role['name'] = $request->name;
         $role->save();
-        return redirect()->route('role.index');
         Session::flash('update','update Sucessfully...');
+        return redirect()->route('role.index');
     }
 
     /**
@@ -90,6 +90,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::find($id)->delete();
+        Session::flash('delete','update Sucessfully...');
+        return redirect()->route('role.index');
     }
 }
