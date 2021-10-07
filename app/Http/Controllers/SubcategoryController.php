@@ -7,6 +7,7 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Illuminate\Validation\Rule;
 
 class SubcategoryController extends Controller
 {
@@ -97,7 +98,7 @@ class SubcategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'subcategory_name'=> 'string |required | unique:subcategories| max:30 | min:2 ',
+            'subcategory_name'=> ['required', 'string',Rule::unique('subcategories', 'subcategory_name')->ignore($id,'id')],
             'category_id'=> 'required | integer'
         ]);
 

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -93,7 +94,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'category_name'=>' string |required | unique:categories| max:30 | min:2 '.$id,
+            'category_name'=>['required', 'string',Rule::unique('categories', 'category_name')->ignore($id,'id')]
         ]);
 
         if($validated){

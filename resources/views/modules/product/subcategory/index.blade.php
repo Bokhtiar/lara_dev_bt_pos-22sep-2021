@@ -37,7 +37,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">NEW SUB-CATEGORY CREATE </h5>
+                            <h5 class="modal-title" id="exampleModalLabel"> <span>+</span> NEW SUB-CATEGORY CREATE </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="@route('subcategory.store')" method="POST">
@@ -114,7 +114,7 @@
 
                     </td>
                     <td>{{ $item->subcategory_name }}</td>
-                    <td>{{ $item->category->category_name }}</td>
+                    <td>{{ $item->category ? $item->category->category_name : 'Data Not Available' }}</td>
                     <td>{{ $item->subcategory_description }}</td>
                     <td>
                         @if($item->status == 1)
@@ -154,7 +154,7 @@
                                             class="text-danger">*</span></label>
                                         <select class="form-control select2" name="category_id" id="">
                                             @foreach ($categories as $cat)
-                                            <option value="{{ $cat->id }} {{ $cat->id == @$item->category_id ? 'selected' : '' }} ">{{ $cat->category_name }}</option>
+                                            <option value="{{ $cat->id }}" {{ $cat->id == @$item->category_id ? 'selected' : '' }}>{{ $cat->category_name }}</option>
                                             @endforeach
                                         </select>
                                 </div>
