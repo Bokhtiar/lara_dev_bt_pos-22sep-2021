@@ -155,6 +155,38 @@
                             </td>
                         </tr>
 
+                        <!-- category end -->
+
+                        <tr>
+                            <td>Sub-Category</td>
+                            <td>
+                                <input type="checkbox" name="permission[subcategory][add]"
+                                       @isset($permission['permission']['subcategory']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[subcategory][edit]"
+                                       @isset($permission['permission']['subcategory']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[subcategory][view]"
+                                       @isset($permission['permission']['subcategory']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[subcategory][delete]"
+                                       @isset($permission['permission']['subcategory']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[subcategory][list]"
+                                       @isset($permission['permission']['subcategory']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--sub category end -->
+
 
                         <tr>
                             <td>Brand</td>

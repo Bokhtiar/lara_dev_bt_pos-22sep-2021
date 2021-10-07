@@ -63,19 +63,22 @@
                   <p>Alert Product</p>
                 </a>
               </li>
-
+              @isset(auth()->user()->role->permission['permission']['category']['list'])
               <li class="nav-item">
                 <a href="@route('category.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Categorie's</p>
                 </a>
               </li>
+              @endisset
+              @isset(auth()->user()->role->permission['permission']['subcategory']['list'])
               <li class="nav-item">
                 <a href="@route('subcategory.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Sub Categorie's</p>
                 </a>
               </li>
+              @endisset
               <li class="nav-item">
                 <a href="@route('brand.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
@@ -270,98 +273,6 @@
               </li>
             </ul>
            </li>
-{{--
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Sub-Category
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/sub-category') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Sub-Categorie's</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Products
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/product') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Product List</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Blogs
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/blog') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Blog List</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tree"></i>
-              <p>
-                Orders
-                <i class="fa fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/orders') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Order</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tree"></i>
-              <p>
-                Contact
-                <i class="fa fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/contact') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Contact</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
-
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tree"></i>

@@ -2,7 +2,9 @@
     <div class="input-group form-inline input-group-sm" style="width: 100%;">
         <p class="form-inline">
         <a href="@route('category.index')" class="btn btn-info text-light"><i class="fas fa-list"></i> List Of Categories</a>
+        @isset(auth()->user()->role->permission['permission']['category']['add'])
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-plus"></i> Add Category</button>
+        @endisset
             </p>
     </div>
 

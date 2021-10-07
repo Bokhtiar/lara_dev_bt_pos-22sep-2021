@@ -47,15 +47,18 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
+                        @isset(auth()->user()->role->permission['permission']['category']['edit'])
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->id }}">
                         <i class="btn btn-info btn-sm far fa-edit"></i>
                         </button>
-
+                        @endisset
+                        @isset(auth()->user()->role->permission['permission']['category']['delete'])
                         <form action="@route('category.destroy',$item->id)" method="POST">
                             @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                         </form>
+                        @endisset
                     </div>
                   </div>
 

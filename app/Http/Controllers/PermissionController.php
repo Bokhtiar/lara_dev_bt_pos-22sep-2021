@@ -75,7 +75,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
         $permission->update($request->all());
-        return redirect('/');
+        return back();
     }
 
     /**

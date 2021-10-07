@@ -72,6 +72,15 @@
                     </tr>
 
                     <tr>
+                        <td>Sub-Category</td>
+                        <td><input type="checkbox" name="permission[subcategory][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[subcategory][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[subcategory][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[subcategory][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[subcategory][list]" value="1"></td>
+                    </tr>
+
+                    <tr>
                         <td>Brand</td>
                         <td><input type="checkbox" name="permission[brand][add]" value="1"></td>
                         <td><input type="checkbox" name="permission[brand][edit]" value="1"></td>
