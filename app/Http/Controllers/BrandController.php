@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Session;
 
 class BrandController extends Controller
@@ -74,7 +75,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
          $validated = $request->validate([
-            'brand_name'=>' string |required | unique:brands| max:30 | min:2 ',
+            'brand_name'=>['required', 'string',Rule::unique('brands', 'brand_name')->ignore($id,'id')],
         ]);
 
         if($validated){

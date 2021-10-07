@@ -23,15 +23,20 @@
         <div class="card-tools">
             <div class="input-group form-inline input-group-sm" style="width: 100%;">
                 <p class="form-inline">
+                    @isset(auth()->user()->role->permission['permission']['warranty']['list'])
                     <a href="@route('warranty.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
                         LIST OF WARRANTY</a>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['warranty']['add'])
                     <a href="@route('warranty.index')" class="btn btn-primary"><i class="fas fa-plus"></i> ADD NEW WARRANTY</a>
+                    @endisset
                 </p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-lg-3 col-md-3">
+            @isset(auth()->user()->role->permission['permission']['warranty']['add'])
             <div class="card">
                 <div class="card-header">
                     <h5><i class="text-secondary fas fa-box"></i> {{ @$edit ? 'UPDATE WARRANTY' : 'CREATE NEW WARRANTY' }} </h5>
@@ -67,6 +72,7 @@
                     </form>
                 </div>
             </div>
+            @endisset
         </div>
         <div class="col-sm-12 col-lg-9 col-md-9">
         <div class="card-body">
@@ -87,14 +93,17 @@
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             </button>
                             <div class="dropdown-menu" role="menu">
+                                @isset(auth()->user()->role->permission['permission']['warranty']['edit'])
                                 <a class="dropdown-item" href="@route('warranty.edit', $item->id)"><i class="btn btn-info btn-sm far fa-edit"></i></a>
-
+                                @endisset
+                                @isset(auth()->user()->role->permission['permission']['warranty']['delete'])
                                 <form action="@route('warranty.destroy',$item->id)" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="dropdown-item "><i
                                             class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                                 </form>
+                                @endisset
                             </div>
                         </div>
 

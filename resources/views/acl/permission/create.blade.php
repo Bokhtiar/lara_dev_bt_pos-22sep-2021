@@ -88,6 +88,24 @@
                         <td><input type="checkbox" name="permission[brand][delete]" value="1"></td>
                         <td><input type="checkbox" name="permission[brand][list]" value="1"></td>
                     </tr>
+
+                    <tr>
+                        <td>Unit</td>
+                        <td><input type="checkbox" name="permission[unit][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[unit][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[unit][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[unit][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[unit][list]" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Warranty</td>
+                        <td><input type="checkbox" name="permission[warranty][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[warranty][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[warranty][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[warranty][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[warranty][list]" value="1"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

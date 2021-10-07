@@ -216,6 +216,68 @@
                                        value="1">
                             </td>
                         </tr>
+                        <!--brand -->
+
+                        <tr>
+                            <td>Unit</td>
+                            <td>
+                                <input type="checkbox" name="permission[unit][add]"
+                                       @isset($permission['permission']['unit']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[unit][edit]"
+                                       @isset($permission['permission']['unit']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[unit][view]"
+                                       @isset($permission['permission']['unit']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[unit][delete]"
+                                       @isset($permission['permission']['unit']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[unit][list]"
+                                       @isset($permission['permission']['unit']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--sub category end -->
+                        <tr>
+                            <td>Warranty</td>
+                            <td>
+                                <input type="checkbox" name="permission[warranty][add]"
+                                       @isset($permission['permission']['warranty']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[warranty][edit]"
+                                       @isset($permission['permission']['warranty']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[warranty][view]"
+                                       @isset($permission['permission']['warranty']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[warranty][delete]"
+                                       @isset($permission['permission']['warranty']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[warranty][list]"
+                                       @isset($permission['permission']['warranty']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--sub category end -->
+
+
                         </tbody>
                     </table>
                 </div>

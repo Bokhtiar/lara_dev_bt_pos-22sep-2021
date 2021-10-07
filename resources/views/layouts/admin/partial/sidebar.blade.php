@@ -79,24 +79,30 @@
                 </a>
               </li>
               @endisset
+              @isset(auth()->user()->role->permission['permission']['brand']['list'])
               <li class="nav-item">
                 <a href="@route('brand.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Brands</p>
                 </a>
               </li>
+              @endisset
+              @isset(auth()->user()->role->permission['permission']['unit']['list'])
               <li class="nav-item">
                 <a href="@route('unit.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Unit</p>
                 </a>
               </li>
+              @endisset
+              @isset(auth()->user()->role->permission['permission']['warranty']['list'])
               <li class="nav-item">
                 <a href="@route('warranty.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Warranty</p>
                 </a>
               </li>
+              @endisset
             </ul>
            </li>
 
