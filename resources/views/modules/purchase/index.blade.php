@@ -29,14 +29,20 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
+                        @isset(auth()->user()->role->permission['permission']['purchase']['edit'])
                          <a class="dropdown-item" href="@route('purchase.edit', $item->id)"><i
                                     class="btn btn-info btn-sm far fa-edit"></i></a>
+                        @endisset
+                        @isset(auth()->user()->role->permission['permission']['purchase']['view'])
                         <a href="@route('purchase.show',$item->id)" class="dropdown-item"> <i class="btn btn-sm btn-success fas fa-eye"></i></a>
+                        @endisset
+                        @isset(auth()->user()->role->permission['permission']['purchase']['delete'])
                         <form action="@route('purchase.destroy',$item->id)" method="POST">
                             @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                         </form>
+                        @endisset
                     </div>
 
                   </div>
@@ -44,8 +50,8 @@
                 </td>
                 <td> <a href="@route('product.show', $item->product_id)">{{ $item->product->product_name }}</a> </td>
                 <td>{{ $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name }}</td>
-                <td>{{ $item->line_total }}</td>
-                <td>{{ $item->line_total - $item->amount }}</td> <!--amount is how many send supplier amount-->
+                <td>{{ $item->line_total }} Tk</td>
+                <td>{{ $item->line_total - $item->amount }} Tk</td> <!--amount is how many send supplier amount-->
                 </tr>
             @endforeach
         </tbody>

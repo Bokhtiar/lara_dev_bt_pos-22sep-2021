@@ -44,19 +44,22 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            @isset(auth()->user()->role->permission['permission']['product']['add'])
               <li class="nav-item">
                 <a href="@route('product.create')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Product Create</p>
                 </a>
               </li>
+            @endisset
+            @isset(auth()->user()->role->permission['permission']['product']['list'])
               <li class="nav-item">
                 <a href="@route('product.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Product List</p>
                 </a>
               </li>
-
+            @endisset
               <li class="nav-item">
                 <a href="{{ url('aleart') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
@@ -106,6 +109,7 @@
             </ul>
            </li>
 
+           @isset(auth()->user()->role->permission['permission']['purchase']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -121,15 +125,9 @@
                   <p>Purchase</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="@route('purchase.create')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Purchase Create</p>
-                </a>
-              </li>
             </ul>
            </li>
-
+           @endisset
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>

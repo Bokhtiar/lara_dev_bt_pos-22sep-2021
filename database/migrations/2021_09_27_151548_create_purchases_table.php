@@ -26,7 +26,6 @@ class CreatePurchasesTable extends Migration
             $table->string('discount_percent')->nullable();
             $table->string('tax')->nullable();
             $table->string('line_total');
-            $table->string('profit_margin')->nullable();
             $table->string('unit_selling_price')->nullable();
             $table->string('amount');
             $table->string('paid_on_date');

@@ -33,26 +33,30 @@
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         </button>
                         <div class="dropdown-menu" role="menu">
+                            @isset(auth()->user()->role->permission['permission']['product']['edit'])
                             <a class="dropdown-item" href="@route('product.edit', $item->id)"><i
                                     class="btn btn-info btn-sm far fa-edit"></i></a>
-                            <!-- Start Large modal -->
-                            <a class="btn btn-primary dropdown-item" href="@route('product.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
 
+                            @endisset
+                            @isset(auth()->user()->role->permission['permission']['product']['view'])
+                            <a class="btn btn-primary dropdown-item" href="@route('product.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
+                            @endisset
+                            @isset(auth()->user()->role->permission['permission']['product']['delete'])
                             <form action="@route('purchase.destroy',$item->id)" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item "><i
                                         class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                             </form>
-
+                            @endisset
                         </div>
                     </div>
 
                 </td>
                 <td>{!! $item->product_name !!}</td>
-                <td>{!! $item->category->category_name !!}</td>
+                <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
-                <td>{!! $item->unit->unit_short_name !!}</td>
+                <td>{!! $item->unit ? $item->unit->unit_short_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->discount_percent !!}</td>
                 <td>{!! $item->tax !!}</td>
                 <td>{!! $item->unit_selling_price !!} Tk</td>

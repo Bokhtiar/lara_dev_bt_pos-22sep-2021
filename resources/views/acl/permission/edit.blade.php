@@ -246,7 +246,7 @@
                                        value="1">
                             </td>
                         </tr>
-                        <!--sub category end -->
+                        <!--unit end -->
                         <tr>
                             <td>Warranty</td>
                             <td>
@@ -275,7 +275,67 @@
                                        value="1">
                             </td>
                         </tr>
-                        <!--sub category end -->
+                        <!--warranty end -->
+
+                        <tr>
+                            <td>Product</td>
+                            <td>
+                                <input type="checkbox" name="permission[product][add]"
+                                       @isset($permission['permission']['product']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[product][edit]"
+                                       @isset($permission['permission']['product']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[product][view]"
+                                       @isset($permission['permission']['product']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[product][delete]"
+                                       @isset($permission['permission']['product']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[product][list]"
+                                       @isset($permission['permission']['product']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--product end -->
+
+                        <tr>
+                            <td>Purchase</td>
+                            <td>
+                                <input type="checkbox" name="permission[purchase][add]"
+                                       @isset($permission['permission']['purchase']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[purchase][edit]"
+                                       @isset($permission['permission']['purchase']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[purchase][view]"
+                                       @isset($permission['permission']['purchase']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[purchase][delete]"
+                                       @isset($permission['permission']['purchase']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[purchase][list]"
+                                       @isset($permission['permission']['purchase']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--product end -->
 
 
                         </tbody>

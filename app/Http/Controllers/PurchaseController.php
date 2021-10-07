@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Purchase;
-use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\DB;
@@ -46,15 +45,12 @@ class PurchaseController extends Controller
             'purchase_quantity' => 'required',
             'unit_cost' => 'required',
             'amount' => 'required',
-            'purchase_date' => 'required',
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
 
         if($validated){
-
             try{
-
                 DB::beginTransaction();
                 $purchase = Purchase::create([
                     'supplier_id' => $request->supplier_id,
@@ -68,7 +64,6 @@ class PurchaseController extends Controller
                     'discount_percent' => $request->discount_percent,
                     'tax' => $request->tax,
                     'line_total' => $request->line_total,
-                    'profit_margin' => $request->profit_margin,
                     'unit_selling_price' => $request->unit_selling_price,
                     'amount' => $request->amount,
                     'paid_on_date' => $request->paid_on_date,
@@ -84,7 +79,6 @@ class PurchaseController extends Controller
                 $product['tax'] = $request->tax;
                 $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
-
                 if (!empty($purchase)) {
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');
@@ -116,7 +110,6 @@ class PurchaseController extends Controller
             'purchase_quantity' => 'required',
             'unit_cost' => 'required',
             'amount' => 'required',
-            'purchase_date' => 'required',
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
@@ -139,7 +132,6 @@ class PurchaseController extends Controller
                     'discount_percent' => $request->discount_percent,
                     'tax' => $request->tax,
                     'line_total' => $request->line_total,
-                    'profit_margin' => $request->profit_margin,
                     'unit_selling_price' => $request->unit_selling_price,
                     'amount' => $request->amount,
                     'paid_on_date' => $request->paid_on_date,
@@ -149,16 +141,17 @@ class PurchaseController extends Controller
                     'nagud' => $request->nagud,
                     'bank' => $request->bank,
                 ]);
+
                 $product = Product::find($request->id);
                 $product['purchase_id'] = $purchase->id;
                 $product['discount_percent'] = $request->discount_percent;
                 $product['tax'] = $request->tax;
                 $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
-
+                return redirect()->route('purchase.index');
                 if (!empty($purchaseU)) {
                     DB::commit();
-                    Session::flash('update','Added Sucessfully...');
+                    Session::flash('update','Update Sucessfully...');
                     return redirect()->route('purchase.index');
                 }
                 throw new \Exception('Invalid About Information');
@@ -171,7 +164,7 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         Purchase::find($id)->delete();
-        Session::flash('delete','update Sucessfully...');
+        Session::flash('delete','Delete Sucessfully...');
         return redirect()->route('purchase.index');
 
     }

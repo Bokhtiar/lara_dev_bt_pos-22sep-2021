@@ -23,7 +23,6 @@ class Purchase extends Model
         'discount_percent',
         'tax',
         'line_total',
-        'profit_margin',
         'unit_selling_price',
         'amount',
         'paid_on_date',

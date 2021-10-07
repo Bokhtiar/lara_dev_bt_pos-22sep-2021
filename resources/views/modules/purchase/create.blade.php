@@ -67,15 +67,16 @@
                                 <th scope="col">Discount percent</th>
                                 <th scope="col">Tax</th>
                                 <th scope="col">Line Total</th>
-                                <th scope="col">Profit Margin %</th>
                                 <th scope="col">Unit Selling Price</th>
-                                <th scope="col">X</th>
                                 </tr>
                             </thead>
                             <tbody id="table_value">
                                 {{-- dynamic value added in jquery --}}
                             </tbody>
-                            </table>
+                        </table>
+                        <div class="float-right" id="total_amount_show">
+                            {{-- <span>Total Amount Is : '+total+'</span> --}}
+                        </div>
                     </div>
 
                     <div class="card my-4">
@@ -86,7 +87,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Amount. <span class="text-danger">*</span></label>
-                                    <input type="number" name="amount" class="form-control" id="">
+                                    <input type="number" name="amount" placeholder="How Much Amount Pay" class="form-control" id="">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Paid on. <span class="text-danger">*</span></label>
@@ -187,7 +188,6 @@
                             <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>\
                             <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value=""> </td>\
                             <td> <input class="form-control form-control-sm" type="number" name="line_total" id="line_total"></td>\
-                            <td> <input class="form-control form-control-sm" type="number" name="profit_margin" id="profit_margin" value=""> </td>\
                             <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>\
                             </tr>')
                             $("input").keyup(function(){
@@ -195,10 +195,8 @@
                                 var unit_cost = $('#unit_cost').val();
                                 var total = quantity * unit_cost
                                 $('#line_total').val(total)
-
-                                var profit_margin = $('#profit_margin').val();
-                                var profitSellingTotal = unit_cost + profit_margin;
-                                $('#unit_selling_price').val(profitSellingTotal)
+                                $('#total_amount_show').html("")
+                                $('#total_amount_show').append('<span class="h4"> + Total Amount Is : '+total+' Tk</span>')
                             });
                         }//return success function
                     })//this is ajax end

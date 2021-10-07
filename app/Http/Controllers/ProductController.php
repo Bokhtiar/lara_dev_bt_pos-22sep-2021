@@ -25,11 +25,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $purchase = Purchase::all();
-        foreach($purchase as $p){
-            $par = $p->product_id;
-            $par = $p->purchase_quantity;
-        }
-        return view('modules.product.index', compact('products', 'purchase','par'));
+        return view('modules.product.index', compact('products', 'purchase'));
     }
 
     /**
