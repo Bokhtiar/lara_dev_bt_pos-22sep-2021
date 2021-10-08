@@ -20,8 +20,6 @@ class Purchase extends Model
         'product_id',
         'purchase_quantity',
         'unit_cost',
-        'discount_percent',
-        'tax',
         'line_total',
         'unit_selling_price',
         'amount',

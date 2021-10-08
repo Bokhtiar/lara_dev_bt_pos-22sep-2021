@@ -48,7 +48,6 @@ class PurchaseController extends Controller
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
-
         if($validated){
             try{
                 DB::beginTransaction();
@@ -61,8 +60,6 @@ class PurchaseController extends Controller
                     'product_id' => $request->product_id,
                     'purchase_quantity' => $request->purchase_quantity,
                     'unit_cost' => $request->unit_cost,
-                    'discount_percent' => $request->discount_percent,
-                    'tax' => $request->tax,
                     'line_total' => $request->line_total,
                     'unit_selling_price' => $request->unit_selling_price,
                     'amount' => $request->amount,
@@ -75,8 +72,6 @@ class PurchaseController extends Controller
                 ]);
                 $product = Product::find($request->product_id);
                 $product['purchase_id'] = $purchase->id;
-                $product['discount_percent'] = $request->discount_percent;
-                $product['tax'] = $request->tax;
                 $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
                 if (!empty($purchase)) {
@@ -129,8 +124,6 @@ class PurchaseController extends Controller
                     'product_id' => $request->product_id,
                     'purchase_quantity' => $request->purchase_quantity,
                     'unit_cost' => $request->unit_cost,
-                    'discount_percent' => $request->discount_percent,
-                    'tax' => $request->tax,
                     'line_total' => $request->line_total,
                     'unit_selling_price' => $request->unit_selling_price,
                     'amount' => $request->amount,
@@ -144,8 +137,6 @@ class PurchaseController extends Controller
 
                 $product = Product::find($request->id);
                 $product['purchase_id'] = $purchase->id;
-                $product['discount_percent'] = $request->discount_percent;
-                $product['tax'] = $request->tax;
                 $product['unit_selling_price'] = $request->unit_selling_price;
                 $product->save();
                 return redirect()->route('purchase.index');

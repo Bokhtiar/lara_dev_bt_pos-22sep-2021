@@ -106,8 +106,10 @@
                       <td>{{ $sell->quantity}}</td>
                       <td>{{ $sell->product->product_name }}</td>
                       <td>#{{ $sell->id }}</td>
-                        {{ $total += $sell->product->unit_selling_price * $sell->quantity }}
-                      <td>{{ $sell->product->unit_selling_price }} Tk</td>
+                        @php
+                        $total += $sell->product->unit_selling_price * $sell->quantity
+                        @endphp
+                      <td>{{ $sell->quantity * $sell->product->unit_selling_price }} Tk</td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -156,9 +158,6 @@
                   <button id="print"  class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                   <button type="button" class="btn btn-success float-right"><i class="fa fa-credit-card"></i> Submit
                     Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fa fa-download"></i> Generate PDF
                   </button>
                 </div>
               </div>

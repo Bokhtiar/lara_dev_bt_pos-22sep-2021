@@ -14,7 +14,7 @@ class Sell extends Model
         'author',
         'quantity',
         'order_id',
-        'status'
+        'status',
     ];
 
     public function product()

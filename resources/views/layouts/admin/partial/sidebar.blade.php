@@ -151,7 +151,7 @@
               </li>
             </ul>
            </li>
-
+           @isset(auth()->user()->role->permission['permission']['order']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -169,6 +169,7 @@
               </li>
             </ul>
            </li>
+           @endisset
 
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -190,7 +191,7 @@
               </li>
             </ul>
            </li>
-
+           @isset(auth()->user()->role->permission['permission']['permission']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -206,15 +207,10 @@
                   <p>Permision list</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="@route('permission.create')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Permission</p>
-                </a>
-              </li>
             </ul>
            </li>
-
+           @endisset
+           @isset(auth()->user()->role->permission['permission']['role']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -230,15 +226,10 @@
                   <p>Role list</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="@route('permission.create')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Permission</p>
-                </a>
-              </li>
             </ul>
            </li>
-
+           @endisset
+           @isset(auth()->user()->role->permission['permission']['report']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>
@@ -277,6 +268,8 @@
               </li>
             </ul>
            </li>
+           @endisset
+           @isset(auth()->user()->role->permission['permission']['setting']['list'])
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tree"></i>
@@ -292,26 +285,9 @@
                   <p>New Admin Create</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ url('admin/about/create') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>About-Us</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('admin/terms/create') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Terms Of Service</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('admin/privacy/create') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Privacy Policy</p>
-                </a>
-              </li>
             </ul>
           </li>
+          @endisset
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

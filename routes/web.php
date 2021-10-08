@@ -76,6 +76,8 @@ Route::post('sell/quantity/{id}', [SellProductController::class, 'quantity_updat
 Route::get('sell/author/all', [SellProductController::class, 'sell_author_all']);
 Route::post('quantity-update/{id}', [SellProductController::class, 'quantity_update']);
 Route::get('sell/delete/{id}', [SellProductController::class, 'destroy']);
+Route::post('percentage-update/{id}', [SellProductController::class, 'discount_percentage']);
+
 
 //order
 Route::resource('order', OrderController::class);

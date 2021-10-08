@@ -124,6 +124,32 @@
                         <td><input type="checkbox" name="permission[purchase][delete]" value="1"></td>
                         <td><input type="checkbox" name="permission[purchase][list]" value="1"></td>
                     </tr>
+
+                    <tr>
+                        <td>Order</td>
+                        <td><input type="checkbox" name="permission[order][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[order][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[order][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[order][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[order][list]" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Report</td>
+                        <td><input type="checkbox" name="permission[report][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[report][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[report][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[report][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[report][list]" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td>Setting</td>
+                        <td><input type="checkbox" name="permission[setting][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[setting][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[setting][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[setting][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[setting][list]" value="1"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

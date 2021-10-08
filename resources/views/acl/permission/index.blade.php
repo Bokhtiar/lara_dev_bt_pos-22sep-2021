@@ -6,7 +6,9 @@
     <section class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @isset(auth()->user()->role->permission['permission']['permission']['add'])
                 <a class="btn btn-success text-light" href="{{url('permission/create')}}">Create Permission </a>
+                @endisset
                 <h2 class="text-center">Permissions</h2>
                 <table class="table">
                     <thead>
@@ -24,8 +26,12 @@
                                 <td>{{$permission->role->name}}</td>
                                 <td>{{$permission->created_at->diffForHumans()}}</td>
                                 <td>
+                                    @isset(auth()->user()->role->permission['permission']['permission']['edit'])
                                     <a class="btn btn-info" href="{{url('permission/edit/'.$permission->id)}}">Edit</a>
+                                    @endisset
+                                    @isset(auth()->user()->role->permission['permission']['permission']['delete'])
                                     <a class="btn btn-danger" href="">Delete</a>
+                                    @endisset
                                 </td>
                             </tr>
                         @endforeach

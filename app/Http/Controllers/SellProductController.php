@@ -44,9 +44,11 @@ class SellProductController extends Controller
      */
     public function store($id)
     {
+        $product = Product::find($id);
         $sell = Sell::create([
             'product_id' => $id,
             'author' => Auth::id(),
+            'discount_percent' => $product->discount_percent,
         ]);
         return response()->json($sell, 200);
     }
@@ -109,5 +111,13 @@ class SellProductController extends Controller
     {
         $sells = Sell::find($id)->delete();
         return response()->json($sells, 200);
+    }
+
+    public function discount_percentage(Request $request,$id)
+    {
+        $sell = Sell::find($id);
+        $sell['discount_percent'] = $request->discount_percent;
+        $sell->save();
+        return response()->json($sell, 200);
     }
 }

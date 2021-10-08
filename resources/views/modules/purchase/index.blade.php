@@ -16,7 +16,8 @@
                 <th>Action</th>
                 <th>Product</th>
                 <th>Supplier</th>
-                <th>Amount</th>
+                <th>Total Amount</th>
+                <th>Paid Amount</th>
                 <th>Due Amount</th>
             </tr>
         </thead>
@@ -51,6 +52,7 @@
                 <td> <a href="@route('product.show', $item->product_id)">{{ $item->product->product_name }}</a> </td>
                 <td>{{ $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name }}</td>
                 <td>{{ $item->line_total }} Tk</td>
+                <td>{{ $item->amount }} Tk</td>
                 <td>{{ $item->line_total - $item->amount }} Tk</td> <!--amount is how many send supplier amount-->
                 </tr>
             @endforeach
@@ -61,6 +63,7 @@
                 <th>Product</th>
                 <th>Supplier</th>
                 <th>Total Amount</th>
+                <th>Paid Amount</th>
                 <th>Due Amount</th>
             </tr>
         </tfoot>

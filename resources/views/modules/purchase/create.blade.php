@@ -63,9 +63,7 @@
                                 <tr>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Purchase Quantity</th>
-                                <th scope="col">Unite Cost</th>
-                                <th scope="col">Discount percent</th>
-                                <th scope="col">Tax</th>
+                                <th scope="col">Unit Cost</th>
                                 <th scope="col">Line Total</th>
                                 <th scope="col">Unit Selling Price</th>
                                 </tr>
@@ -185,8 +183,6 @@
                             <td>'+data.product_name+'</td>\
                             <td><input class="form-control form-control-sm" type="number" value="0" name="purchase_quantity" id="purchase_quantity"> </td> \
                             <td> <input class="form-control form-control-sm" type="number" value="" name="unit_cost" id="unit_cost"> </td>\
-                            <td> <input class="form-control form-control-sm" type="number" name="discount_percent" id="discrount_percent"> </td>\
-                            <td> <input class="form-control form-control-sm" type="number" name="tax" id="tax" value=""> </td>\
                             <td> <input class="form-control form-control-sm" type="number" name="line_total" id="line_total"></td>\
                             <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>\
                             </tr>')

@@ -72,6 +72,7 @@
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Unit Price</th>
+                                                <th scope="col">Total Price</th>
                                                 <th scope="col">X</th>
                                                 </tr>
                                             </thead>
@@ -79,8 +80,7 @@
 
                                             </tbody>
                                             </table>
-                                            <div class="float-right">
-                                                <button class="btn btn-info">Items: 0.00</button>
+                                            <div class="float-right" id="total_amount_show">
                                                 <button class="total btn btn-primary"></button>
                                             </div>
                                     <!--table start -->
@@ -102,7 +102,7 @@
                                     <label for="">Amount. <span class="text-danger">*</span></label>
                                     <input type="number" placeholder="how many pay customer" name="pay_amount" class="form-control" id="">
                                 </div>
-                                <input type="hidden" name="total_amount" value="" id="">
+                                <input type="hidden" name="total_amount" value="100" id="total_amount">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Sell on. <span class="text-danger">*</span></label>
                                     <input type="date" name="sell_on_date" class="form-control" id="">
@@ -242,28 +242,29 @@
                     success:function(response) {
                         console.log(response)
                         $('tbody').html("")
-                        var total = 0;
+                            var total = 0;
                         response.forEach(data => {
+                            total += data.product.unit_selling_price*data.quantity
                             $('tbody').append('<tr>\
                             <td>'+data.product.product_name+'</td>\
                             <td>\
                                 <form action="" method="POST" class="form-inline">\
-                                    <input type="hidden" class="id" value=" '+data.id+' ">\
-                                    <input type="text" class="qty" value="'+data.quantity+'" >\
-                                    <button type="button" value=" '+data.id+' " class="update btn btn-success">submit</button>\
+                                    <input type="text" class="form-control form-control-sm qty" value="'+data.quantity+'" >\
+                                    <button type="button" value=" '+data.id+' " class="update btn btn-success btn-sm">submit</button>\
                                 </form>\
                             </td>\
-                            <td>'+data.quantity * data.product.unit_selling_price+' Tk</td>\
-                            total ='+data.quantity+'\
-                            console.log(total)\
+                            <td>'+data.product.unit_selling_price+' Tk </td>\
+                             <td> '+data.product.unit_selling_price*data.quantity+' Tk</td>\
                             <td> <button type="button " value=" '+data.id+' "  class="delete btn btn-danger">X</button> </td>\
                             </tr>')
                         });
-
-                        $('.total').append(total);
+                        $('#total_amount').val(total);
+                        $('#total_amount_show').html("")
+                        $('#total_amount_show').append('<span class="h4"> + Total Amount Is : '+total+' Tk</span>')
                     }//end success function
                 });
-            }//end function
+            }//all sell data show
+
 
 
             $(document).on('click', '.update', function(e){
@@ -280,11 +281,30 @@
                     dataType: 'json',
                     success:function(response){
                         getData()
+                    }//end quantity update function
+                });//quantity update ajax end
+            })//sell quantity
+
+
+
+            $(document).on('click', '.discount_percent_update', function(e){
+                e.preventDefault();
+                var id =  $(this).val();
+                var data={
+                    'discount_percent' : $('.qty').val()
+                };
+
+                $.ajax({
+                    url: '/percentage-update/'+id,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success:function(response){
+                        getData()
 
                     }//end quantity update function
                 });//quantity update ajax end
-            });
-
+            })//sell quantity
 
             $(document).on('click', '.delete', function(e){
                 e.preventDefault();
@@ -302,13 +322,9 @@
                         }//success function
                     })
                 }
-            })
+            })//sell delete
 
-            // $("#qty").on("submit", function (e) {
-            //     e.preventDefault();
-            //     var q =  $('#quantity_update').val();
 
-            // });//form end
 
         })//main document end
 
