@@ -20,6 +20,7 @@ class Order extends Model
         'total_amount',
         'sell_on_date',
         'payment_method',
+        'user_id',
         'bkash',
         'nagud',
         'rocket',
@@ -31,5 +32,9 @@ class Order extends Model
     {
         return $this->belongsTo(Contact::class);
     }
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('alert_quantity')->nullable();
             $table->integer('category_id');
             $table->integer('subcategory_id');
+            $table->integer('user_id');
             $table->integer('brand_id');
             $table->integer('warranty_id')->nullable();
             $table->string('unit_selling_price')->nullable(); //this price come form purchase table

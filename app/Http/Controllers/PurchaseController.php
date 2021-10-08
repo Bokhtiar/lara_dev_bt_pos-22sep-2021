@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Support\Facades\DB;
 
@@ -57,6 +58,7 @@ class PurchaseController extends Controller
                     'purchase_date' => $request->purchase_date,
                     'attech_file' => 'NOT FILE',
                     'note' => $request->note,
+                    'user_id' => Auth::id(),
                     'product_id' => $request->product_id,
                     'purchase_quantity' => $request->purchase_quantity,
                     'unit_cost' => $request->unit_cost,
@@ -121,6 +123,7 @@ class PurchaseController extends Controller
                     'purchase_date' => $request->purchase_date,
                     'attech_file' => 'NOT FILE',
                     'note' => $request->note,
+                    'user_id' => Auth::id(),
                     'product_id' => $request->product_id,
                     'purchase_quantity' => $request->purchase_quantity,
                     'unit_cost' => $request->unit_cost,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Sell;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Support\Facades\DB;
 
@@ -58,6 +59,7 @@ class OrderController extends Controller
                     'note' => $request->note,
                     'pay_amount' => $request->pay_amount,
                     'total_amount' => $request->total_amount,
+                    'user_id' => Auth::id(),
                     'sell_on_date' => $request->sell_on_date,
                     'payment_method' => $request->payment_method,
                     'bkash' => $request->bkash,
@@ -128,7 +130,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::find($id)->delete();
+        Session::flash('delete','update Sucessfully...');
+        return redirect()->route('order.index');
+
     }
 
     public function status($id)

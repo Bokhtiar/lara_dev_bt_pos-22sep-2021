@@ -49,7 +49,7 @@
                   </div>
 
                 </td>
-                <td> <a href="@route('product.show', $item->product_id)">{{ $item->product->product_name }}</a> </td>
+                <td> <a href="@route('product.show', $item->product_id)">{{ $item->product ? $item->product->product_name : 'Product Deleted' }}</a> </td>
                 <td>{{ $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name }}</td>
                 <td>{{ $item->line_total }} Tk</td>
                 <td>{{ $item->amount }} Tk</td>

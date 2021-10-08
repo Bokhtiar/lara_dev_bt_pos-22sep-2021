@@ -20,6 +20,7 @@ class Purchase extends Model
         'product_id',
         'purchase_quantity',
         'unit_cost',
+        'user_id',
         'line_total',
         'unit_selling_price',
         'amount',
@@ -35,6 +36,11 @@ class Purchase extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function supplier()

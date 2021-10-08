@@ -62,7 +62,8 @@
                   From
                   <address>
                     <strong>Admin, Inc.</strong><br>
-                    Email: {{ Auth::user()->email }}
+                    Name: {{ $item->user ? $item->user->name : '' }} <br>
+                    Email: {{ $item->user ? $item->user->email : '' }}
                   </address>
                 </div>
                 <!-- /.col -->
@@ -150,12 +151,9 @@
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    <button id="print"  class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                   <button type="button" class="btn btn-success float-right"><i class="fa fa-credit-card"></i> Submit
                     Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fa fa-download"></i> Generate PDF
                   </button>
                 </div>
               </div>
@@ -173,15 +171,11 @@
 
 <!-- ./wrapper -->
 @section('js')
-{{-- <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- FastClick -->
-<script src="../../plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script> --}}
+    <script>
+        $(document).on('click', '#print', function(){
+            window.print();
+           return false;
+        })
+    </script>
 @endsection
 </html>

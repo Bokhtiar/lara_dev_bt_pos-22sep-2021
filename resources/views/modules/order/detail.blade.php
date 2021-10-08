@@ -62,7 +62,8 @@
                   From
                   <address>
                     <strong>Admin, Inc.</strong><br>
-                    Email: {{ Auth::user()->email }}
+                    Name: {{ $item->user ? $item->user->name : '' }} <br>
+                    Email: {{ $item->user ? $item->user->email : '' }} <br>
                   </address>
                 </div>
                 <!-- /.col -->
@@ -176,7 +177,6 @@
 <!-- ./wrapper -->
 @section('js')
     <script>
-        alert('hi')
         $(document).on('click', '#print', function(){
             window.print();
            return false;
