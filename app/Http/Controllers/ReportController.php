@@ -35,4 +35,23 @@ class ReportController extends Controller
         $orders = Order::whereYear('created_at', date('Y'))->get();
         return view('modules.report.year', compact('orders'));
     }
+
+    public function date_range()
+    {
+        $orders = Order::all();
+        return view('modules.report.date_range', compact('orders'));
+    }
+
+    public function date_range_search(Request $request)
+    {
+        $start_date = Carbon::parse($request->start_date)
+                             ->toDateTimeString();
+
+       $end_date = Carbon::parse($request->end_date)
+                             ->toDateTimeString();
+       $orders =  Order::whereBetween('created_at',[$start_date,$end_date])->get();
+
+        return view('modules.report.date_range', compact('orders'));
+    }
 }
+

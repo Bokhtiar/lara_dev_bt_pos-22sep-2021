@@ -240,6 +240,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="@route('date.range')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Date Ranger Report</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="@route('day.report')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Today Report</p>

@@ -88,6 +88,8 @@ Route::get('day/report', [ReportController::class, 'day'])->name('day.report');
 Route::get('month/report', [ReportController::class, 'month'])->name('month.report');
 Route::get('week/report', [ReportController::class, 'week'])->name('week.report');
 Route::get('year/report', [ReportController::class, 'year'])->name('year.report');
+Route::get('date/range', [ReportController::class, 'date_range'])->name('date.range');
+Route::post('date/range/search', [ReportController::class, 'date_range_search'])->name('date.range.search');
 
 // permission
 Route::get('permission/index', [PermissionController::class, 'index'])->name('permission.index');
