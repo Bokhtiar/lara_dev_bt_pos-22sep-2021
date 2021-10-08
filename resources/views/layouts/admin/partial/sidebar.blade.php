@@ -35,6 +35,15 @@
             </a>
           </li><!--dasboard end -->
 
+          <li class="nav-item">
+            <a href="{{url('/pos')}}" class="nav-link">
+                <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                POS
+              </p>
+            </a>
+          </li><!--dasboard end -->
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-pie-chart"></i>

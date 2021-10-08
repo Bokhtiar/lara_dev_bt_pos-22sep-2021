@@ -285,27 +285,6 @@
                 });//quantity update ajax end
             })//sell quantity
 
-
-
-            $(document).on('click', '.discount_percent_update', function(e){
-                e.preventDefault();
-                var id =  $(this).val();
-                var data={
-                    'discount_percent' : $('.qty').val()
-                };
-
-                $.ajax({
-                    url: '/percentage-update/'+id,
-                    type: 'POST',
-                    data: data,
-                    dataType: 'json',
-                    success:function(response){
-                        getData()
-
-                    }//end quantity update function
-                });//quantity update ajax end
-            })//sell quantity
-
             $(document).on('click', '.delete', function(e){
                 e.preventDefault();
                 var id = $(this).val()

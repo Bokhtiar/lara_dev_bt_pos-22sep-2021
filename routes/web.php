@@ -23,9 +23,10 @@ use Facade\FlareClient\Report;
 Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
-
 //register route is disable another route is active
 Auth::routes(['register' => false]);
+
+Route::get('/pos', [App\Http\Controllers\PosController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -50,6 +51,10 @@ Route::resource('warranty', WarrantyController::class);
 //product
 Route::resource('product', ProductController::class);
 Route::get('aleart', [App\Http\Controllers\ProductController::class, 'aleart']);
+Route::get('/all/data', [App\Http\Controllers\ProductController::class, 'product_all']);
+Route::get('/category/product/{id}', [App\Http\Controllers\ProductController::class, 'category_product']);
+
+
 
 Route::get('/product/status/{id}', [App\Http\Controllers\ProductController::class, 'status'])->name('product.status');
 

@@ -28,6 +28,19 @@ class ProductController extends Controller
         return view('modules.product.index', compact('products', 'purchase'));
     }
 
+    // ajax request all data product
+    public function product_all()
+    {
+        $products = Product::with('purchase')->Active()->get();
+        return response()->json($products, 200);
+    }
+
+    //category ways product show
+    public function category_product($id)
+    {
+        $products = Product::with('purchase')->where('category_id', $id)->Active()->get();
+        return response()->json($products, 200);
+    }
     /**
      * Show the form for creating a new resource.
      *
