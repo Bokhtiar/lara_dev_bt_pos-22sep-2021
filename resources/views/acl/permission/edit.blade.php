@@ -335,7 +335,68 @@
                                        value="1">
                             </td>
                         </tr>
-                        <!--product end -->
+                        <!--purchase end -->
+
+
+                        <tr>
+                            <td>Sell</td>
+                            <td>
+                                <input type="checkbox" name="permission[sell][add]"
+                                       @isset($permission['permission']['sell']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[sell][edit]"
+                                       @isset($permission['permission']['sell']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[sell][view]"
+                                       @isset($permission['permission']['sell']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[sell][delete]"
+                                       @isset($permission['permission']['sell']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[sell][list]"
+                                       @isset($permission['permission']['sell']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--sell end -->
+
+                        <tr>
+                            <td>POS</td>
+                            <td>
+                                <input type="checkbox" name="permission[pos][add]"
+                                       @isset($permission['permission']['pos']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[pos][edit]"
+                                       @isset($permission['permission']['pos']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[pos][view]"
+                                       @isset($permission['permission']['pos']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[pos][delete]"
+                                       @isset($permission['permission']['pos']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[pos][list]"
+                                       @isset($permission['permission']['pos']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--pos end -->
 
                         <tr>
                             <td>Order</td>

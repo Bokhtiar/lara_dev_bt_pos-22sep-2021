@@ -126,6 +126,24 @@
                     </tr>
 
                     <tr>
+                        <td>Sell</td>
+                        <td><input type="checkbox" name="permission[sell][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[Sell][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[Sell][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[Sell][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[Sell][list]" value="1"></td>
+                    </tr>
+
+                    <tr>
+                        <td>POS</td>
+                        <td><input type="checkbox" name="permission[pos][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[pos][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[pos][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[pos][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[pos][list]" value="1"></td>
+                    </tr>
+
+                    <tr>
                         <td>Order</td>
                         <td><input type="checkbox" name="permission[order][add]" value="1"></td>
                         <td><input type="checkbox" name="permission[order][edit]" value="1"></td>

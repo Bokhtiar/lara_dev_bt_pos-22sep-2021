@@ -50,17 +50,21 @@
                             Due Payment
                           </button>
                         @endif
+                        @isset(auth()->user()->role->permission['permission']['sell']['view'])
                         <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
+                        @endisset
+                        @isset(auth()->user()->role->permission['permission']['sell']['delete'])
                         <form action="@route('order.destroy',$item->id)" method="POST">
                             @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
                         </form>
+                        @endisset
                     </div>
                   </div>
 
                 </td>
-                <td>{{$item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name }}</td>
+                <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : 'Data Deleted' }}</td>
                 <td>{{ $item->pay_amount }}TK</td>
                 <td>{{ $item->total_amount }}TK</td>
                 <td>{{ $item->total_amount - $item->pay_amount }}TK</td>
