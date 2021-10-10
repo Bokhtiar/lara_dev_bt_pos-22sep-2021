@@ -42,7 +42,7 @@
                   </div>
 
                 </td>
-                <td>{{$item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name }}</td>
+                <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : '' }}</td>
                 <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>{{ $item->total_amount }} TK</td>
                 <td>{{ $item->pay_amount }} TK</td>

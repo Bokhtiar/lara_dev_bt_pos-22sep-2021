@@ -18,8 +18,7 @@
                 <th>Category</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
-                <th>Percentage %</th>
-                <th>Tax %</th>
+                <th>Unit Price</th>
                 <th>Sell Price</th>
                 <th>Status</th>
             </tr>
@@ -57,8 +56,7 @@
                 <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
                 <td>{!! $item->unit ? $item->unit->unit_short_name : 'Data Not Available' !!}</td>
-                <td>{!! $item->discount_percent !!}</td>
-                <td>{!! $item->tax !!}</td>
+                <td>{!! $item->purchase ? $item->purchase->unit_cost : 'Data Not Available' !!} Tk</td>
                 <td>{!! $item->unit_selling_price !!} Tk</td>
                 <td>
                     @if($item->status == 1)
@@ -80,8 +78,7 @@
                 <th>Category</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
-                <th>Percentage %</th>
-                <th>Tax %</th>
+                <th>Unit Price</th>
                 <th>Sell Price</th>
                 <th>Status</th>
             </tr>

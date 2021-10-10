@@ -34,7 +34,7 @@
               </p>
             </a>
           </li><!--dasboard end -->
-
+          @isset(auth()->user()->role->permission['permission']['pos']['list'])
           <li class="nav-item">
             <a href="{{url('/pos')}}" class="nav-link">
                 <i class="nav-icon fa fa-dashboard"></i>
@@ -42,7 +42,8 @@
                 POS
               </p>
             </a>
-          </li><!--dasboard end -->
+          </li><!--pos end -->
+          @endisset
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
