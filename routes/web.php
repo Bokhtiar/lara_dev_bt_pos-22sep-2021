@@ -16,12 +16,22 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarrantyController;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Sell;
 use App\Models\Subcategory;
+use App\Models\User;
 use App\Models\Warranty;
 use Facade\FlareClient\Report;
 
 Route::get('/', function () {
-    return view('welcome');
+    $product = Product::count();
+    $order = Order::count();
+    $user = User::count();
+    $sell = Sell::count();
+    $orders = Order::latest()->get();
+    return view('welcome', compact('product', 'order', 'user', 'sell', 'orders'));
+
 })->middleware('auth');
 //register route is disable another route is active
 Auth::routes(['register' => false]);

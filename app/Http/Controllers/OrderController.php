@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Sell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Foreach_;
 
 class OrderController extends Controller
 {
@@ -40,6 +43,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'customer_id'=>'required',
             'invoice_no'=>'required',
@@ -48,6 +52,35 @@ class OrderController extends Controller
             'sell_on_date'=>'required',
             'payment_method'=>'required',
         ]);
+
+        $sells = Sell::where('Author', Auth::id())->where('order_id', null)->get();
+        $purchase = Purchase::all();
+
+
+        foreach ($sells as $item) {
+            // dd($item->product->purchase_id);
+            if($item->product->purchase_id){
+                $purchase = Purchase::find($item->product->purchase_id);
+                    $purchase['purchase_quantity'] = $purchase->purchase_quantity - $item->quantity;
+                    $purchase->save();
+            }
+
+
+        }
+
+        // foreach ($sells as $item) {
+        //     // dd($item->product->purchase_id);
+        //     foreach($purchase as $p){
+        //         if($item->product->purchase_id == $p->id){
+        //             $purchase = Purchase::find($item->product->purchase_id);
+        //             $purchase['purchase_quantity'] = $purchase->purchase_quantity - $item->quantity;
+        //             $purchase->save();
+        //         }
+        //     }
+        // }
+
+     
+
 
         if($validated){
             try{

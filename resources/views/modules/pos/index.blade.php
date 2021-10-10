@@ -184,7 +184,6 @@
                         response.forEach(item => {
                             $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">\
                                 <div class="card">\
-                                <img class="card-img-top" src="..." alt="Card image cap">\
                                 <div class="card-body">\
                                 <p class="card-text">\
                                 '+item.product_name+' <br>\

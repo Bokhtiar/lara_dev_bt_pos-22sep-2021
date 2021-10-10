@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'Monthly Report')
+@section('title', 'Date Ranges Report')
 
 @section('css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
