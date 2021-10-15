@@ -13,7 +13,7 @@ class Product extends Model
     use CrudTrait;
 
     protected $fillable = [
-        'product_name', 'price', 'purchase_id', 'unit_selling_price', 'product_sku', 'alert_quantity', 'category_id', 'subcategory_id','brand_id','unit_id','warranty_id','product_image','product_description','status'
+        'product_name', 'unit_price', 'purchase_id', 'unit_selling_price', 'product_sku', 'alert_quantity', 'category_id', 'subcategory_id','brand_id','unit_id','warranty_id','product_image','product_description','status'
     ];
     public function category()
     {

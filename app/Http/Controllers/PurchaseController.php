@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -14,7 +15,7 @@ class PurchaseController extends Controller
 {
     public function index( )
     {
-        $purchases = Purchase::get(['id','product_id', 'supplier_id', 'amount', 'line_total']);
+        $purchases = Purchase::all();
         return view('modules.purchase.index',compact('purchases'));
     }
     public function create()
@@ -32,52 +33,54 @@ class PurchaseController extends Controller
 
     public function product_show($id)
     {
-        $product = Product::with('purchase')->find($id);
-        return response()->json($product, 200);
+        $product = Product::find($id);
+        return response()->json([
+            'product'=>$product,
+        ]);
     }
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'supplier_id'=>'required',
             'purchase_date'=>'required',
             'reference_no'=>'required',
-            'product_id' => 'required',
-            'purchase_quantity' => 'required',
-            'unit_cost' => 'required',
-            'amount' => 'required',
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
         if($validated){
             try{
                 DB::beginTransaction();
-                $purchase = Purchase::create([
+                 $purchase = Purchase::create([
                     'supplier_id' => $request->supplier_id,
                     'reference_no' => $request->reference_no,
                     'purchase_date' => $request->purchase_date,
                     'attech_file' => 'NOT FILE',
                     'note' => $request->note,
                     'user_id' => Auth::id(),
-                    'product_id' => $request->product_id,
-                    'purchase_quantity' => $request->purchase_quantity,
-                    'unit_cost' => $request->unit_cost,
-                    'line_total' => $request->line_total,
-                    'unit_selling_price' => $request->unit_selling_price,
-                    'amount' => $request->amount,
                     'paid_on_date' => $request->paid_on_date,
                     'payment_method' => $request->payment_method,
+                    'amount' => $request->amount,
                     'bkash' => $request->bkash,
                     'rocket' => $request->rocket,
                     'nagud' => $request->nagud,
                     'bank' => $request->bank,
-                ]);
-                $product = Product::find($request->product_id);
-                $product['purchase_id'] = $purchase->id;
-                $product['unit_selling_price'] = $request->unit_selling_price;
-                $product->save();
+                 ]);
+
                 if (!empty($purchase)) {
                     DB::commit();
+                    $purchase_id = $purchase->id;
+                    $product_id = $request->product_id;
+                    for ($i=0; $i < count($product_id) ; $i++) {
+                        $product = new PurchaseProduct;
+                        $product->product_id = $request->product_id[$i];
+                        $product->purchase_quantity = $request->purchase_quantity[$i];
+                        $product->purchase_id = $purchase_id;
+                        $product->unit_price = $request->unit_price[$i];
+                        $product->total_price = $request->total_price[$i];
+                        $product->save();
+                    }
                     Session::flash('insert','Added Sucessfully...');
                     return redirect()->route('purchase.index');
                 }

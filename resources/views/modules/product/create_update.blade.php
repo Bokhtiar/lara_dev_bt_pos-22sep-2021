@@ -91,13 +91,26 @@
                     </div>
                     {{-- warranty and image --}}
                     <div class="form-group">
-                        <label for="">Select Unite: <span class="text-danger">*</span></label>
-                            <select name="unit_id" id="" class="form-control select2">
-                                <option value="">--Select Unit--</option>
-                                @foreach ($units as $u)
-                                <option value="{{ $u->id }}" {{ $u->id == @$edit->unit_id ? 'selected' : '' }}>{{ $u->unit_short_name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="">Select Unite: <span class="text-danger">*</span></label>
+                                <select name="unit_id" id="" class="form-control select2">
+                                    <option value="">--Select Unit--</option>
+                                    @foreach ($units as $u)
+                                    <option value="{{ $u->id }}" {{ $u->id == @$edit->unit_id ? 'selected' : '' }}>{{ $u->unit_short_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="">Unit Price <span class="text-danger">*</span></label>
+                                <input class="form-control" name="unit_price" placeholder="unit price" value="{{ @$edit->unit_price }}">
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="">Unit Sell Price <span class="text-danger">*</span></label>
+                                <input class="form-control" name="unit_selling_price" placeholder="unit Sell price" value="{{ @$edit->unit_selling_price }}">
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-gorup">
                        <div class="card">

@@ -49,11 +49,9 @@
                   </div>
 
                 </td>
-                <td> <a href="@route('product.show', $item->product_id)">{{ $item->product ? $item->product->product_name : 'Product Deleted' }}</a> </td>
-                <td>{{ $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name }}</td>
-                <td>{{ $item->line_total }} Tk</td>
-                <td>{{ $item->amount }} Tk</td>
-                <td>{{ $item->line_total - $item->amount }} Tk</td> <!--amount is how many send supplier amount-->
+
+
+
                 </tr>
             @endforeach
         </tbody>

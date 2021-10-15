@@ -70,6 +70,8 @@ class ProductController extends Controller
             'subcategory_id'=>'required | integer ',
             'brand_id'=>'required | integer ',
             'unit_id'=>'required | integer ',
+            'unit_price'=>'required ',
+            'unit_selling_price'=>'required ',
         ]);
 
         if($validated){
@@ -83,6 +85,8 @@ class ProductController extends Controller
                     'subcategory_id' => $request->subcategory_id,
                     'brand_id' => $request->brand_id,
                     'unit_id' => $request->unit_id,
+                    'unit_price' => $request->unit_price,
+                    'unit_selling_price' => $request->unit_selling_price,
                     'warranty_id' => $request->warranty_id,
                     'product_description' => $request->product_description,
                 ]);
@@ -142,6 +146,8 @@ class ProductController extends Controller
             'subcategory_id'=>'required | integer ',
             'brand_id'=>'required | integer ',
             'unit_id'=>'required | integer ',
+            'unit_price'=>'required ',
+            'unit_selling_price'=>'required ',
         ]);
 
         if($validated){
@@ -156,6 +162,8 @@ class ProductController extends Controller
                     'subcategory_id' => $request->subcategory_id,
                     'brand_id' => $request->brand_id,
                     'unit_id' => $request->unit_id,
+                    'unit_price' => $request->unit_price,
+                    'unit_selling_price' => $request->unit_selling_price,
                     'warranty_id' => $request->warranty_id,
                     'product_description' => $request->product_description,
                 ]);

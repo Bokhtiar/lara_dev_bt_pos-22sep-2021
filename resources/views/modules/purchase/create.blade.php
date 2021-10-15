@@ -62,13 +62,14 @@
                             <thead class="bg-success">
                                 <tr>
                                 <th scope="col">Product Name</th>
+                                <th scope="col">Product Id</th>
                                 <th scope="col">Purchase Quantity</th>
-                                <th scope="col">Unit Cost</th>
-                                <th scope="col">Line Total</th>
-                                <th scope="col">Unit Selling Price</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="table_value">
+                            <tbody>
                                 {{-- dynamic value added in jquery --}}
                             </tbody>
                         </table>
@@ -177,23 +178,28 @@
                         url:'/product_purchase_search/'+id,
                         type: 'GET',
                         dataType: 'json',
-                        success:function(data){
-                            console.log(data);
-                            $('#table_value').append('<tr>\
-                            <td>'+data.product_name+'</td>\
-                            <td><input class="form-control form-control-sm" type="number" value="0" name="purchase_quantity" id="purchase_quantity"> </td> \
-                            <td> <input class="form-control form-control-sm" type="number" value="" name="unit_cost" id="unit_cost"> </td>\
-                            <td> <input class="form-control form-control-sm" type="number" name="line_total" id="line_total"></td>\
-                            <td> <input class="form-control form-control-sm" type="number" value="" name="unit_selling_price" id="unit_selling_price"> </td>\
-                            </tr>')
-                            $("input").keyup(function(){
-                                var quantity = $('#purchase_quantity').val();
-                                var unit_cost = $('#unit_cost').val();
-                                var total = quantity * unit_cost
-                                $('#line_total').val(total)
-                                $('#total_amount_show').html("")
-                                $('#total_amount_show').append('<span class="h4"> + Total Amount Is : '+total+' Tk</span>')
-                            });
+                        success:function(response){
+                            console.log(response)
+                            var sum = 0;
+                            $.each(response, function(key, item){
+                                $('tbody').append('<tr>\
+                                    <td>'+item.product_name+'</td>\
+                                    <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]"> </td>\
+                                    <td> <input type="number" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
+                                    <td> <input type="number" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
+                                    <td> <input type="text" class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
+                                    <td>X</td>\
+                                </tr>')
+                                
+                            })
+                            console.log(sum);
+                            $('input').keyup(function(){
+                                var qty = $('.qty').val();
+                                var unit_price = $('.unit_price').val();
+                                var total = qty * unit_price;
+                                $('.total').val(total);
+                            })
+
                         }//return success function
                     })//this is ajax end
                 }
