@@ -20,12 +20,9 @@ class CreatePurchasesTable extends Migration
             $table->string('purchase_date');
             $table->string('attech_file')->nullable();
             $table->longText('note')->nullable();
-            $table->integer('product_id')->uniqid();
-            $table->string('purchase_quantity');
-            $table->string('unit_cost');
-            $table->string('line_total');
-            $table->string('unit_selling_price')->nullable();
-            $table->string('amount');
+            $table->integer('user_id');
+            $table->string('total_amount');
+            $table->string('paid_amount');
             $table->string('paid_on_date');
             $table->string('payment_method');
             $table->string('bkash')->nullable();

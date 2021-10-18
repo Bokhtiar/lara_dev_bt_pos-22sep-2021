@@ -34,7 +34,8 @@ Route::get('/', function () {
 
 })->middleware('auth');
 //register route is disable another route is active
-Auth::routes(['register' => false]);
+Auth::routes();
+//['register' => false]
 
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index']);
 

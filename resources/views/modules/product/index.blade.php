@@ -56,7 +56,7 @@
                 <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
                 <td>{!! $item->unit ? $item->unit->unit_short_name : 'Data Not Available' !!}</td>
-                <td>{!! $item->purchase ? $item->purchase->unit_cost : 'Data Not Available' !!} Tk</td>
+                <td>{!! $item->unit_price !!} Tk</td>
                 <td>{!! $item->unit_selling_price !!} Tk</td>
                 <td>
                     @if($item->status == 1)

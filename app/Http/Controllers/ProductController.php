@@ -10,6 +10,7 @@ use App\Models\Subcategory;
 use App\Models\Unit;
 use App\Models\Warranty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -64,6 +65,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validated = $request->validate([
             'product_name'=>' string |required | unique:products| min:2 ',
             'category_id'=>'required | integer ',
@@ -85,6 +87,8 @@ class ProductController extends Controller
                     'subcategory_id' => $request->subcategory_id,
                     'brand_id' => $request->brand_id,
                     'unit_id' => $request->unit_id,
+                    'product_image' => "no file",
+                    'user_id' => Auth::id(),
                     'unit_price' => $request->unit_price,
                     'unit_selling_price' => $request->unit_selling_price,
                     'warranty_id' => $request->warranty_id,

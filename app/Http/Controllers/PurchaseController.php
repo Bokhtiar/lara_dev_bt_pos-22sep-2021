@@ -61,7 +61,8 @@ class PurchaseController extends Controller
                     'user_id' => Auth::id(),
                     'paid_on_date' => $request->paid_on_date,
                     'payment_method' => $request->payment_method,
-                    'amount' => $request->amount,
+                    'total_amount' => $request->total_amount,
+                    'paid_amount' => $request->paid_amount,
                     'bkash' => $request->bkash,
                     'rocket' => $request->rocket,
                     'nagud' => $request->nagud,
@@ -69,7 +70,6 @@ class PurchaseController extends Controller
                  ]);
 
                 if (!empty($purchase)) {
-                    DB::commit();
                     $purchase_id = $purchase->id;
                     $product_id = $request->product_id;
                     for ($i=0; $i < count($product_id) ; $i++) {
@@ -81,6 +81,7 @@ class PurchaseController extends Controller
                         $product->total_price = $request->total_price[$i];
                         $product->save();
                     }
+                    DB::commit();
                     Session::flash('insert','Added Sucessfully...');
                     return redirect()->route('purchase.index');
                 }

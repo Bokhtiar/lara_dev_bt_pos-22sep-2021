@@ -76,6 +76,17 @@
                         <div class="float-right" id="total_amount_show">
                             {{-- <span>Total Amount Is : '+total+'</span> --}}
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-lg-8">
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4">
+                                <input type="number" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
+                                <input type="number" name="paid_amount" class="form-control mb-2" placeholder="Paid Amount" id="">
+                                <input type="number" class="form-control" placeholder="Due Amount" id="">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card my-4">
@@ -85,24 +96,23 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <label for="">Amount. <span class="text-danger">*</span></label>
-                                    <input type="number" name="amount" placeholder="How Much Amount Pay" class="form-control" id="">
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Paid on. <span class="text-danger">*</span></label>
                                     <input type="date" name="paid_on_date" class="form-control" id="">
                                 </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-control">
+                                        <label for="">Payment Methods</label>
+                                        <select class="form-control select2" name="payment_method" id="payment_method">
+                                            <option value="">--select payment method--</option>
+                                            <option value="Bkash">Bkash</option>
+                                            <option value="Nagud">Nagud</option>
+                                            <option value="Rocket">Rocket</option>
+                                            <option value="Bank">Bank</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-control">
-                                <label for="">Payment Methods</label>
-                                <select class="form-control select2" name="payment_method" id="payment_method">
-                                    <option value="">--select payment method--</option>
-                                    <option value="Bkash">Bkash</option>
-                                    <option value="Nagud">Nagud</option>
-                                    <option value="Rocket">Rocket</option>
-                                    <option value="Bank">Bank</option>
-                                </select>
-                            </div>
+
 
                             <!--pyament mehtods start here -->
                             <div class="form-gorup my-3 card" id="Bkash" style="display: none">
@@ -190,7 +200,7 @@
                                     <td> <input type="text" class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
                                     <td>X</td>\
                                 </tr>')
-                                
+
                             })
                             console.log(sum);
                             $('input').keyup(function(){
