@@ -103,9 +103,9 @@
                     <tbody>
                       <tr>
                       <td>{{ $item->purchase_quantity }}</td>
-                      <td>{{ $item->product->product_name }}</td>
+                      <td>{{ $item->product ? $item->product->product_name : "" }}</td>
                       <td>#{{ $item->id }}</td>
-                      <td>{{ $item->product->purchase->unit_cost }} Tk</td>
+                      <td>{{ $item->product ? $item->product->unit_price : "" }} Tk</td>
                     </tr>
                     </tbody>
                   </table>
@@ -134,12 +134,12 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>{{ $item->product->purchase->unit_cost }} Tk</td>
+                        <td> Tk</td>
                       </tr>
 
                       <tr>
                         <th>Total:</th>
-                        <td>{{ $item->product->purchase->unit_cost }} Tk</td>
+                        <td> Tk</td>
                       </tr>
                     </table>
                   </div>

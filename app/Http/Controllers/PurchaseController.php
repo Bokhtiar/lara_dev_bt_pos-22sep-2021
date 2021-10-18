@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseProduct;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -167,6 +168,24 @@ class PurchaseController extends Controller
 
     }
 
+    public function purchase_date_filtering()
+    {
+        $purchases = Purchase::all();
+        return view('modules.purchase.date_ranger', compact('purchases'));
+    }
+
+
+    public function purchase_date_filtering_search(Request $request)
+    {
+        $start_date = Carbon::parse($request->start_date)
+                             ->toDateTimeString();
+
+       $end_date = Carbon::parse($request->end_date)
+                             ->toDateTimeString();
+       $purchases =  Purchase::whereBetween('created_at',[$start_date,$end_date])->get();
+
+       return view('modules.purchase.date_ranger', compact('purchases'));
+    }
 
 
 
