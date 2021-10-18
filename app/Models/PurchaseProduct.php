@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PurchaseProduct extends Model
 {
@@ -14,4 +15,14 @@ class PurchaseProduct extends Model
     protected $fillable = [
         'product_id', 'purchase_id', 'unit_price', 'total_price', 'purchase_quantity', 'status',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+
+    public function scopeProduct_name($query, $id){
+       return Self::where('purchase_id', $id)->get('product_id');
+    }
 }

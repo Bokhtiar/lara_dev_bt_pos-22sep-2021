@@ -50,9 +50,19 @@
 
                 </td>
 
-
-
+                <td>
+                    @foreach (App\Models\PurchaseProduct::query()->Product_name($item->id) as $p)
+                        <a href="@route('product.show', $p->product_id)">{{ $p->product->product_name }}</a> |
+                    @endforeach
+                </td>
+                <td>noyon</td>
+                <td>{{ $item->total_amount }}</td>
+                <td>{{ $item->paid_amount }}</td>
+                <td>{{ $item->total_amount - $item->paid_amount }}</td>
                 </tr>
+
+
+
             @endforeach
         </tbody>
         <tfoot>
