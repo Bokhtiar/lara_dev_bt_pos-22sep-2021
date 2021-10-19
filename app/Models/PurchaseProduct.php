@@ -25,4 +25,9 @@ class PurchaseProduct extends Model
     public function scopeProduct_name($query, $id){
        return Self::where('purchase_id', $id)->get('product_id');
     }
+
+    // public function scopePurchase_product($q, $id)
+    // {
+
+    // }
 }

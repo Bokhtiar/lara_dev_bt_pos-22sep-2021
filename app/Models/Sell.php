@@ -10,46 +10,28 @@ class Sell extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'product_id',
-        'author',
-        'quantity',
-        'order_id',
+        'customer_id',
+        'invoice_no',
+        'invoice_date',
+        'note',
+        'paid_amount',
+        'total_amount',
+        'sell_on_date',
+        'payment_method',
+        'user_id',
+        'bkash',
+        'nagud',
+        'rocket',
+        'bank',
         'status',
     ];
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function purchase()
-    {
-        return $this->belongsTo(Purchase::class);
-    }
-    public function admin()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function customer()
     {
         return $this->belongsTo(Contact::class);
     }
-
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
-    }
-
-    public static function item_cart(){
-
-        $sell=Self::where('author',Auth::id())
-                ->where('order_id',NULL)
-                ->get();
-
-        return $sell;
-        }
 }

@@ -80,8 +80,15 @@
 
                                             </tbody>
                                             </table>
-                                            <div class="float-right" id="total_amount_show">
-                                                <button class="total btn btn-primary"></button>
+                                            <div class="row">
+                                                <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-lg-4">
+                                                    <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
+                                                    <input type="number" name="paid_amount" class="form-control mb-2" placeholder="Paid Amount" id="">
+                                                    <input type="number" class="form-control" placeholder="Due Amount" id="">
+                                                </div>
                                             </div>
                                     <!--table start -->
                                 </div>
@@ -258,9 +265,7 @@
                             <td> <button type="button " value=" '+data.id+' "  class="delete btn btn-danger">X</button> </td>\
                             </tr>')
                         });
-                        $('#total_amount').val(total);
-                        $('#total_amount_show').html("")
-                        $('#total_amount_show').append('<span class="h4"> + Total Amount Is : '+total+' Tk</span>')
+
                     }//end success function
                 });
             }//all sell data show

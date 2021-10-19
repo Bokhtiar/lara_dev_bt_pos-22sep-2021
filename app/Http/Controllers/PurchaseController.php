@@ -38,6 +38,7 @@ class PurchaseController extends Controller
         return response()->json([
             'product'=>$product,
         ]);
+
     }
 
     public function store(Request $request)

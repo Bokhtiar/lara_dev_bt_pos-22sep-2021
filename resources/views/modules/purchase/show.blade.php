@@ -3,16 +3,6 @@
     @section('title', 'Supplier Invoice')
 
     @section('css')
-  {{-- <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
     @endsection
     @section('admin_content')
   <!-- Content Wrapper. Contains page content -->
@@ -92,21 +82,21 @@
               <div class="row">
                 <div class="col-12 table-responsive">
                   <table class="table table-striped text-center">
-                    <thead>
+                    <thead class="bg-success">
                     <tr>
                       <th>Qty</th>
-                      <th>Product</th>
-                      <th>Serial #</th>
+                      <th>Product Name</th>
+                      <th>Unit Price</th>
+                      <th>Unit Sell Price</th>
                       <th>Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                      <td>{{ $item->purchase_quantity }}</td>
-                      <td>{{ $item->product ? $item->product->product_name : "" }}</td>
-                      <td>#{{ $item->id }}</td>
-                      <td>{{ $item->product ? $item->product->unit_price : "" }} Tk</td>
-                    </tr>
+                        <tr>
+                            {{-- @foreach (App\Models\Purchase::query()->Purchase_product($item->id) as $item)
+
+                            @endforeach --}}
+                        </tr>
                     </tbody>
                   </table>
                 </div>

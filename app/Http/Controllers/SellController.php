@@ -10,9 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SellProductController extends Controller
+class SellController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,9 +31,8 @@ class SellProductController extends Controller
     public function create()
     {
         $products = Product::Active()->get();
-        $sells = Sell::with('product','purchase')->where('Author', Auth::id())->where('order_id', null)->get();
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
-        return view('modules.sell.create', compact('products', 'contacts','sells'));
+        return view('modules.sell.create', compact('products', 'contacts'));
     }
 
     /**

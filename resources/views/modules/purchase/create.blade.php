@@ -82,7 +82,7 @@
 
                             </div>
                             <div class="col-md-4 col-sm-4 col-lg-4">
-                                <input type="number" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
+                                <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
                                 <input type="number" name="paid_amount" class="form-control mb-2" placeholder="Paid Amount" id="">
                                 <input type="number" class="form-control" placeholder="Due Amount" id="">
                             </div>
@@ -189,31 +189,24 @@
                         type: 'GET',
                         dataType: 'json',
                         success:function(response){
-                            console.log(response)
-                            var sum = 0;
                             $.each(response, function(key, item){
+
                                 $('tbody').append('<tr>\
                                     <td>'+item.product_name+'</td>\
                                     <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]"> </td>\
-                                    <td> <input type="number" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
-                                    <td> <input type="number" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
-                                    <td> <input type="text" class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
+                                    <td> <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
+                                    <td> <input type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
+                                    <td> <input type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
                                     <td>X</td>\
                                 </tr>')
 
                             })
-                            console.log(sum);
-                            $('input').keyup(function(){
-                                var qty = $('.qty').val();
-                                var unit_price = $('.unit_price').val();
-                                var total = qty * unit_price;
-                                $('.total').val(total);
-                            })
-
                         }//return success function
                     })//this is ajax end
                 }
             });
+
+
             $('#payment_method').on('change', function(e){
                 var payment_name = e.target.value
                 $('#Bkash').hide();
@@ -233,5 +226,19 @@
         });
 
 
+            function sumQty(sum, nu){
+                var s = $('#unit'+nu).val();
+                var to = sum * s;
+                $('#tot'+nu).val(to);
+            }
+
+
+            function getSumQuantity(){
+                var sumQuantity = 0;
+                $(".total").each(function(){
+                    sumQuantity += parseFloat(this.value)
+                })
+                $('#total_amount').val(sumQuantity);
+            }
     </script>
     @endsection

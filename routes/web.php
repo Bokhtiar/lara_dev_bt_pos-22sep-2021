@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SellController;
 use App\Http\Controllers\SellProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -88,13 +89,13 @@ Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class
 
 
 //sell product
-Route::resource('sell', SellProductController::class);
-Route::get('store/sell/{id}', [SellProductController::class, 'store']);
-Route::post('sell/quantity/{id}', [SellProductController::class, 'quantity_update'])->name('sell.quantity');
-Route::get('sell/author/all', [SellProductController::class, 'sell_author_all']);
-Route::post('quantity-update/{id}', [SellProductController::class, 'quantity_update']);
-Route::get('sell/delete/{id}', [SellProductController::class, 'destroy']);
-Route::post('percentage-update/{id}', [SellProductController::class, 'discount_percentage']);
+Route::resource('sell', SellController::class);
+Route::get('store/sell/{id}', [SellController::class, 'store']);
+Route::post('sell/quantity/{id}', [SellController::class, 'quantity_update'])->name('sell.quantity');
+Route::get('sell/author/all', [SellController::class, 'sell_author_all']);
+Route::post('quantity-update/{id}', [SellController::class, 'quantity_update']);
+Route::get('sell/delete/{id}', [SellController::class, 'destroy']);
+Route::post('percentage-update/{id}', [SellController::class, 'discount_percentage']);
 
 
 //order
