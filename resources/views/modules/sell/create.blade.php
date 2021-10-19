@@ -20,7 +20,7 @@
             <div class="card container">
                 <x-sell></x-sell>
                 <div class="body">
-                    <form action="@route('order.store') " method="POST" class="form-group">
+                    <form action="@route('sell.store') " method="POST" class="form-group">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -70,6 +70,7 @@
                                             <thead class="bg-success">
                                                 <tr>
                                                 <th scope="col">Product Name</th>
+                                                <th scope="col">Product ID</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Unit Selling Price</th>
                                                 <th scope="col">Total Price</th>
@@ -106,25 +107,23 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <label for="">Amount. <span class="text-danger">*</span></label>
-                                    <input type="number" placeholder="how many pay customer" name="pay_amount" class="form-control" id="">
+                                    <div class="form-control">
+                                        <label for="">Payment Methods</label>
+                                        <select class="form-control select2" name="payment_method" id="payment_method">
+                                            <option value="">--select payment method--</option>
+                                            <option value="Bkash">Bkash</option>
+                                            <option value="Nagud">Nagud</option>
+                                            <option value="Rocket">Rocket</option>
+                                            <option value="Bank">Bank</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <input type="hidden" name="total_amount" value="100" id="total_amount">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Sell on. <span class="text-danger">*</span></label>
                                     <input type="date" name="sell_on_date" class="form-control" id="">
                                 </div>
                             </div>
-                            <div class="form-control">
-                                <label for="">Payment Methods</label>
-                                <select class="form-control select2" name="payment_method" id="payment_method">
-                                    <option value="">--select payment method--</option>
-                                    <option value="Bkash">Bkash</option>
-                                    <option value="Nagud">Nagud</option>
-                                    <option value="Rocket">Rocket</option>
-                                    <option value="Bank">Bank</option>
-                                </select>
-                            </div>
+
 
                             <!--pyament mehtods start here -->
                             <div class="form-gorup my-3 card" id="Bkash" style="display: none">
@@ -233,7 +232,8 @@
                         $.each(response, function(key, item){
                             $("tbody").append('<tr>\
                             <td>'+item.product_name+'</td>\
-                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="0" name="sell_quantity[]" > </td>\
+                            <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
                             <td> <input type="text" id="unit_selling_price'+item.id+'" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
                             <td> <button class="btn btn-sm btn-danger">X</button> </td>\

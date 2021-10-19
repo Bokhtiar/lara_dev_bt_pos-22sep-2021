@@ -6,9 +6,12 @@ use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Sell;
+use App\Models\SellProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class SellController extends Controller
 {
@@ -41,15 +44,59 @@ class SellController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
-        $product = Product::find($id);
-        $sell = Sell::create([
-            'product_id' => $id,
-            'author' => Auth::id(),
-            'discount_percent' => $product->discount_percent,
+
+        $validated = $request->validate([
+            'customer_id'=>'required',
+            'invoice_date'=>'required',
+            'invoice_no'=>'required',
+            'payment_method' => 'required',
+            'sell_on_date'=> 'required'
         ]);
-        return response()->json($sell, 200);
+        if($validated){
+            try{
+                DB::beginTransaction();
+                 $sell = Sell::create([
+                    'customer_id' => $request->customer_id,
+                    'invoice_date' => $request->invoice_date,
+                    'invoice_no' => $request->invoice_no,
+                    'note' => $request->note,
+                    'total_amount' => $request->total_amount,
+                    'paid_amount' => $request->paid_amount,
+                    'user_id' => Auth::id(),
+                    'sell_on_date' => $request->sell_on_date,
+                    'payment_method' => $request->payment_method,
+                    'bkash' => $request->bkash,
+                    'rocket' => $request->rocket,
+                    'nagud' => $request->nagud,
+                    'bank' => $request->bank,
+                 ]);
+
+
+
+                if (!empty($sell)) {
+                    $sell_id = $sell->id;
+                    $product_id = $request->product_id;
+                    for ($i=0; $i < count($product_id) ; $i++) {
+                        $product = new SellProduct;
+                        $product->product_id = $request->product_id[$i];
+                        $product->sell_quantity = $request->sell_quantity[$i];
+                        $product->sell_id = $sell_id;
+                        $product->unit_selling_price = $request->unit_selling_price[$i];
+                        $product->total_price = $request->total_price[$i];
+                        $product->save();
+                    }
+                    DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
+                    return redirect()->route('sell.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                // DB::rollBack();
+                return redirect()->route('sell.create');
+            }
+        }
     }
 
     public function sell_author_all()
