@@ -22,8 +22,8 @@ class SellController extends Controller
      */
     public function index()
     {
-        $orders = Order::latest()->get();
-        return view('modules.sell.index', compact('orders'));
+        $sells = Sell::latest()->get();
+        return view('modules.sell.index', compact('sells'));
     }
 
     /**
@@ -121,7 +121,8 @@ class SellController extends Controller
      */
     public function show($id)
     {
-        //
+        $item  = Sell::find($id);
+        return view('modules.sell.details', compact('item'));
     }
 
     /**
@@ -144,7 +145,11 @@ class SellController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sell = Sell::find($id);
+        $sell_payment = $sell->paid_amount + $request->paid_amount;
+        $sell['paid_amount'] = $sell_payment;
+        $sell->save();
+        return back();
     }
 
     /**

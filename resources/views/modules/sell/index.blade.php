@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'List Of Order')
+@section('title', 'List Of Sells')
 
 @section('css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -27,15 +27,15 @@
             <tr>
                 <th>Action</th>
                 <th>Customer Name</th>
-                <th>Pay Amount</th>
+                <th>Paid Amount</th>
                 <th>Total Amount</th>
-                <th>DUE Amonut</th>
+                <th>Due Amonut</th>
                 <th>Order Date</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($orders as $item)
+            @foreach ($sells as $item)
                 <tr>
                 <td>
                     <div class="btn-group">
@@ -43,7 +43,7 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        @if($item->pay_amount == $item->total_amount)
+                        @if($item->paid_amount == $item->total_amount)
                         <span class="dropdown-item">no Due</span>
                         @else
                         <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
@@ -51,7 +51,7 @@
                           </button>
                         @endif
                         @isset(auth()->user()->role->permission['permission']['sell']['view'])
-                        <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
+                        <a class="dropdown-item" href="@route('sell.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
                         @endisset
                         @isset(auth()->user()->role->permission['permission']['sell']['delete'])
                         <form action="@route('order.destroy',$item->id)" method="POST">
@@ -65,9 +65,9 @@
 
                 </td>
                 <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : 'Data Deleted' }}</td>
-                <td>{{ $item->pay_amount }}TK</td>
+                <td>{{ $item->paid_amount }}TK</td>
                 <td>{{ $item->total_amount }}TK</td>
-                <td>{{ $item->total_amount - $item->pay_amount }}TK</td>
+                <td>{{ $item->total_amount - $item->paid_amount }}TK</td>
                 <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>
                     @if($item->status == 1)
@@ -89,13 +89,13 @@
                             </button>
                             </div>
                             <div class="modal-body">
-                               <span>Due Amount is :  {{ $item->total_amount - $item->pay_amount }}</span>
-                                    <form action="@route('order.update', $item->id)" method="POST">
+                               <span>Due Amount is :  {{ $item->total_amount - $item->paid_amount }}</span>
+                                    <form action="@route('sell.update', $item->id)" method="POST">
                                         @csrf
                                         @method('put')
                                         <div class="form-gorup">
                                             <label for="">How Many pay amount</label>
-                                        <input type="number" name="pay_amount" class="form-control" placeholder="pay amount" id="">
+                                        <input type="number" name="paid_amount" class="form-control" placeholder="pay amount" id="">
                                         </div>
 
                             </div>
@@ -115,7 +115,7 @@
                 <th>Customer Name</th>
                 <th>Pay Amount</th>
                 <th>Total Amount</th>
-                <th>DUE Amonut</th>
+                <th>Due Amonut</th>
                 <th>Order Date</th>
                 <th>Status</th>
             </tr>

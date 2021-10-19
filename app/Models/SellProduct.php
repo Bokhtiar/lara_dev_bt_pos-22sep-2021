@@ -16,5 +16,15 @@ class SellProduct extends Model
         'total_price',
         'status',
     ];
+
+    public function scopeSellProduct($q,$id)
+    {
+        return self::where('sell_id', $id)->get();
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
 
