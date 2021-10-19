@@ -71,13 +71,13 @@
                                                 <tr>
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Quantity</th>
-                                                <th scope="col">Unit Price</th>
+                                                <th scope="col">Unit Selling Price</th>
                                                 <th scope="col">Total Price</th>
                                                 <th scope="col">X</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                {{-- ajax value add --}}
                                             </tbody>
                                             </table>
                                             <div class="row">
@@ -85,9 +85,9 @@
 
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-lg-4">
-                                                    <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
-                                                    <input type="number" name="paid_amount" class="form-control mb-2" placeholder="Paid Amount" id="">
-                                                    <input type="number" class="form-control" placeholder="Due Amount" id="">
+                                                    <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" value="0" >
+                                                    <input type="number" id="paid_amount" oninput="pay(this.value)" value="0" name="paid_amount" class="form-control mb-2">
+                                                    <input type="number" id="due_amount" class="form-control" placeholder="Due Amount" >
                                                 </div>
                                             </div>
                                     <!--table start -->
@@ -180,138 +180,89 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/select2/select2.full.min.js"></script>
     <script>
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });
-        //end of ajax heaer setup
-
+        });//end of ajax heaer setup
         $(function () {
             $('.select2').select2()
         })
         //end of select2
-
         $(document).ready(function() {
             $('#customer_id').on('change', function(e){
-                var id = e.target.value
-                if(id){
-                    $.ajax({
-                        url : '/customer/info/'+id,
-                        dataType : 'Json',
-                        type : 'GET',
-                        success:function(data){
-                            $('#customer_detail').append('<p>Customer Phone: '+data.phone+'</p> <p>Customer Email: '+data.email+'</p> <h5>Locations</h5> <p class="ml-2"> '+data.city+' '+data.state+' '+data.country+'</p> ')
-                        }//data return end
-                    })//ajax end
-                }
-            });//customer end
-
-            $('#product_id').on('change', function(e){
-                var id = e.target.value
-                if(id){
-                    $.ajax({
-                        url : '/store/sell/'+id,
-                        type: 'GET',
-                        dataType: 'Json',
-                        success:function(data){
-                            getData()
-                        }//eend ajax url
-                    })
-                }//end if condition
-            });//product id
-
-
-
-            $('#payment_method').on('change', function(e){
-                var payment_name = e.target.value
-                $('#Bkash').hide();
-                $('#Nagud').hide();
-                $('#Rocket').hide();
-                $('#Bank').hide();
-                if(payment_name == 'Bkash'){
-                    $('#Bkash').show();
-                }else if(payment_name == 'Nagud'){
-                    $('#Nagud').show();
-                }else if(payment_name == 'Rocket'){
-                    $('#Rocket').show();
-                }else if (payment_name == 'Bank'){
-                    $('#Bank').show();
-                }
-            })//pyament methods
-            getData()
-            function getData() {
-                    $.ajax({
-                    url : '/sell/author/all',
-                    type: 'GET',
-                    dataType: 'json',
-                    success:function(response) {
-                        console.log(response)
-                        $('tbody').html("")
-                            var total = 0;
-                        response.forEach(data => {
-                            total += data.product.unit_selling_price*data.quantity
-                            $('tbody').append('<tr>\
-                            <td>'+data.product.product_name+'</td>\
-                            <td>\
-                                <form action="" method="POST" class="form-inline">\
-                                    <input type="text" class="form-control form-control-sm qty" value="'+data.quantity+'" >\
-                                    <button type="button" value=" '+data.id+' " class="update btn btn-success btn-sm">submit</button>\
-                                </form>\
-                            </td>\
-                            <td>'+data.product.unit_selling_price+' Tk </td>\
-                             <td> '+data.product.unit_selling_price*data.quantity+' Tk</td>\
-                            <td> <button type="button " value=" '+data.id+' "  class="delete btn btn-danger">X</button> </td>\
-                            </tr>')
-                        });
-
-                    }//end success function
-                });
-            }//all sell data show
-
-
-
-            $(document).on('click', '.update', function(e){
-                e.preventDefault();
-                var id =  $(this).val();
-                var data={
-                    'quantity' : $('.qty').val()
-                };
-
+            var id = e.target.value
+            if(id){
                 $.ajax({
-                    url: '/quantity-update/'+id,
-                    type: 'POST',
-                    data: data,
-                    dataType: 'json',
+                    url : '/customer/info/'+id,
+                    dataType : 'Json',
+                    type : 'GET',
+                    success:function(data){
+                        $('#customer_detail').append('<p>Customer Phone: '+data.phone+'</p> <p>Customer Email: '+data.email+'</p> <h5>Locations</h5> <p class="ml-2"> '+data.city+' '+data.state+' '+data.country+'</p> ')
+                    }//data return end
+                })//ajax end
+            }
+        });//customer end
+
+        $('#payment_method').on('change', function(e){
+            var payment_name = e.target.value
+            $('#Bkash').hide();
+            $('#Nagud').hide();
+            $('#Rocket').hide();
+            $('#Bank').hide();
+            if(payment_name == 'Bkash'){
+                $('#Bkash').show();
+            }else if(payment_name == 'Nagud'){
+                $('#Nagud').show();
+            }else if(payment_name == 'Rocket'){
+                $('#Rocket').show();
+            }else if (payment_name == 'Bank'){
+                $('#Bank').show();
+            }
+        })//pyament methods
+
+        $("#product_id").on('change',function(e){
+            var id = e.target.value
+            console.log(id);
+            if(id){
+                $.ajax({
+                    url:'/sell/product/search/'+id,
+                    type: 'GET',
+                    dataType: 'Json',
                     success:function(response){
-                        getData()
-                    }//end quantity update function
-                });//quantity update ajax end
-            })//sell quantity
+                        $.each(response, function(key, item){
+                            $("tbody").append('<tr>\
+                            <td>'+item.product_name+'</td>\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="0" name="sell_quantity[]" > </td>\
+                            <td> <input type="text" id="unit_selling_price'+item.id+'" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                            <td> <button class="btn btn-sm btn-danger">X</button> </td>\
+                            </tr>')
+                        })
+                    }
+                })
+            }
+        })//product serach and show
+    })//main document end
+    function getQty(qty, num){
+        var sell_price = $("#unit_selling_price" + num).val()
+        var row_total = qty * sell_price
+        $("#total"+num).val(row_total)
+    }//row count total price
 
-            $(document).on('click', '.delete', function(e){
-                e.preventDefault();
-                var id = $(this).val()
-                if(id){
-                    $.ajax({
-                        url: '/sell/delete/'+id,
-                        type: 'GET',
-                        dataType:'json',
-                        success:function(response){
-                            console.log(response)
+    function getSumPrice(){
+        var row_total = 0;
+        $(".total").each(function(){
+            row_total += parseFloat(this.value)
+        })
+        $("#total_amount").val(row_total)
+    }//colum count total price
 
-                            getData();
-
-                        }//success function
-                    })
-                }
-            })//sell delete
-
-
-
-        })//main document end
-
+    function pay(amount){
+        var total = $("#total_amount").val();
+        var paid = total-amount;
+        $("#due_amount").val(paid);
+    }
 
 
     </script>

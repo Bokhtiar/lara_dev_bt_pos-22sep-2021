@@ -96,7 +96,7 @@ Route::get('sell/author/all', [SellController::class, 'sell_author_all']);
 Route::post('quantity-update/{id}', [SellController::class, 'quantity_update']);
 Route::get('sell/delete/{id}', [SellController::class, 'destroy']);
 Route::post('percentage-update/{id}', [SellController::class, 'discount_percentage']);
-
+Route::get('/sell/product/search/{id}', [SellController::class, 'sell_product_show']);
 
 //order
 Route::resource('order', OrderController::class);

@@ -119,4 +119,12 @@ class SellController extends Controller
         $sell->save();
         return response()->json($sell, 200);
     }
+
+    public function sell_product_show($id)
+    {
+        $product = Product::find($id);
+        return response()->json([
+            'product'=>$product,
+        ]);
+    }
 }
