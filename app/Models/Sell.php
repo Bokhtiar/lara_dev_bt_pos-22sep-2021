@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Sell extends Model
 {
     use HasFactory;
+    use CrudTrait;
     protected $fillable = [
         'customer_id',
         'invoice_no',

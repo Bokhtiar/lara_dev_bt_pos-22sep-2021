@@ -97,6 +97,7 @@ Route::post('quantity-update/{id}', [SellController::class, 'quantity_update']);
 Route::get('sell/delete/{id}', [SellController::class, 'destroy']);
 Route::post('percentage-update/{id}', [SellController::class, 'discount_percentage']);
 Route::get('/sell/product/search/{id}', [SellController::class, 'sell_product_show']);
+Route::get('sell/status/{id}', [SellController::class, 'status'])->name('sell.status');
 
 //order
 Route::resource('order', OrderController::class);

@@ -160,8 +160,21 @@ class SellController extends Controller
      */
     public function destroy($id)
     {
-        $sells = Sell::find($id)->delete();
-        return response()->json($sells, 200);
+        try{
+            DB::beginTransaction();
+            $sell = Sell::find($id)->delete();
+            if($sell){
+                foreach (SellProduct::query()->SellProduct($id) as $sell){
+                    SellProduct::find($sell->id)->delete();
+                }
+                DB::commit();
+                Session::flash('delete','delete Sucessfully...');
+                return redirect()->route('sell.index');
+            }
+        }catch(\Exception $ex){
+            //DB::rollBack();
+            return redirect()->route('sell.index');
+        }
     }
 
     public function discount_percentage(Request $request,$id)
@@ -178,5 +191,13 @@ class SellController extends Controller
         return response()->json([
             'product'=>$product,
         ]);
+    }
+
+    public function status($id)
+    {
+        $sell = Sell::find($id);
+        Sell::query()->Status($sell);
+        Session::flash('status','update Sucessfully...');
+        return redirect()->route('sell.index');
     }
 }

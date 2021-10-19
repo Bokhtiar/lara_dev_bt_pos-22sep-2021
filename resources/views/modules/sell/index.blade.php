@@ -54,7 +54,7 @@
                         <a class="dropdown-item" href="@route('sell.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
                         @endisset
                         @isset(auth()->user()->role->permission['permission']['sell']['delete'])
-                        <form action="@route('order.destroy',$item->id)" method="POST">
+                        <form action="@route('sell.destroy',$item->id)" method="POST">
                             @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
@@ -71,9 +71,9 @@
                 <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>
                     @if($item->status == 1)
-                        <a class="" href="@route('order.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
+                        <a class="" href="@route('sell.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
                         @else
-                        <a class="" href="@route('order.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
+                        <a class="" href="@route('sell.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
                     @endif
                 </td>
                 </tr>
