@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($orders as $item)
+            @foreach ($sells as $item)
                 <tr>
                 <td>
                     <div class="btn-group">

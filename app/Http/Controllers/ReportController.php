@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Sell;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -10,36 +11,36 @@ class ReportController extends Controller
 {
     public function day()
     {
-        $orders = Order::whereDate('created_at', Carbon::today())->get();
-        return view('modules.report.day', compact('orders'));
+        $sells = Sell::whereDate('created_at', Carbon::today())->get();
+        return view('modules.report.day', compact('sells'));
     }
 
     public function month()
     {
-        $orders = Order::whereMonth('created_at', date('m'))
+        $sells = Sell::whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))
         ->get();
-        return view('modules.report.month', compact('orders'));
+        return view('modules.report.month', compact('sells'));
     }
 
     public function week()
     {
         //current wekk function
-        $orders = Order::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
-        return view('modules.report.week', compact('orders'));
+        $sells = Sell::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        return view('modules.report.week', compact('sells'));
     }
 
     public function year()
     {
         //current wekk function
-        $orders = Order::whereYear('created_at', date('Y'))->get();
-        return view('modules.report.year', compact('orders'));
+        $sells = Sell::whereYear('created_at', date('Y'))->get();
+        return view('modules.report.year', compact('sells'));
     }
 
     public function date_range()
     {
-        $orders = Order::all();
-        return view('modules.report.date_range', compact('orders'));
+        $sells = Sell::all();
+        return view('modules.report.date_range', compact('sells'));
     }
 
     public function date_range_search(Request $request)
@@ -49,9 +50,9 @@ class ReportController extends Controller
 
        $end_date = Carbon::parse($request->end_date)
                              ->toDateTimeString();
-       $orders =  Order::whereBetween('created_at',[$start_date,$end_date])->get();
+       $sells =  Sell::whereBetween('created_at',[$start_date,$end_date])->get();
 
-        return view('modules.report.date_range', compact('orders'));
+        return view('modules.report.date_range', compact('sells'));
     }
 }
 
