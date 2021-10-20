@@ -39,6 +39,7 @@ Auth::routes();
 //['register' => false]
 
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index']);
+Route::get('/search/product/{search_key}', [App\Http\Controllers\PosController::class, 'search']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

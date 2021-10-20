@@ -18,7 +18,8 @@ class PosController extends Controller
     {
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
         $categories = Category::query()->Active()->get();
-        return view('modules.pos.index', compact('contacts', 'categories'));
+        $products = Product::query()->Active()->get();
+        return view('modules.pos.index', compact('contacts', 'categories', 'products'));
     }
 
     /**
@@ -26,9 +27,12 @@ class PosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search($search_key)
     {
-        //
+          $product=Product::orwhere('product_name','like','%'.$search_key.'%')
+                                 ->where('status',1)
+                                 ->get();
+          return response()->json($product, 200);
     }
 
     /**

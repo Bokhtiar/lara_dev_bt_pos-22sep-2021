@@ -1,6 +1,9 @@
 @extends('layouts.admin.app')
 
     @section('title', 'POS')
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('admin') }}/plugins/select2/select2.min.css">
+    @endsection
 
     @section('admin_content')
     <section class="container card">
@@ -27,7 +30,15 @@
                             @endforeach
                         </select>
                     </div> --}}
+                    {{-- <input type="text" oninput="search(this.value)" name="" id=""> --}}
+
                     <div class="row" id="product_row">
+                        <select name="product_id" id="product_id" class="form-control select2">
+                            <option value="">--Select Product--</option>
+                            @foreach ($products as $item)
+                            <option value="{{ $item->id }}"> {{ $item->product_name }} </option>
+                            @endforeach
+                        </select>
                         <div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">
                             {{-- ajax loaded data --}}
                         </div>
@@ -176,101 +187,145 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/select2/select2.full.min.js"></script>
      <script>
-         $.ajaxSetup({
+        $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         //end of ajax heaer setup
-
-            all_product()
-            function all_product(){
-                $.ajax({
-                    url: '/all/data',
-                    type: 'GET',
-                    dataType: 'JSON',
-                    success:function(response){
-                        console.log(response)
-                        response.forEach(item => {
-                            $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">\
-                                <div class="card">\
-                                <div class="card-body">\
-                                <p class="card-text">\
-                                '+item.product_name+' <br>\
-                                '+item.unit_selling_price+'Tk <br>\
-                                <button class="btn btn-sm btn-success" onclick="add('+item.id+')" >+add</button>\
-                                </p>\
-                                </div>\
-                              </div>\
-                              </div>')
-                        });
-                    }
-                })
-            }//all product show
-
-            function add(id) {
-                if(id){
-                    $.ajax({
-                    url:'/sell/product/search/'+id,
-                    type: 'GET',
-                    dataType: 'Json',
-                    success:function(response){
-                        $.each(response, function(key, item){
-                            $("tbody").append('<tr>\
-                            <td>'+item.product_name+'</td>\
-                            <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
-                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
-                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
-                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
-                            <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
-                            </tr>')
-                        })
-                    }
-                })
-                }//end if condition
-            } //add function end
-
-            function getQty(quantity, sl){
-                var slp = $("#unit_selling_price"+sl).val();
-                var total_p = quantity * slp
-                $("#total"+sl).val(total_p)
-            }
-
-            function getSumPrice(){
-        var row_total = 0;
-        $(".total").each(function(){
-            row_total += parseFloat((this.value == 0 ? 0 : this.value))
-        })
-        $("#total_amount").val(row_total)
-    }//colum count total price
-
-            function pay(amount){
-                var total = $("#total_amount").val();
-                var paid = total-amount;
-                $("#due_amount").val(paid);
-            }//sum total
-
-            function unit_price(price, n){
-                var $qty = $("#qty" + n).val();
-                var total_price = $qty * price
-                $("#total"+n).val(total_price)
-            }
-
-            $('#payment_method').on('change', function(e){
-                var payment_name = e.target.value
-                $('#Bkash').hide();
-                $('#Nagud').hide();
-                $('#Rocket').hide();
-                $('#Bank').hide();
-                if(payment_name == 'Bkash'){
-                    $('#Bkash').show();
-                }else if(payment_name == 'Nagud'){
-                    $('#Nagud').show();
-                }else if(payment_name == 'Rocket'){
-                    $('#Rocket').show();
-                }else if (payment_name == 'Bank'){
-                    $('#Bank').show();
+        function product_show(response){
+            response.forEach(item => {
+            $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">\
+            <div class="card">\
+            <div class="card-body">\
+            <p class="card-text">\
+            '+item.product_name+' <br>\
+            '+item.unit_selling_price+'Tk <br>\
+            <button class="btn btn-sm btn-success" onclick="add('+item.id+')" >+add</button>\
+            </p>\
+            </div>\
+            </div>\
+            </div>')
+        });
+        }//html product show
+        all_product()
+        function all_product(){
+            $.ajax({
+                url: '/all/data',
+                type: 'GET',
+                dataType: 'JSON',
+                success:function(response){
+                    console.log(response)
+                    product_show(response)
                 }
-            })//pyament methods
+            })
+        }//all product show
+
+        function add(id) {
+            if(id){
+                $.ajax({
+                url:'/sell/product/search/'+id,
+                type: 'GET',
+                dataType: 'Json',
+                success:function(response){
+                    $.each(response, function(key, item){
+                        $("tbody").append('<tr>\
+                        <td>'+item.product_name+'</td>\
+                        <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
+                        <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                        <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                        <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                        <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                        </tr>')
+                    })
+                }
+            })
+            }//end if condition
+        } //add function end
+
+        function getQty(quantity, sl){
+            var slp = $("#unit_selling_price"+sl).val();
+            var total_p = quantity * slp
+            $("#total"+sl).val(total_p)
+        }
+
+        function getSumPrice(){
+            var row_total = 0;
+            $(".total").each(function(){
+                row_total += parseFloat((this.value == 0 ? 0 : this.value))
+            })
+            $("#total_amount").val(row_total)
+        }//colum count total price
+
+        function pay(amount){
+            var total = $("#total_amount").val();
+            var paid = total-amount;
+            $("#due_amount").val(paid);
+        }//sum total
+
+        function unit_price(price, n){
+            var $qty = $("#qty" + n).val();
+            var total_price = $qty * price
+            $("#total"+n).val(total_price)
+        }
+
+        $('#payment_method').on('change', function(e){
+            var payment_name = e.target.value
+            $('#Bkash').hide();
+            $('#Nagud').hide();
+            $('#Rocket').hide();
+            $('#Bank').hide();
+            if(payment_name == 'Bkash'){
+                $('#Bkash').show();
+            }else if(payment_name == 'Nagud'){
+                $('#Nagud').show();
+            }else if(payment_name == 'Rocket'){
+                $('#Rocket').show();
+            }else if (payment_name == 'Bank'){
+                $('#Bank').show();
+            }
+        })//pyament methods
+
+        // function search(value){
+        //     if(value){
+        //         $.ajax({
+        //             url:'/search/product/'+value,
+        //             type:'GET',
+        //             dataType: 'JSON',
+        //             success:function(response){
+        //                 product_show(response)
+        //             }
+        //         })
+        //     }
+        // }//auto search
+
+        $(function () {
+        $('.select2').select2()
+        }) //end of select2
+
+        $("#product_id").on('change',function(e){
+        var id = e.target.value
+        console.log(id);
+        if(id){
+            $.ajax({
+                url:'/sell/product/search/'+id,
+                type: 'GET',
+                dataType: 'Json',
+                success:function(response){
+                    $.each(response, function(key, item){
+                        $("tbody").append('<tr>\
+                        <td>'+item.product_name+'</td>\
+                        <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
+                        <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                        <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                        <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                        <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                        </tr>')
+                    })
+                }
+            })
+        }
+        })//product serach and show
+
      </script>
     @endsection
