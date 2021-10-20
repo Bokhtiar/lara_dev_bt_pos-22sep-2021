@@ -34,22 +34,33 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7 col-lg-7">
-                    <form action="@route('order.store') " method="POST" class="form-group">
+                    <form action="@route('sell.store') " method="POST" class="form-group">
                         @csrf
-                    <table class="table table-striped my-3">
-                        <thead class="bg-success">
-                            <tr>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Unit Price</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">X</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <table class="table table-striped my-3">
+                            <thead class="bg-success">
+                                <tr>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product ID</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Unit Selling Price</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">X</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- ajax value add --}}
+                            </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-lg-8">
 
-                        </tbody>
-                        </table>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-lg-4">
+                                    <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" value="0" >
+                                    <input type="number" id="paid_amount" oninput="pay(this.value)" value="0" name="paid_amount" class="form-control mb-2">
+                                    <input type="number" id="due_amount" class="form-control" value="0" >
+                                </div>
+                            </div>
                         <p>
                         <div class="float-right" id="total_amount_show">
                         <button class="total btn btn-primary"></button>
@@ -91,25 +102,24 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <label for="">Amount. <span class="text-danger">*</span></label>
-                                            <input type="number" placeholder="how many pay customer" name="pay_amount" class="form-control" id="">
+                                            <div class="form-control">
+                                                <label for="">Payment Methods</label>
+                                                <select class="form-control select2" name="payment_method" id="payment_method">
+                                                    <option value="">--select payment method--</option>
+                                                    <option value="Bkash">Bkash</option>
+                                                    <option value="Nagud">Nagud</option>
+                                                    <option value="Rocket">Rocket</option>
+                                                    <option value="Bank">Bank</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <input type="hidden" name="total_amount" value="100" id="total_amount">
+
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <label for="">Sell on. <span class="text-danger">*</span></label>
                                             <input type="date" name="sell_on_date" class="form-control" id="">
                                         </div>
                                     </div>
-                                    <div class="form-control">
-                                        <label for="">Payment Methods</label>
-                                        <select class="form-control select2" name="payment_method" id="payment_method">
-                                            <option value="">--select payment method--</option>
-                                            <option value="Bkash">Bkash</option>
-                                            <option value="Nagud">Nagud</option>
-                                            <option value="Rocket">Rocket</option>
-                                            <option value="Bank">Bank</option>
-                                        </select>
-                                    </div>
+
 
                                     <!--pyament mehtods start here -->
                                     <div class="form-gorup my-3 card" id="Bkash" style="display: none">
@@ -188,7 +198,6 @@
                                 <p class="card-text">\
                                 '+item.product_name+' <br>\
                                 '+item.unit_selling_price+'Tk <br>\
-                                Qty: '+item.purchase.purchase_quantity+' <br>\
                                 <button class="btn btn-sm btn-success" onclick="add('+item.id+')" >+add</button>\
                                 </p>\
                                 </div>\
@@ -200,51 +209,52 @@
             }//all product show
 
             function add(id) {
-
                 if(id){
                     $.ajax({
-                        url : '/store/sell/'+id,
-                        type: 'GET',
-                        dataType: 'Json',
-                        success:function(response){
-                            getData()
-                        }//eend ajax url
-                    })
+                    url:'/sell/product/search/'+id,
+                    type: 'GET',
+                    dataType: 'Json',
+                    success:function(response){
+                        $.each(response, function(key, item){
+                            $("tbody").append('<tr>\
+                            <td>'+item.product_name+'</td>\
+                            <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                            <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                            </tr>')
+                        })
+                    }
+                })
                 }//end if condition
             } //add function end
 
+            function getQty(quantity, sl){
+                var slp = $("#unit_selling_price"+sl).val();
+                var total_p = quantity * slp
+                $("#total"+sl).val(total_p)
+            }
 
-            getData()
-            function getData() {
-                    $.ajax({
-                    url : '/sell/author/all',
-                    type: 'GET',
-                    dataType: 'json',
-                    success:function(response) {
-                        console.log(response)
-                        $('tbody').html("")
-                            var total = 0;
-                        response.forEach(data => {
-                            total += data.product.unit_selling_price*data.quantity
-                            $('tbody').append('<tr>\
-                            <td>'+data.product.product_name+'</td>\
-                            <td>\
-                                <form action="" method="POST" class="form-inline">\
-                                    <input type="text" class="form-control form-control-sm qty" value="'+data.quantity+'" >\
-                                    <button type="button" value=" '+data.id+' " class="update btn btn-success btn-sm">submit</button>\
-                                </form>\
-                            </td>\
-                            <td>'+data.product.unit_selling_price+' Tk </td>\
-                             <td> '+data.product.unit_selling_price*data.quantity+' Tk</td>\
-                            <td> <button type="button " value=" '+data.id+' "  class="delete btn btn-danger">X</button> </td>\
-                            </tr>')
-                        });
-                        $('#total_amount').val(total);
-                        $('#total_amount_show').html("")
-                        $('#total_amount_show').append('<span class="h4"> + Total Amount Is : '+total+' Tk</span>')
-                    }//end success function
-                });
-            }//all sell data show
+            function getSumPrice(){
+        var row_total = 0;
+        $(".total").each(function(){
+            row_total += parseFloat((this.value == 0 ? 0 : this.value))
+        })
+        $("#total_amount").val(row_total)
+    }//colum count total price
+
+            function pay(amount){
+                var total = $("#total_amount").val();
+                var paid = total-amount;
+                $("#due_amount").val(paid);
+            }//sum total
+
+            function unit_price(price, n){
+                var $qty = $("#qty" + n).val();
+                var total_price = $qty * price
+                $("#total"+n).val(total_price)
+            }
 
             $('#payment_method').on('change', function(e){
                 var payment_name = e.target.value
@@ -262,73 +272,5 @@
                     $('#Bank').show();
                 }
             })//pyament methods
-
-            $(document).on('click', '.update', function(e){
-                e.preventDefault();
-                var id =  $(this).val();
-                var data={
-                    'quantity' : $('.qty').val()
-                };
-
-                $.ajax({
-                    url: '/quantity-update/'+id,
-                    type: 'POST',
-                    data: data,
-                    dataType: 'json',
-                    success:function(response){
-                        getData()
-                    }//end quantity update function
-                });//quantity update ajax end
-            })//sell quantity
-
-            $(document).on('click', '.delete', function(e){
-                e.preventDefault();
-                var id = $(this).val()
-                if(id){
-                    $.ajax({
-                        url: '/sell/delete/'+id,
-                        type: 'GET',
-                        dataType:'json',
-                        success:function(response){
-                            console.log(response)
-
-                            getData();
-
-                        }//success function
-                    })
-                }
-            })//sell delete
-
-            // $(document).on('change', '#category_id', function(e){
-            //     e.preventDefault();
-            //     var id = e.target.value;
-            //     if(id){
-            //         $.ajax({
-            //             url:'/category/product/'+id,
-            //             type:'GET',
-            //             dataType: 'json',
-            //             success:function(response){
-            //                 response.forEach(item => {
-            //                 $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">\
-            //                     <div class="card">\
-            //                     <img class="card-img-top" src="..." alt="Card image cap">\
-            //                     <div class="card-body">\
-            //                     <p class="card-text">\
-            //                     '+item.product_name+' <br>\
-            //                     '+item.unit_selling_price+'Tk <br>\
-            //                     Qty: '+item.purchase.purchase_quantity+' <br>\
-            //                     <button class="btn btn-sm btn-success" onclick="add('+item.id+')" >+add</button>\
-            //                     </p>\
-            //                     </div>\
-            //                   </div>\
-            //                   </div>')
-            //             });
-            //             }
-            //         })
-            //     }
-            // })
-
-
-
      </script>
     @endsection

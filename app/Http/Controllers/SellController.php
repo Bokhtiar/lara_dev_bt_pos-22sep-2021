@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Session;
 
 class SellController extends Controller
@@ -46,7 +47,6 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'customer_id'=>'required',
             'invoice_date'=>'required',
@@ -89,7 +89,12 @@ class SellController extends Controller
                     }
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');
-                    return redirect()->route('sell.index');
+                    $current_url = url()->previous();
+                    if($current_url == "http://localhost:8000/pos"){
+                        return redirect('/pos');
+                    }else{
+                        return redirect()->route('sell.index');
+                    }
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
