@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Product Create')
+@section('title', 'Product List')
 @section('css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.jqueryui.min.css">
@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Action</th>
+                <th>Product Image</th>
                 <th>Product Name </th>
                 <th>Category</th>
                 <th>Sku Code</th>
@@ -52,6 +53,19 @@
                     </div>
 
                 </td>
+
+                    @php
+                    $image=json_decode($item->product_image);
+                    @endphp
+
+                        @if(empty($image))
+                            <td>Image Not Selected</td>
+                        @else
+                            <td><img src="{{asset($image[0])}}" height="60px" width="60px" alt=""> </td>
+                        @endif
+
+
+
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
@@ -74,6 +88,7 @@
         <tfoot>
             <tr>
                 <th>Action</th>
+                <th>Product Image</th>
                 <th>Product Name </th>
                 <th>Category</th>
                 <th>Sku Code</th>

@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseProduct;
 use App\Models\Subcategory;
 use App\Models\Unit;
 use App\Models\Warranty;
@@ -65,7 +66,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validated = $request->validate([
             'product_name'=>' string |required | unique:products| min:2 ',
             'category_id'=>'required | integer ',
@@ -79,21 +80,30 @@ class ProductController extends Controller
         if($validated){
             try{
                 DB::beginTransaction();
-                $product = Product::create([
-                    'product_name' => $request->product_name,
-                    'product_sku' => $request->product_sku,
-                    'alert_quantity' => $request->alert_quantity,
-                    'category_id' => $request->category_id,
-                    'subcategory_id' => $request->subcategory_id,
-                    'brand_id' => $request->brand_id,
-                    'unit_id' => $request->unit_id,
-                    'product_image' => "no file",
-                    'user_id' => Auth::id(),
-                    'unit_price' => $request->unit_price,
-                    'unit_selling_price' => $request->unit_selling_price,
-                    'warranty_id' => $request->warranty_id,
-                    'product_description' => $request->product_description,
-                ]);
+                $product = new Product;
+                    $product->product_name = $request->product_name;
+                    $product->product_sku = Product::query()->Sku();
+                    $product->alert_quantity = $request->alert_quantity;
+                    $product->category_id = $request->category_id;
+                    $product->subcategory_id = $request->subcategory_id;
+                    $product->brand_id = $request->brand_id;
+                    $product->unit_id = $request->unit_id;
+
+                    $product_image = array();
+                    if ($request->hasFile('product_image')) {
+                        foreach ($request->product_image as $key => $photo) {
+                            $path = $photo->store('uploads/product/photos');
+                            array_push($product_image, $path);
+                        }
+                        $product['product_image']=json_encode($product_image);
+                    }
+
+                    $product->user_id = Auth::id();
+                    $product->unit_price = $request->unit_price;
+                    $product->unit_selling_price = $request->unit_selling_price;
+                    $product->warranty_id = $request->warranty_id;
+                    $product->product_description = $request->product_description;
+                    $product->save();
                 if (!empty($product)) {
                     DB::commit();
                     Session::flash('insert','Added Sucessfully...');
@@ -101,6 +111,7 @@ class ProductController extends Controller
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
+                return abort(404);
                 DB::rollBack();
             }
         }

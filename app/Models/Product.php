@@ -57,9 +57,15 @@ class Product extends Model
 
     public function scopeAlert()
     {
-        foreach(Purchase::all() as $p){
-                return Product::whereNotNull('purchase_id')->where('alert_quantity', '>=', $p->purchase_quantity)->get();
-        }
+        return "";
+    }
+
+    public function scopeSku()
+    {
+        $product = Product::latest()->first();
+        $sku = $product->id + 1;
+        $sku_code = "PSKU 00".$sku;
+        return $sku_code;
     }
 
 }

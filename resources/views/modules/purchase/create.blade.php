@@ -112,8 +112,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <!--pyament mehtods start here -->
                             <div class="form-gorup my-3 card" id="Bkash" style="display: none">
                                 <p class="card-header">
@@ -152,7 +150,6 @@
                                 </p>
                             </div><!--bkash-->
                             <!--payment methods end here -->
-
                         </div>
                     </div>
                     <div class="float-right">
@@ -190,16 +187,14 @@
                         dataType: 'json',
                         success:function(response){
                             $.each(response, function(key, item){
-
                                 $('tbody').append('<tr>\
                                     <td>'+item.product_name+'</td>\
                                     <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]"> </td>\
                                     <td> <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
                                     <td> <input type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
                                     <td> <input type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
-                                    <td>X</td>\
+                                    <td> X </td>\
                                 </tr>')
-
                             })
                         }//return success function
                     })//this is ajax end

@@ -39,7 +39,7 @@
                             <option value="{{ $item->id }}"> {{ $item->product_name }} </option>
                             @endforeach
                         </select>
-                        <div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">
+                        <div id="wrapper_div">
                             {{-- ajax loaded data --}}
                         </div>
                     </div>
@@ -195,7 +195,7 @@
         //end of ajax heaer setup
         function product_show(response){
             response.forEach(item => {
-            $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4" id="wrapper_div">\
+            $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
             <div class="card">\
             <div class="card-body">\
             <p class="card-text">\
@@ -287,6 +287,7 @@
         })//pyament methods
 
         // function search(value){
+        //     $("#wrapper_div").hide()
         //     if(value){
         //         $.ajax({
         //             url:'/search/product/'+value,

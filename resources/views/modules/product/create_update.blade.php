@@ -24,10 +24,10 @@
             </div>
             <div class="card-body">
                 @if (isset($edit))
-                <form class="form-gorup" action="@route('product.update',$edit->id)" method="POST">
+                <form class="form-gorup" action="@route('product.update',$edit->id)" enctype="multipart/form-data" method="POST">
                     @method('PUT')
                     @else
-                    <form class="form-gorup" action="@route('product.store')" method="POST">
+                    <form class="form-gorup" enctype="multipart/form-data" action="@route('product.store')" method="POST">
                 @endif
                     @csrf
                     <div class="row">
@@ -35,10 +35,7 @@
                             <label for="">Product Name: <span class="text-danger"> * </span></label>
                             <input type="text" value="{{ @$edit->product_name }}" name="product_name" placeholder="product name" class="form-control">
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                            <label for="">SKU: <span title="SKU auto genarate and if you can menual put here"> <i class="text-info far fa-bell"></i> </span> </label>
-                            <input type="text" value="{{ @$edit->product_sku }}" placeholder="sku" name="product_sku" class="form-control">
-                        </div>
+
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                             <label for="">Alert Quantity:  <span title="When your stock is form number equal after alert about product"> <i class="text-info far fa-bell"></i> </span> </label>
                             <input type="number" placeholder="alert qty" minlength="1" value="{{ @$edit->alert_quantity }}" name="alert_quantity" class="form-control">
@@ -62,7 +59,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
                             <label for="">Select Brands: <span class="text-danger"> * </span> </label>
                             <select name="brand_id" id="" class="form-control select2">
                                 <option value="">--Select Brands--</option>
@@ -86,7 +83,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Porduct Image</label>
-                            <input type="file" class="form-control" name="product_image" value="">
+                            <input type="file" class="form-control" name="product_image[]" multiple value="">
                         </div>
                     </div>
                     {{-- warranty and image --}}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\PurchaseProduct;
 use App\Models\Sell;
 use App\Models\SellProduct;
 use Carbon\Carbon;
@@ -85,6 +86,11 @@ class SellController extends Controller
                         $product->sell_id = $sell_id;
                         $product->unit_selling_price = $request->unit_selling_price[$i];
                         $product->total_price = $request->total_price[$i];
+
+                        $p = PurchaseProduct::where('product_id', $request->product_id[$i])->first();
+                        $p["purchase_quantity"] = $p->purchase_quantity - $request->sell_quantity[$i];
+                        $p->save();
+
                         $product->save();
                     }
                     DB::commit();

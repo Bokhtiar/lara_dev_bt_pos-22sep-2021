@@ -48,7 +48,7 @@
                 </td>
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->alert_quantity !!}</td>
-                <td class="bg-danger">{!! $item->purchase->purchase_quantity !!}</td>
+                <td class="bg-danger">{!! $item->purchase_quantity !!}</td>
                 <td>
                     @if($item->status == 1)
                     <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"
