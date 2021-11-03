@@ -17,6 +17,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarrantyController;
+use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Sell;
@@ -27,11 +28,11 @@ use Facade\FlareClient\Report;
 
 Route::get('/', function () {
     $product = Product::count();
-    $order = Order::count();
+    $contact = Contact::count();
     $user = User::count();
     $sell = Sell::count();
-    $orders = Order::latest()->get();
-    return view('welcome', compact('product', 'order', 'user', 'sell', 'orders'));
+    $sells = Sell::latest()->get();
+    return view('welcome', compact('product', 'contact', 'user', 'sell', 'sells'));
 
 })->middleware('auth');
 //register route is disable another route is active

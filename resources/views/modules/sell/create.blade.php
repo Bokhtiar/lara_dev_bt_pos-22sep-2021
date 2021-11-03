@@ -16,10 +16,10 @@
 
     @section('admin_content')
 
-        <section class="">
-            <div class="card container">
+        <section class="card">
+            <div class="card-header ">
                 <x-sell></x-sell>
-                <div class="body">
+                <div class="card-body">
                     <form action="@route('sell.store') " method="POST" class="form-group">
                         @csrf
                         <div class="row">

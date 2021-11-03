@@ -36,4 +36,11 @@ class Sell extends Model
     {
         return $this->belongsTo(Contact::class);
     }
+
+    public function scopeInvoice_number(){
+        $sell = Sell::latest()->first();
+        $inv = $sell->id + 1;
+        $inv_code = "SL 00".$inv;
+        return $inv_code;
+    }
 }

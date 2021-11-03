@@ -51,7 +51,6 @@ class SellController extends Controller
         $validated = $request->validate([
             'customer_id'=>'required',
             'invoice_date'=>'required',
-            'invoice_no'=>'required',
             'payment_method' => 'required',
             'sell_on_date'=> 'required'
         ]);
@@ -61,7 +60,7 @@ class SellController extends Controller
                  $sell = Sell::create([
                     'customer_id' => $request->customer_id,
                     'invoice_date' => $request->invoice_date,
-                    'invoice_no' => $request->invoice_no,
+                    'invoice_no' => Sell::query()->Invoice_number(),
                     'note' => $request->note,
                     'total_amount' => $request->total_amount,
                     'paid_amount' => $request->paid_amount,

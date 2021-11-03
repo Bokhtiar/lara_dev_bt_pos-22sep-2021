@@ -92,19 +92,19 @@
               <div class="row">
                 <div class="col-12 table-responsive">
                   <table class="table table-striped text-center">
-                    <thead>
+                    <thead class="bg-success">
                     <tr>
                       <th>Product</th>
                       <th>Qty</th>
                       <th>Price</th>
-                      <th>Subtotal</th>
+                      <th>Line Total</th>
                     </tr>
                     </thead>
                     <tbody>
                         <?php $total = 0; ?>
                     @foreach (App\Models\SellProduct::query()->SellProduct($item->id) as $sell)
                       <tr>
-                        <td>{{ $sell->product ? $sell->product->product_name : '' }}</td>
+                        <td>{{ $sell->product ? $sell->product->product_name : 'product Already Deleted' }}</td>
                         <td>{{ $sell->sell_quantity}}</td>
                         <td>{{ $sell->unit_selling_price }} Tk</td>
                         <td>{{ $sell->total_price }} Tk</td>
@@ -152,7 +152,7 @@
               <div class="row no-print">
                 <div class="col-12">
                   <button id="print"  class="btn btn-default"><i class="fa fa-print"></i> Print</button>
-                  
+
                 </div>
               </div>
             </div>

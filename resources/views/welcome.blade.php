@@ -17,7 +17,7 @@
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                   <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
               </div><!-- /.col -->
@@ -52,8 +52,8 @@
                   <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
 
                   <div class="info-box-content">
-                    <span class="info-box-text">Order</span>
-                    <span class="info-box-number">{{ $order }}</span>
+                    <span class="info-box-text">Supplier and Customer</span>
+                    <span class="info-box-number">{{ $contact }}</span>
                   </div>
                   <!-- /.info-box-content -->
                 </div>
@@ -103,15 +103,15 @@
                 <tr>
                     <th>Action</th>
                     <th>Customer Name</th>
-                    <th>Pay Amount</th>
                     <th>Total Amount</th>
+                    <th>Pay Amount</th>
                     <th>DUE Amonut</th>
                     <th>Order Date</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($orders as $item)
+                @foreach ($sells as $item)
                     <tr>
                     <td>
                         <div class="btn-group">
@@ -137,15 +137,15 @@
 
                     </td>
                     <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : ''}}</td>
-                    <td>{{ $item->pay_amount }}TK</td>
                     <td>{{ $item->total_amount }}TK</td>
-                    <td>{{ $item->total_amount - $item->pay_amount }}TK</td>
+                    <td>{{ $item->paid_amount }}TK</td>
+                    <td>{{ $item->total_amount - $item->paid_amount }}TK</td>
                     <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td>
                         @if($item->status == 1)
-                            <a class="" href="@route('order.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
+                            <a class="" href="@route('sell.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
                             @else
-                            <a class="" href="@route('order.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
+                            <a class="" href="@route('sell.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
                         @endif
                     </td>
                     </tr>

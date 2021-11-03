@@ -30,7 +30,7 @@
                 <th>Paid Amount</th>
                 <th>Total Amount</th>
                 <th>Due Amonut</th>
-                <th>Order Date</th>
+                <th>Sell Date</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -116,7 +116,7 @@
                 <th>Pay Amount</th>
                 <th>Total Amount</th>
                 <th>Due Amonut</th>
-                <th>Order Date</th>
+                <th>Sell Date</th>
                 <th>Status</th>
             </tr>
         </tfoot>

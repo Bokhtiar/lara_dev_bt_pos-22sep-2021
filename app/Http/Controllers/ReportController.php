@@ -46,14 +46,24 @@ class ReportController extends Controller
 
     public function date_range_search(Request $request)
     {
-        $start_date = Carbon::parse($request->start_date)
-                             ->toDateTimeString();
+        $startDate = Carbon::parse($request->start_date)->startOfDay();
+        $endDate = Carbon::parse($request->end_date)->endOfDay();
+        $sells = Sell::whereBetween('created_at', [$startDate, $endDate])->get();
 
-       $end_date = Carbon::parse($request->end_date)
-                             ->toDateTimeString();
-       $sells =  Sell::whereBetween('created_at',[$start_date,$end_date])->get();
+    //     $start_date = Carbon::parse($request->start_date)
+    //                          ->toDateTimeString();
 
+    //    $end_date = Carbon::parse($request->end_date)
+    //                          ->toDateTimeString();
+    //    $sells =  Sell::whereBetween('created_at',[$start_date,$end_date])->get();
+
+    // $sells = Sell::where('created_at','>=',$request->start_date)
+    // ->where('created_at','<=',$request->end_date)
+    // ->get();
         return view('modules.report.date_range', compact('sells'));
+
+
+
     }
 }
 
