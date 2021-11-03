@@ -81,7 +81,7 @@
                 <div class="col-sm-4 invoice-col">
                   <b>Invoice {{ $item->invoice_no }}</b><br>
                   <br>
-                  <b>Order ID:</b> {{ $item->id }}<br>
+                  <b>Sell No.:</b> {{ $item->id }}<br>
                   <b>Account:</b> {{ $item->payment_method }}
                 </div>
                 <!-- /.col -->

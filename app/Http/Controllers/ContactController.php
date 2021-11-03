@@ -25,9 +25,10 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('modules.contact.create');
+        $type = $request->type;
+        return view('modules.contact.create', compact('type'));
     }
 
     /**
@@ -93,10 +94,11 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $edit = Contact::find($id);
-        return view('modules.contact.create', compact('edit'));
+        $type = $request->type;
+        return view('modules.contact.create', compact('edit','type'));
     }
 
     /**

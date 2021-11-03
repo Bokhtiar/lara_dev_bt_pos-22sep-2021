@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
@@ -39,5 +40,11 @@ class SettingController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('subAdmin.index');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

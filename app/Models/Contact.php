@@ -10,7 +10,7 @@ class Contact extends Model
 {
     use HasFactory;
     use CrudTrait;
-    
+
     protected $fillable = [
         'contact_info',
         'prefix_name',
@@ -26,4 +26,12 @@ class Contact extends Model
         'company_phone',
         'compnay_email',
     ];
+
+    public function scopegetCode($type='customer'){
+    if( $type = 'customer' ){
+            return 'customer';
+        }else{
+            return 'supplier';
+        }
+    }
 }

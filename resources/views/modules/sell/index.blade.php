@@ -20,7 +20,7 @@
         @endif
 
     <section class="card">
-            <x-order></x-order>
+            <x-sell></x-sell>
         <div class="card-body">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>

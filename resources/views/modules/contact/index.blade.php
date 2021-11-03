@@ -20,7 +20,7 @@
         @endif
 
     <section class="card">
-            <x-contact></x-contact>
+         
         <div class="card-body">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>

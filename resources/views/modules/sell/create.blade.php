@@ -37,16 +37,10 @@
                                 </div>
                             </div><!--customer site done -->
                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                <div class="row">
-                                    <div class="col-sm-12 col-lg-6 col-md-6">
+
                                         <label for="">Invoice Date</label>
                                         <input type="date" class="form-control" name="invoice_date" id="">
-                                    </div>
-                                    <div class="col-sm-12 col-lg-6 col-md-6">
-                                        <label for="">Invoice No.</label>
-                                        <input type="number" class="form-control" name="invoice_no" placeholder="Invoice No." id="">
-                                    </div>
-                                </div>
+
                             </div><!--others information-->
                         </div>
 

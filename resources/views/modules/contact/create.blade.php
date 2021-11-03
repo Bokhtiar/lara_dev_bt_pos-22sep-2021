@@ -14,7 +14,7 @@
         </div>
         @endif
             <section class="card">
-                    <x-contact></x-contact>
+
                     <div class="card-body">
                         @if(isset($edit))
                         <form action="@route('contact.update', $edit->id)" class="form-group" method="POST">
@@ -23,12 +23,13 @@
                             <form action="@route('contact.store')" class="form-group" method="POST">
                         @endif
                             @csrf
+                            <input type="hidden" name="" value="{{ $type }}" id="supplier">
                             <div class="form-gorup mb-3">
                                 <label for="">Select Contact <span class="text-danger">*</span> </label>
                                 <select class="form-control" name="contact_info" id="contact_info">
                                     <option value="">Select Contact</option>
-                                    <option value="Customer" {{ @$edit->contact_info == 'Customer' ? 'selected' : '' }}>Customer</option>
-                                    <option value="Supplier" {{ @$edit->contact_info == 'Supplier' ? 'selected' : '' }}>Supplier</option>
+                                    <option value="Customer" {{ @$edit->contact_info == 'Customer' ? 'selected' : '' }} {{ $type == 'customer' ? 'selected' : '' }}>Customer</option>
+                                    <option value="Supplier" {{ @$edit->contact_info == 'Supplier' ? 'selected' : '' }} {{ $type == 'supplier' ? 'selected' : '' }} >Supplier</option>
                                 </select>
                             </div>
                             <div class="row">
@@ -134,13 +135,14 @@
     <script>
         $(document).ready(function(){
 
-            $('#contact_info').on('change', function(e){
-                var contact = e.target.value
-                if(contact == 'Supplier'){
+
+                var contact = $("#supplier").val();
+                console.log(contact);
+                if(contact == 'supplier'){
                     $('#supplier_info').toggle(3000);
                 }
 
-            })
+
         })
     </script>
     @endsection

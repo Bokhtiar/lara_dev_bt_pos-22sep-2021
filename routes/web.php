@@ -44,6 +44,7 @@ Route::get('/search/product/{search_key}', [App\Http\Controllers\PosController::
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 //category
 Route::resource('category', CategoryController::class);
 Route::get('/category/status/{id}', [App\Http\Controllers\CategoryController::class, 'status'])->name('category.status');
@@ -77,6 +78,7 @@ Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdm
 Route::get('/subAdmin/create', [SettingController::class, 'create'])->name('subAdmin.create');
 Route::post('/subAdmin/store', [SettingController::class, 'store'])->name('subAdmin.store');
 Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name('subAdmin.delete');
+Route::get('/logout', [App\Http\Controllers\SettingController::class, 'logout']);
 
 //purchase product
 Route::resource('purchase', PurchaseController::class);
