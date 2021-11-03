@@ -79,7 +79,10 @@ Route::get('/subAdmin/delete/{id}', [SettingController::class, 'destroy'])->name
 
 //purchase product
 Route::resource('purchase', PurchaseController::class);
+Route::post('/purchase/due/pay//{id}', [PurchaseController::class, 'duePay']);
 Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
+Route::get('/purchae_edit_product/{id}', [PurchaseController::class, 'purchase_edit_product']);
+
 Route::get('/purchase/date/filtering', [PurchaseController::class, 'purchase_date_filtering'])->name('purchase.date.filtering');
 Route::post('/purchase/date/range/search', [PurchaseController::class, 'purchase_date_filtering_search'])->name('purchase.date.range.search');
 

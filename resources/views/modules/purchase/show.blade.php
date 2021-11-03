@@ -87,16 +87,25 @@
                       <th>Qty</th>
                       <th>Product Name</th>
                       <th>Unit Price</th>
-                      <th>Unit Sell Price</th>
                       <th>Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                        @endphp
+                        @foreach ($products as $p)
                         <tr>
-                            {{-- @foreach (App\Models\Purchase::query()->Purchase_product($item->id) as $item)
-
-                            @endforeach --}}
+                            <td>{{ $p->purchase_quantity }}</td>
+                            <td>{{ $p->product->product_name }}</td>
+                            <td>{{ $p->unit_price }}</td>
+                            <td>{{ $p->purchase_quantity * $p->unit_price }}</td>
+                            @php
+                                $total += $p->purchase_quantity * $p->unit_price;
+                            @endphp
                         </tr>
+                        @endforeach
+
                     </tbody>
                   </table>
                 </div>
@@ -122,14 +131,11 @@
 
                   <div class="table-responsive">
                     <table class="table">
-                      <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td> Tk</td>
-                      </tr>
+
 
                       <tr>
                         <th>Total:</th>
-                        <td> Tk</td>
+                        <td> {{ $total }} Tk</td>
                       </tr>
                     </table>
                   </div>
