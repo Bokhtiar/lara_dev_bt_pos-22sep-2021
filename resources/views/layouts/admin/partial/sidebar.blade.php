@@ -17,7 +17,7 @@
         </div>
         <div class="info">
             @if (Auth::check())
-            <a href="{{ url('admin.dashboard') }}" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="{{ url('/') }}" class="d-block">{{ Auth::user()->name }}</a>
             @else
             @php
                 view('auth.login');
@@ -66,18 +66,22 @@
                       <p>Contact List</p>
                     </a>
                   </li>
-              <li class="nav-item">
-                <a href="@route('contact.create', ['type'=>'customer'])" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Customer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="@route('contact.create', ['type'=>'supplier'])" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Supplier</p>
-                </a>
-              </li>
+                  @isset(auth()->user()->role->permission['permission']['customer']['add'])
+                  <li class="nav-item">
+                    <a href="@route('contact.create', ['type'=>'customer'])" class="nav-link">
+                      <i class="fa fa-circle-o nav-icon"></i>
+                      <p>Create Customer</p>
+                    </a>
+                  </li>
+                  @endisset
+                  @isset(auth()->user()->role->permission['permission']['supplier']['add'])
+                  <li class="nav-item">
+                    <a href="@route('contact.create', ['type'=>'supplier'])" class="nav-link">
+                      <i class="fa fa-circle-o nav-icon"></i>
+                      <p>Create Supplier</p>
+                    </a>
+                  </li>
+                  @endisset
             </ul>
            </li>
           <li class="nav-item has-treeview">

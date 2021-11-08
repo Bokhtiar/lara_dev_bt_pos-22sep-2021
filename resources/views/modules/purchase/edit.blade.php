@@ -64,8 +64,8 @@
                         <thead class="bg-success">
                             <tr>
                             <th scope="col">Product Name</th>
-                            <th scope="col">Purchase Id</th>
-                            <th scope="col">Product Id</th>
+                            {{-- <th scope="col">Purchase Id</th>
+                            <th scope="col">Product Id</th> --}}
                             <th scope="col">Purchase Quantity</th>
                             <th scope="col">Unit Price</th>
                             <th scope="col">Total Price</th>
@@ -107,6 +107,7 @@
                                     <label for="">Payment Methods</label>
                                     <select class="form-control select2" name="payment_method" id="payment_method">
                                         <option value="">--select payment method--</option>
+                                        <option value="Handcash" {{ 'Handcash' == $purchase->payment_method ? 'selected' : '' }}>Handcash</option>
                                         <option value="Bkash" {{ 'Bkash' == $purchase->payment_method ? 'selected' : '' }}>Bkash</option>
                                         <option value="Nagud" {{ 'Nagud' == $purchase->payment_method ? 'selected' : '' }}>Nagud</option>
                                         <option value="Rocket" {{ 'Rocket' == $purchase->payment_method ? 'selected' : '' }}>Rocket</option>
@@ -194,8 +195,8 @@
                     $.each(response.product, function(key, item){
                             $('tbody').append('<tr>\
                                 <td>'+item.product.product_name+'</td>\
-                                <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="purchaseProduct_id[]"> </td>\
-                                <td> <input required type="number" class="form-control form-control-sm" value="'+item.product.id+'" name="product_id[]"> </td>\
+                                <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="purchaseProduct_id[]">\
+                                <input required type="hidden" class="form-control form-control-sm" value="'+item.product.id+'" name="product_id[]">\
                                 <td> <input required type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="'+item.purchase_quantity+'" name="purchase_quantity[]"> </td>\
                                 <td> <input required type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
                                 <td> <input required type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="'+item.total_price+'" name="total_price[]"></td>\
@@ -220,8 +221,8 @@
                         $.each(response, function(key, item){
                             $('tbody').append('<tr>\
                                 <td>'+item.product_name+'</td>\
-                                <td> <input type="number" class="form-control form-control-sm" value="" name="purchaseProduct_id[]"> </td>\
-                                <td> <input required type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]"> </td>\
+                                <input type="hidden" class="form-control form-control-sm" value="" name="purchaseProduct_id[]">\
+                                <input required type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]">\
                                 <td> <input required type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
                                 <td> <input required type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
                                 <td> <input required type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="00" name="total_price[]"></td>\

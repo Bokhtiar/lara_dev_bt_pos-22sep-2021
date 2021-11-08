@@ -308,6 +308,66 @@
                         <!--product end -->
 
                         <tr>
+                            <td>Customer</td>
+                            <td>
+                                <input type="checkbox" name="permission[customer][add]"
+                                       @isset($permission['permission']['customer']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[customer][edit]"
+                                       @isset($permission['permission']['customer']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[customer][view]"
+                                       @isset($permission['permission']['customer']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[customer][delete]"
+                                       @isset($permission['permission']['customer']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[customer][list]"
+                                       @isset($permission['permission']['customer']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--customer end -->
+
+
+                        <tr>
+                            <td>Supplier</td>
+                            <td>
+                                <input type="checkbox" name="permission[supplier][add]"
+                                       @isset($permission['permission']['supplier']['add']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[supplier][edit]"
+                                       @isset($permission['permission']['supplier']['edit']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[supplier][view]"
+                                       @isset($permission['permission']['supplier']['view']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[supplier][delete]"
+                                       @isset($permission['permission']['supplier']['delete']) checked @endisset
+                                       value="1">
+                            </td>
+                            <td>
+                                <input type="checkbox" name="permission[supplier][list]"
+                                       @isset($permission['permission']['supplier']['list']) checked @endisset
+                                       value="1">
+                            </td>
+                        </tr>
+                        <!--supplier end -->
+                        <tr>
                             <td>Purchase</td>
                             <td>
                                 <input type="checkbox" name="permission[purchase][add]"

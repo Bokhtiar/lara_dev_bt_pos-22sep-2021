@@ -8,11 +8,11 @@
     @section('admin_content')
     <section class="container card">
         <div class="card-header">
-            <h3 class="card-title"> <i class="fas fa-list"></i> LIST OF BRAND</h3>
+            <h3 class="card-title"> <i class="fas fa-list"></i> LIST OF SELLS</h3>
             <div class="card-tools">
                 <div class="input-group form-inline input-group-sm" style="width: 100%;">
                     <p class="form-inline">
-                        <a href="@route('order.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
+                    <a href="@route('sell.index')" class="btn btn-info text-light"><i class="fas fa-list"></i>
                             LIST OF ORDER</a>
                         <a href="{{ url('pos') }}" class="btn btn-primary"><i class="fas fa-plus"></i> POS</a>
                     </p>
@@ -74,7 +74,7 @@
                             </div>
                         <p>
                         <div class="float-right" id="total_amount_show">
-                        <button class="total btn btn-primary"></button>
+                        
                         </div>
                         </p> <br><br><br><br>
 
@@ -117,6 +117,7 @@
                                                 <label for="">Payment Methods</label>
                                                 <select class="form-control select2" name="payment_method" id="payment_method">
                                                     <option value="">--select payment method--</option>
+                                                    <option value="Handcash">Handcash</option>
                                                     <option value="Bkash">Bkash</option>
                                                     <option value="Nagud">Nagud</option>
                                                     <option value="Rocket">Rocket</option>

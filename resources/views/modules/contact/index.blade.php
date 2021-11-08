@@ -20,7 +20,7 @@
         @endif
 
     <section class="card">
-         
+
         <div class="card-body">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -41,16 +41,42 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
+                        @if($item->contact_info == 'Customer')
+                        @isset(auth()->user()->role->permission['permission']['customer']['view'])
                          <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="btn btn-sm btn-success fas fa-eye"></i>
                             </button>
+                        @endisset
+                         @isset(auth()->user()->role->permission['permission']['customer']['edit'])
                         <a class="dropdown-item" href="@route('contact.edit', $item->id)"><i
-                                    class="btn btn-info btn-sm far fa-edit"></i></a>
-                        <form action="@route('contact.destroy',$item->id)" method="POST">
+                                class="btn btn-info btn-sm far fa-edit"></i></a>
+                        @endisset
+                         @isset(auth()->user()->role->permission['permission']['customer']['delete'])
+                            <form action="@route('contact.destroy',$item->id)" method="POST">
                             @csrf
-                        @method('DELETE')
-                        <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
-                        </form>
+                            @method('DELETE')
+                            <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
+                            </form>
+                        @endisset
+                    @else
+                        @isset(auth()->user()->role->permission['permission']['supplier']['view'])
+                         <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
+                            <i class="btn btn-sm btn-success fas fa-eye"></i>
+                            </button>
+                        @endisset
+                         @isset(auth()->user()->role->permission['permission']['supplier']['edit'])
+                        <a class="dropdown-item" href="@route('contact.edit', $item->id)"><i
+                                class="btn btn-info btn-sm far fa-edit"></i></a>
+                        @endisset
+                         @isset(auth()->user()->role->permission['permission']['supplier']['delete'])
+                            <form action="@route('contact.destroy',$item->id)" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
+                            </form>
+                        @endisset
+                    @endif
+                    
                     </div>
                   </div>
 

@@ -96,7 +96,6 @@
 
 
             <section class="card">
-                <x-order></x-order>
             <div class="card-body">
             <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>

@@ -224,12 +224,16 @@ class PurchaseController extends Controller
 
     public function purchase_date_filtering_search(Request $request)
     {
-        $start_date = Carbon::parse($request->start_date)
-                             ->toDateTimeString();
+        $startDate = Carbon::parse($request->start_date)->startOfDay();
+        $endDate = Carbon::parse($request->end_date)->endOfDay();
+        $purchases = Purchase::whereBetween('created_at', [$startDate, $endDate])->get();
 
-       $end_date = Carbon::parse($request->end_date)
-                             ->toDateTimeString();
-       $purchases =  Purchase::whereBetween('created_at',[$start_date,$end_date])->get();
+    //     $start_date = Carbon::parse($request->start_date)
+    //                          ->toDateTimeString();
+
+    //    $end_date = Carbon::parse($request->end_date)
+    //                          ->toDateTimeString();
+    //    $purchases =  Purchase::whereBetween('created_at',[$start_date,$end_date])->get();
 
        return view('modules.purchase.date_ranger', compact('purchases'));
     }

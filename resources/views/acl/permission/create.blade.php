@@ -115,7 +115,23 @@
                         <td><input type="checkbox" name="permission[product][delete]" value="1"></td>
                         <td><input type="checkbox" name="permission[product][list]" value="1"></td>
                     </tr>
+                    <tr>
+                        <td>Customer</td>
+                        <td><input type="checkbox" name="permission[customer][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[customer][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[customer][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[customer][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[customer][list]" value="1"></td>
+                    </tr>
 
+                    <tr>
+                        <td>Supplier</td>
+                        <td><input type="checkbox" name="permission[supplier][add]" value="1"></td>
+                        <td><input type="checkbox" name="permission[supplier][edit]" value="1"></td>
+                        <td><input type="checkbox" name="permission[supplier][view]" value="1"></td>
+                        <td><input type="checkbox" name="permission[supplier][delete]" value="1"></td>
+                        <td><input type="checkbox" name="permission[supplier][list]" value="1"></td>
+                    </tr>
                     <tr>
                         <td>Purchase</td>
                         <td><input type="checkbox" name="permission[purchase][add]" value="1"></td>

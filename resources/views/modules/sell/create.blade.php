@@ -64,7 +64,7 @@
                                             <thead class="bg-success">
                                                 <tr>
                                                 <th scope="col">Product Name</th>
-                                                <th scope="col">Product ID</th>
+                                                {{-- <th scope="col">Product ID</th> --}}
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Unit Selling Price</th>
                                                 <th scope="col">Total Price</th>
@@ -105,6 +105,7 @@
                                         <label for="">Payment Methods</label>
                                         <select class="form-control select2" name="payment_method" id="payment_method">
                                             <option value="">--select payment method--</option>
+                                            <option value="Handcash">Handcash</option>
                                             <option value="Bkash">Bkash</option>
                                             <option value="Nagud">Nagud</option>
                                             <option value="Rocket">Rocket</option>
@@ -226,7 +227,7 @@
                         $.each(response, function(key, item){
                             $("tbody").append('<tr>\
                             <td>'+item.product_name+'</td>\
-                            <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
+                             <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
                             <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
                             <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
