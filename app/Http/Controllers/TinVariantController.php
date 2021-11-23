@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fit;
+use App\Models\TinVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class TinVariantController extends Controller
 {
@@ -14,7 +17,8 @@ class TinVariantController extends Controller
      */
     public function index()
     {
-        //
+        $tinvariants = TinVariant::all();
+        return view('modules.product.tin.tinvariant.index', compact('tinvariants'));
     }
 
     /**
@@ -35,8 +39,33 @@ class TinVariantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
+    { //'fit_id', 'mm', 'ton', 'tinpc',
+        $validated = $request->validate([
+            'fit_id'=>' required ',
+            'mm'=>' required ',
+            'ton'=>' required ',
+            'tinpc'=>' required ',
+        ]);
+
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $tinvariant = TinVariant::create([
+                    'fit_id' => $request->fit_id,
+                    'mm' => $request->mm,
+                    'ton' => $request->ton,
+                    'tinpc' => $request->tinpc,
+                ]);
+                if (!empty($tinvariant)) {
+                    DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
+                    return redirect()->route('tinvariant.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
