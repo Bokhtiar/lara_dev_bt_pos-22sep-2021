@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fit;
 use Illuminate\Http\Request;
 
 class TinVariantController extends Controller
@@ -23,7 +24,8 @@ class TinVariantController extends Controller
      */
     public function create()
     {
-        //
+        $fits = Fit::all();
+        return view('modules.product.tin.tinvariant.create_update', compact('fits'));
     }
 
     /**
@@ -34,7 +36,7 @@ class TinVariantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

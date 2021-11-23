@@ -219,7 +219,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="@route('fit.index')" class="nav-link">
+                <a href="@route('tinvariant.create')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Tin Variant </p>
                 </a>
