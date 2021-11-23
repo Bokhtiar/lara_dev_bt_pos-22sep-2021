@@ -87,7 +87,9 @@ class TinVariantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fits = Fit::all();
+        $edit = TinVariant::find($id);
+        return view('modules.product.tin.tinvariant.create_update', compact('fits', 'edit'));
     }
 
     /**
@@ -99,7 +101,33 @@ class TinVariantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'fit_id'=>' required ',
+            'mm'=>' required ',
+            'ton'=>' required ',
+            'tinpc'=>' required ',
+        ]);
+
+        if($validated){
+            try{
+                $tinvariant = TinVariant::find($id);
+                DB::beginTransaction();
+                $tinvariantU = $tinvariant->update([
+                    'fit_id' => $request->fit_id,
+                    'mm' => $request->mm,
+                    'ton' => $request->ton,
+                    'tinpc' => $request->tinpc,
+                ]);
+                if (!empty($tinvariantU)) {
+                    DB::commit();
+                    Session::flash('update','Added Sucessfully...');
+                    return redirect()->route('tinvariant.index');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -110,6 +138,8 @@ class TinVariantController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TinVariant::find($id)->delete();
+        Session::flash('delete','Added Sucessfully...');
+        return redirect()->route('tinvariant.index');
     }
 }

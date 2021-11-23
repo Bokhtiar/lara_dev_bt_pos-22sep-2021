@@ -52,7 +52,11 @@
                             <button type="button" class=" btn-success btn ">Action</button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             </button>
+
+
+
                             <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="@route('tinvariant.edit', $item->id)"><i class="btn btn-info btn-sm far fa-edit"></i></a>
                                 <form action="@route('tinvariant.destroy',$item->id)" method="POST">
                                     @csrf
                                     @method('DELETE')
