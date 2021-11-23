@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FitController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\TinVariantController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarrantyController;
 use App\Models\Contact;
@@ -68,11 +70,11 @@ Route::resource('product', ProductController::class);
 Route::get('aleart', [App\Http\Controllers\ProductController::class, 'aleart']);
 Route::get('/all/data', [App\Http\Controllers\ProductController::class, 'product_all']);
 Route::get('/category/product/{id}', [App\Http\Controllers\ProductController::class, 'category_product']);
-
-
-
 Route::get('/product/status/{id}', [App\Http\Controllers\ProductController::class, 'status'])->name('product.status');
-
+//tin fit
+Route::resource('fit', FitController::class);
+//tin variant
+Route::resource('tinvariant', TinVariantController::class);
 //setting
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');
 Route::get('/subAdmin/create', [SettingController::class, 'create'])->name('subAdmin.create');

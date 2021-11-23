@@ -203,6 +203,31 @@
            </li>
            @endisset
 
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
+              <p>
+               Tin Products
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="@route('fit.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Fit Create</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('fit.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Tin Variant </p>
+                </a>
+              </li>
+            </ul>
+           </li>
+
+
 
            @isset(auth()->user()->role->permission['permission']['permission']['list'])
            <li class="nav-item has-treeview">
