@@ -27,6 +27,16 @@ class Product extends Model
         'warranty_id',
         'product_image',
         'product_description',
+
+        //tin colums
+        'tin_unit',
+        'variant_id',
+        'unit_total_price',
+        'unit_ban_price',
+        'unit_per_pc_price',
+        'unit_sell_total_price',
+        'unit_sell_ban_price',
+        'unit_sell_per_pc_price',
         'status'
     ];
     public function category()

@@ -19,6 +19,8 @@ class CreateSellProductsTable extends Migration
             $table->integer('sell_id');
             $table->integer('sell_quantity');
             $table->string('unit_selling_price');
+            //tin unit
+            $table->string('tin_unit');
             $table->string('total_price');
             $table->integer('status')->default(0);
             $table->timestamps();

@@ -13,6 +13,8 @@ class SellProduct extends Model
         'sell_id',
         'sell_quantity',
         'unit_selling_price',
+        //tin unit
+        'tin_unit',
         'total_price',
         'status',
     ];

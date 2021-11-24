@@ -28,6 +28,16 @@ class CreateProductsTable extends Migration
             $table->integer('unit_id');
             $table->string('product_image')->nullable();
             $table->longText('product_description')->nullable();
+
+            //tin colurm
+            $table->string('tin_unit')->nullable();
+            $table->integer('variant_id')->nullable();
+            $table->integer('unit_total_price')->nullable();
+            $table->integer('unit_ban_price')->nullable();
+            $table->integer('unit_per_pc_price')->nullable();
+            $table->integer('unit_sell_total_price')->nullable();
+            $table->integer('unit_sell_ban_price')->nullable();
+            $table->integer('unit_sell_per_pc_price')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

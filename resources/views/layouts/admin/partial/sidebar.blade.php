@@ -224,6 +224,12 @@
                   <p>Tin Variant </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="@route('tin.create')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Tin create </p>
+                </a>
+              </li>
             </ul>
            </li>
 

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\TinController;
 use App\Http\Controllers\TinVariantController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarrantyController;
@@ -75,6 +76,8 @@ Route::get('/product/status/{id}', [App\Http\Controllers\ProductController::clas
 Route::resource('fit', FitController::class);
 //tin variant
 Route::resource('tinvariant', TinVariantController::class);
+//tin
+Route::resource('tin', TinController::class);
 //setting
 Route::get('/subAdmin/index', [SettingController::class, 'index'])->name('subAdmin.index');
 Route::get('/subAdmin/create', [SettingController::class, 'create'])->name('subAdmin.create');
