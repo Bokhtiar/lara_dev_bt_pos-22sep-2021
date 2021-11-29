@@ -156,7 +156,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'product_name'=>' string |required | unique:products| min:2 ',
+            'product_name'=>' string |required | min:2 ',
             'category_id'=>'required | integer ',
             'subcategory_id'=>'required | integer ',
             'brand_id'=>'required | integer ',

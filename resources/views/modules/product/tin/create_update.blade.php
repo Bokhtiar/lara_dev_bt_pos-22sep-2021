@@ -67,15 +67,15 @@
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                            <label for="">Select Tin Variants: <span class="text-danger"> * </span> </label>
+                            <label for="">Select Tin Fit Level: <span class="text-danger"> * </span> </label>
                             <select name="fit" id="" class="form-control select2">
-                                <option value="">--Select Brands--</option>
-                                <option value="6">6fit</option>
-                                <option value="7">7fit</option>
-                                <option value="8">8fit</option>
-                                <option value="9">9fit</option>
-                                <option value="10">10fit</option>
-                                <option value="12">12fit</option>
+                                <option value="">--Select Fit--</option>
+                                <option value="6" {{ $edit->fit == 6 ? 'selected' : '' }}>6fit</option>
+                                <option value="7" {{ $edit->fit == 7 ? 'selected' : '' }}>7fit</option>
+                                <option value="8" {{ $edit->fit == 8 ? 'selected' : '' }}>8fit</option>
+                                <option value="9" {{ $edit->fit == 9 ? 'selected' : '' }}>9fit</option>
+                                <option value="10" {{ $edit->fit == 10 ? 'selected' : '' }}>10fit</option>
+                                <option value="12" {{ $edit->fit == 12 ? 'selected' : '' }}>12fit</option>
                             </select>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Tin M.M</label>
-                            <input type="text" name="mm" class="form-control" placeholder="m.m">
+                            <input type="text" name="mm" value="{{ @$edit->mm }}" class="form-control" placeholder="m.m">
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Porduct Image</label>
@@ -97,9 +97,9 @@
                                 <label for="">Select Unite: <span class="text-danger">*</span></label>
                                 <select name="tin_unit" id="" class="form-control select2">
                                     <option value="">--Select Unit--</option>
-                                    <option value="ton">Ton</option>
-                                    <option value="ban">Ban</option>
-                                    <option value="pc">Pc</option>
+                                    <option value="ton" {{ $edit->tin_unit == 'ton' ? 'selected' : '' }}>Ton</option>
+                                    <option value="ban" {{ $edit->tin_unit == 'ban' ? 'selected' : '' }}>Ban</option>
+                                    <option value="pc" {{ $edit->tin_unit == 'pc' ? 'selected' : '' }}>Pc</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">

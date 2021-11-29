@@ -34,15 +34,21 @@
                         </button>
                         <div class="dropdown-menu" role="menu">
                             @isset(auth()->user()->role->permission['permission']['product']['edit'])
+                            @if ($item->fit)
+                            <a class="dropdown-item" href="@route('tin.edit', $item->id)"><i
+                                class="btn btn-info btn-sm far fa-edit"></i></a>
+                            @else
                             <a class="dropdown-item" href="@route('product.edit', $item->id)"><i
-                                    class="btn btn-info btn-sm far fa-edit"></i></a>
+                                class="btn btn-info btn-sm far fa-edit"></i></a>
+                            @endif
+
 
                             @endisset
                             @isset(auth()->user()->role->permission['permission']['product']['view'])
                             <a class="btn btn-primary dropdown-item" href="@route('product.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
                             @endisset
                             @isset(auth()->user()->role->permission['permission']['product']['delete'])
-                            <form action="@route('purchase.destroy',$item->id)" method="POST">
+                            <form action="@route('product.destroy',$item->id)" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item "><i
