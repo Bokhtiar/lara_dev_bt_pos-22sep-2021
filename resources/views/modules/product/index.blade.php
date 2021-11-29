@@ -69,9 +69,21 @@
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
-                <td>{!! $item->unit ? $item->unit->unit_short_name : 'Data Not Available' !!}</td>
-                <td>{!! $item->unit_price !!} Tk</td>
-                <td>{!! $item->unit_selling_price !!} Tk</td>
+                <td>{!! $item->unit ? $item->unit->unit_short_name : $item->tin_unit !!}</td>
+                <td>
+                    @if ($item->unit_price)
+                    {!! $item->unit_price !!} Tk
+                    @else
+                    {!! $item->unit_total_price !!} Tk
+                    @endif
+                </td>
+                <td>
+                    @if ($item->unit_selling_price)
+                    {!! $item->unit_selling_price !!} Tk
+                    @else
+                    {!! $item->unit_sell_total_price !!} Tk
+                    @endif
+                </td>
                 <td>
                     @if($item->status == 1)
                     <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"

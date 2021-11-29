@@ -30,7 +30,8 @@ class Product extends Model
 
         //tin colums
         'tin_unit',
-        'variant_id',
+        'mm',
+        'fit',
         'unit_total_price',
         'unit_ban_price',
         'unit_per_pc_price',

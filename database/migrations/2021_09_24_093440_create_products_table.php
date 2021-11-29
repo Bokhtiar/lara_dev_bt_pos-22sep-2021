@@ -31,7 +31,8 @@ class CreateProductsTable extends Migration
 
             //tin colurm
             $table->string('tin_unit')->nullable();
-            $table->integer('variant_id')->nullable();
+            $table->string('mm')->nullable();
+            $table->string('fit')->nullable();
             $table->integer('unit_total_price')->nullable();
             $table->integer('unit_ban_price')->nullable();
             $table->integer('unit_per_pc_price')->nullable();

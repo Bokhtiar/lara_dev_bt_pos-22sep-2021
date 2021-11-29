@@ -32,17 +32,14 @@
                 @endif
                     @csrf
                     <div class="row">
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                             <label for="">Product Name: <span class="text-danger"> * </span></label>
                             <input type="text" value="{{ @$edit->product_name }}" name="product_name" placeholder="product name" class="form-control">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                            <label for="">Alert Quantity:  <span title="When your stock is form number equal after alert about product"> <i class="text-info far fa-bell"></i> </span> </label>
-                            <input type="number" placeholder="alert qty" minlength="1" value="{{ @$edit->alert_quantity }}" name="alert_quantity" class="form-control">
-                        </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                             <label for="">Select Category: <span class="text-danger">*</span> </label>
                             <select name="category_id" id="" class="form-control select2">
                                 <option value="">--Select Category--</option>
@@ -71,18 +68,22 @@
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                             <label for="">Select Tin Variants: <span class="text-danger"> * </span> </label>
-                            <select name="variant_id" id="" class="form-control select2">
+                            <select name="fit" id="" class="form-control select2">
                                 <option value="">--Select Brands--</option>
-                                @foreach ($tinvariants as $tinvar)
-                                <option value="{{ $tinvar->id }}" {{ $tinvar->id == @$edit->variant_id ? 'selected' : '' }}>{{ $tinvar->fit->fit_size .'ft '. $tinvar->mm }}mm</option>
-                                @endforeach
+                                <option value="6">6fit</option>
+                                <option value="7">7fit</option>
+                                <option value="8">8fit</option>
+                                <option value="9">9fit</option>
+                                <option value="10">10fit</option>
+                                <option value="12">12fit</option>
                             </select>
                         </div>
                     </div>
                     {{-- end name,sku,alert_quntity  --}}
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">
-
+                            <label for="">Tin M.M</label>
+                            <input type="text" name="mm" class="form-control" placeholder="m.m">
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Porduct Image</label>
@@ -102,8 +103,9 @@
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
-                                <label for="">unit total price<span class="text-danger">*</span></label>
+                                <label for="">unit ton price<span class="text-danger">*</span></label>
                                 <input class="form-control" name="unit_total_price" placeholder="unit_total_price" value="{{ @$edit->unit_total_price }}">
+                                <!--unit_total_price and unit_ton_price is same-->
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit ban price<span class="text-danger">*</span></label>
@@ -115,7 +117,7 @@
                             </div>
 
                             <div class="col-sm-12 col-md-4 col-lg-4">
-                                <label for="">unit Sell total price<span class="text-danger">*</span></label>
+                                <label for="">unit Sell ton price<span class="text-danger">*</span></label>
                                 <input class="form-control" name="unit_sell_total_price" placeholder="unit_sell_total_price" value="{{ @$edit->unit_sell_total_price }}">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">

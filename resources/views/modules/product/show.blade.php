@@ -15,10 +15,51 @@
                         <p>Category : {{ $item->category ? $item->category->category_name : 'Data Not Available' }}</p>
                         <p>SubCategory: {{ $item->subcategory ? $item->subcategory->subcategory_name : 'Data Not Available' }}</p>
                         <p>Brand: {{ $item->brand ? $item->brand->brand_name : 'Data Not Available' }}</p>
-                        <p>Unit: {{ $item->unit ? $item->unit->unit_short_name : 'Data Not Available' }}</p>
-                        <p>Unit Selling Price: {{ $item->unit_selling_price }}</p>
-                        <p>Discount Percentage: {{ $item->discount_percent }} %</p>
-                        <p>Tax: {{ $item->tax }} %</p>
+                        <p>Unit: {{ $item->unit ? $item->unit->unit_short_name : $item->tin_unit }}</p>
+                        <p>Unit  Price:
+                            @if ($item->unit_price)
+                            {!! $item->unit_price !!} Tk
+                            @else
+                            {!! $item->unit_total_price !!} Tk
+                            @endif
+                        </p>
+                        <p>Unit Selling Price:
+                            @if ($item->unit_selling_price)
+                            {!! $item->unit_selling_price !!} Tk
+                            @else
+                            {!! $item->unit_sell_total_price !!} Tk
+                            @endif
+                        </p>
+
+                            @isset($item->unit_ban_price)
+                            <p>Unit Ban Price
+                                {!! $item->unit_ban_price !!} Tk
+                            </p>
+                            @endisset
+                            @isset($item->unit_per_pc_price)
+                            <p>Unit Per Pc Price
+                                {!! $item->unit_per_pc_price !!} Tk
+                            </p>
+                            @endisset
+
+                            @isset($item->unit_sell_total_price)
+                            <p>Unit Sell Ton Price
+                                {!! $item->unit_sell_total_price !!} Tk
+                            </p>
+                            @endisset
+                            @isset($item->unit_sell_ban_price)
+                            <p>Unit Sell Ban Price
+                                {!! $item->unit_sell_ban_price !!} Tk
+                            </p>
+                            @endisset
+                            @isset($item->unit_sell_per_pc_price)
+                            <p>Unit Sell Per Pc Price
+                                {!! $item->unit_sell_per_pc_price !!} Tk
+                            </p>
+                            @endisset
+
+
+
                         <p>Warranty: {{ $item->warranty ? $item->warranty->warranty_name : 'Data Not Available' }}</p>
                         <p>Description : {!! $item->product_description	 !!}</p>
                     </div>

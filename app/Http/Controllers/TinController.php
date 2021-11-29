@@ -51,7 +51,7 @@ class TinController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validated = $request->validate([
             'product_name'=>' string |required | unique:products| min:2 ',
             'category_id'=>'required | integer ',
@@ -60,7 +60,8 @@ class TinController extends Controller
 
             //tin colum
             'tin_unit'=>'required ',
-            'variant_id'=>'required ',
+            'fit'=>'required ',
+            'mm'=>'required ',
             'unit_total_price'=>'required ',
             'unit_ban_price'=>'required ',
             'unit_per_pc_price'=>'required ',
@@ -99,7 +100,8 @@ class TinController extends Controller
 
 
                     $product->tin_unit = $request->tin_unit;
-                    $product->variant_id = $request->variant_id;
+                    $product->fit = $request->fit;
+                    $product->mm = $request->mm;
                     $product->unit_total_price = $request->unit_total_price;
                     $product->unit_ban_price = $request->unit_ban_price;
                     $product->unit_per_pc_price = $request->unit_per_pc_price;
