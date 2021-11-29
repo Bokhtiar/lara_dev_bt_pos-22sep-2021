@@ -19,8 +19,9 @@
     <x-product></x-product>
     <section class="">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">  <i class="far fa-box"></i>  {{ @$edit ? 'Product Update' : 'Product Create' }} </h4>
+                <a class="ml-auto btn btn-success" href="@route('product.create')">Every Product Add</a>
             </div>
             <div class="card-body">
                 @if (isset($edit))
@@ -73,7 +74,7 @@
                             <select name="variant_id" id="" class="form-control select2">
                                 <option value="">--Select Brands--</option>
                                 @foreach ($tinvariants as $tinvar)
-                                <option value="{{ $tinvar->id }}" {{ $tinvar->id == @$edit->variant_id ? 'selected' : '' }}>{{ $tinvar->fit->fit_size }}ft</option>
+                                <option value="{{ $tinvar->id }}" {{ $tinvar->id == @$edit->variant_id ? 'selected' : '' }}>{{ $tinvar->fit->fit_size .'ft '. $tinvar->mm }}mm</option>
                                 @endforeach
                             </select>
                         </div>

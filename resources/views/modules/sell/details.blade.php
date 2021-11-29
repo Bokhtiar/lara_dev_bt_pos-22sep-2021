@@ -105,7 +105,12 @@
                     @foreach (App\Models\SellProduct::query()->SellProduct($item->id) as $sell)
                       <tr>
                         <td>{{ $sell->product ? $sell->product->product_name : 'product Already Deleted' }}</td>
-                        <td>{{ $sell->sell_quantity}}</td>
+                        @if (!empty($sell->tin_unit))
+                        <td>{{ $sell->sell_quantity}} {{ $sell->tin_unit }}</td>
+                        @else
+                        <td>{{ $sell->sell_quantity}}pc</td>
+                        @endif
+
                         <td>{{ $sell->unit_selling_price }} Tk</td>
                         <td>{{ $sell->total_price }} Tk</td>
                         <?php $total += $sell->total_price ?>

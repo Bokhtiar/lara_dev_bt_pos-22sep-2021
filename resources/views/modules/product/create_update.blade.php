@@ -19,10 +19,12 @@
     <x-product></x-product>
     <section class="">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title">  <i class="far fa-box"></i>  {{ @$edit ? 'Product Update' : 'Product Create' }} </h4>
+                <a class="ml-auto btn btn-success" href="@route('tin.create')">Tin Product Add</a>
             </div>
-            <div class="card-body">
+            <!--this is gas, cement , road product form start here-->
+            <div class="card-body" id="every_product">
                 @if (isset($edit))
                 <form class="form-gorup" action="@route('product.update',$edit->id)" enctype="multipart/form-data" method="POST">
                     @method('PUT')
@@ -155,6 +157,7 @@
                     </div>
                 </form>
             </div>
+            <!--end gas, cement , road -->
         </div>
     </section>
 @endsection
@@ -169,6 +172,7 @@
   $(function () {
     $('.select2').select2()
   })
+
 </script>
 {{-- select2 end --}}
 @endsection
@@ -205,5 +209,8 @@
           toolbar: { fa: true }
         })
       })
+
+
+
 
     </script>
