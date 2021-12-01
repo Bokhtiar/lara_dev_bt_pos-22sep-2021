@@ -197,7 +197,7 @@
                                 <td>'+item.product.product_name+'</td>\
                                 <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="purchaseProduct_id[]">\
                                 <input required type="hidden" class="form-control form-control-sm" value="'+item.product.id+'" name="product_id[]">\
-                                <td> <input required type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="'+item.purchase_quantity+'" name="purchase_quantity[]"> </td>\
+                                <td>  <input required type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="'+item.purchase_quantity+'" name="purchase_quantity[]"> </td>\
                                 <td> <input required type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
                                 <td> <input required type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="'+item.total_price+'" name="total_price[]"></td>\
                                 <td> X </td>\

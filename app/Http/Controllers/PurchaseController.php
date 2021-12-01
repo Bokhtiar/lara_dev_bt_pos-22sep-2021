@@ -72,22 +72,38 @@ class PurchaseController extends Controller
                     'nagud' => $request->nagud,
                     'bank' => $request->bank,
                  ]);
-
+                //  dd($request->all());
                 if (!empty($purchase)) {
                     $purchase_id = $purchase->id;
                     $product_id = $request->product_id;
                     for ($i=0; $i < count($product_id) ; $i++) {
-                        $product = new PurchaseProduct;
-                        $product->product_id = $request->product_id[$i];
-                        $product->purchase_quantity = $request->purchase_quantity[$i];
-                        $product->purchase_id = $purchase_id;
-                        $product->unit_price = $request->unit_price[$i];
-                        $product->total_price = $request->total_price[$i];
-                        $product->save();
+                        if(isset( $request->tin[$i])){
+                            $product = new PurchaseProduct;
+                            $product->product_id = $request->product_id[$i];
+                            $pro[$i] = Product::find($request->product_id[$i]);
+                            $product->purchase_quantity = $request->purchase_quantity[$i] * $pro[$i]->piches;
+                            $product->purchase_id = $purchase_id;
+                            $product->unit_price = $request->unit_price[$i];
+                            $product->total_price = $request->total_price[$i];
+                            $product->save();
 
-                        $p = Product::find($request->product_id[$i]);
-                        $p->purchase_id = $purchase_id;
-                        $p->save();
+                            $p = Product::find($request->product_id[$i]);
+                            $p->purchase_id = $purchase_id;
+                            $p->save();
+                        }else{
+                            $product = new PurchaseProduct;
+                            $product->product_id = $request->product_id[$i];
+                            $product->purchase_quantity = $request->purchase_quantity[$i];
+                            $product->purchase_id = $purchase_id;
+                            $product->unit_price = $request->unit_price[$i];
+                            $product->total_price = $request->total_price[$i];
+                            $product->save();
+
+                            $p = Product::find($request->product_id[$i]);
+                            $p->purchase_id = $purchase_id;
+                            $p->save();
+                        }
+
                     }
                 }
                 if($purchase){

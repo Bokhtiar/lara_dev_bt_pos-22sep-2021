@@ -70,20 +70,30 @@
                             <label for="">Select Tin Fit Level: <span class="text-danger"> * </span> </label>
                             <select name="fit" id="" class="form-control select2">
                                 <option value="">--Select Fit--</option>
-                                <option value="6" {{ $edit->fit == 6 ? 'selected' : '' }}>6fit</option>
-                                <option value="7" {{ $edit->fit == 7 ? 'selected' : '' }}>7fit</option>
-                                <option value="8" {{ $edit->fit == 8 ? 'selected' : '' }}>8fit</option>
-                                <option value="9" {{ $edit->fit == 9 ? 'selected' : '' }}>9fit</option>
-                                <option value="10" {{ $edit->fit == 10 ? 'selected' : '' }}>10fit</option>
-                                <option value="12" {{ $edit->fit == 12 ? 'selected' : '' }}>12fit</option>
+                                <option value="6" {{ @$edit->fit == 6 ? 'selected' : '' }}>6fit</option>
+                                <option value="7" {{ @$edit->fit == 7 ? 'selected' : '' }}>7fit</option>
+                                <option value="8" {{ @$edit->fit == 8 ? 'selected' : '' }}>8fit</option>
+                                <option value="9" {{ @$edit->fit == 9 ? 'selected' : '' }}>9fit</option>
+                                <option value="10" {{ @$edit->fit == 10 ? 'selected' : '' }}>10fit</option>
+                                <option value="12" {{ @$edit->fit == 12 ? 'selected' : '' }}>12fit</option>
                             </select>
                         </div>
                     </div>
                     {{-- end name,sku,alert_quntity  --}}
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">
-                            <label for="">Tin M.M</label>
-                            <input type="text" name="mm" value="{{ @$edit->mm }}" class="form-control" placeholder="m.m">
+                            <label for="">Tin M.M <span class="text-danger"> * </span></label>
+                            <select name="mm" id="" required class="form-control">
+                                <option value="">Select M.M</option>
+                                <option value="120">120</option>
+                                <option value="170">170</option>
+                                <option value="190">190</option>
+                                <option value="220">220</option>
+                                <option value="260">260</option>
+                                <option value="320">320</option>
+                                <option value="340">340</option>
+                                <option value="420">420</option>
+                            </select>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="">Porduct Image</label>
@@ -97,36 +107,40 @@
                                 <label for="">Select Unite: <span class="text-danger">*</span></label>
                                 <select name="tin_unit" id="" class="form-control select2">
                                     <option value="">--Select Unit--</option>
-                                    <option value="ton" {{ $edit->tin_unit == 'ton' ? 'selected' : '' }}>Ton</option>
-                                    <option value="ban" {{ $edit->tin_unit == 'ban' ? 'selected' : '' }}>Ban</option>
-                                    <option value="pc" {{ $edit->tin_unit == 'pc' ? 'selected' : '' }}>Pc</option>
+                                    <option value="ton" {{ @$edit->tin_unit == 'ton' ? 'selected' : '' }}>Ton</option>
+                                    <option value="ban" {{ @$edit->tin_unit == 'ban' ? 'selected' : '' }}>Ban</option>
+                                    <option value="pc" {{ @$edit->tin_unit == 'pc' ? 'selected' : '' }}>Pc</option>
                                 </select>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <label for="">How Much Piches in Ton<span class="text-danger">*</span></label>
+                                <input class="form-control" name="piches" placeholder="piches" value="{{ @$edit->piches }}">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit ton price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_total_price" placeholder="unit_total_price" value="{{ @$edit->unit_total_price }}">
+                                <input class="form-control" name="unit_total_price" placeholder="unit total price" value="{{ @$edit->unit_total_price }}">
                                 <!--unit_total_price and unit_ton_price is same-->
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit ban price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_ban_price" placeholder="unit_ban_price" value="{{ @$edit->unit_ban_price }}">
+                                <input class="form-control" name="unit_ban_price" placeholder="unit ban price" value="{{ @$edit->unit_ban_price }}">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit per pc price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_per_pc_price" placeholder="unit_per_pc_price" value="{{ @$edit->unit_per_pc_price }}">
+                                <input class="form-control" name="unit_per_pc_price" placeholder="unit per piches price" value="{{ @$edit->unit_per_pc_price }}">
                             </div>
 
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit Sell ton price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_sell_total_price" placeholder="unit_sell_total_price" value="{{ @$edit->unit_sell_total_price }}">
+                                <input class="form-control" name="unit_sell_total_price" placeholder="unit sell total price" value="{{ @$edit->unit_sell_total_price }}">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit sell ban price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_sell_ban_price" placeholder="unit_sell_ban_price" value="{{ @$edit->unit_sell_ban_price }}">
+                                <input class="form-control" name="unit_sell_ban_price" placeholder="unit sell ban price" value="{{ @$edit->unit_sell_ban_price }}">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">unit sell per pc price<span class="text-danger">*</span></label>
-                                <input class="form-control" name="unit_sell_per_pc_price" placeholder="unit_sell_per_pc_price" value="{{ @$edit->unit_sell_per_pc_price }}">
+                                <input class="form-control" name="unit_sell_per_pc_price" placeholder="unit sell per piches price" value="{{ @$edit->unit_sell_per_pc_price }}">
                             </div>
                         </div>
 

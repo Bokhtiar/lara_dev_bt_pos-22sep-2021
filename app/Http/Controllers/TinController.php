@@ -74,7 +74,7 @@ class TinController extends Controller
             try{
                 DB::beginTransaction();
                 $product = new Product;
-                    $product->product_name = $request->product_name;
+                    $product->product_name = $request->product_name .' '. $request->mm .' mm';
                     $product->product_sku = Product::query()->Sku();
                     $product->alert_quantity = $request->alert_quantity;
                     $product->category_id = $request->category_id;
@@ -101,6 +101,7 @@ class TinController extends Controller
 
                     $product->tin_unit = $request->tin_unit;
                     $product->fit = $request->fit;
+                    $product->piches = $request->piches;
                     $product->mm = $request->mm;
                     $product->unit_total_price = $request->unit_total_price;
                     $product->unit_ban_price = $request->unit_ban_price;
@@ -216,6 +217,7 @@ class TinController extends Controller
 
                     $product->tin_unit = $request->tin_unit;
                     $product->fit = $request->fit;
+                    $product->piches = $request->piches;
                     $product->mm = $request->mm;
                     $product->unit_total_price = $request->unit_total_price;
                     $product->unit_ban_price = $request->unit_ban_price;

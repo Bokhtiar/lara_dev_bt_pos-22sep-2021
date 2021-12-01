@@ -86,6 +86,7 @@ class SellController extends Controller
                         $product->unit_selling_price = $request->unit_selling_price[$i];
                         $product->total_price = $request->total_price[$i];
                         $product->tin_unit = $request->tin_unit[$i];
+                        
                         $p = PurchaseProduct::where('product_id', $request->product_id[$i])->first();
                         $p["purchase_quantity"] = $p->purchase_quantity - $request->sell_quantity[$i];
                         $p->save();

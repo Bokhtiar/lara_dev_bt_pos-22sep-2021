@@ -60,7 +60,7 @@
                         </div>
                         <div class="mb-2">
                             <input class="btn btn-info" type="reset" name="" value="reset" id="">
-                            @if (isset($edit))
+                            @if (isset(@$edit))
                                 <input class="btn btn-primary" type="submit" name="" value="Update Tin Variant" id="">
                             @else
                                 <input class="btn btn-primary" type="submit" name="" value="Add New Tin Variant" id="">

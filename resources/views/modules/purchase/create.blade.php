@@ -187,12 +187,12 @@
                     dataType: 'json',
                     success:function(response){
                         console.log(response)
-                        if(response.product.variant_id == null){
+                        if(response.product.fit == null){
                             $.each(response, function(key, item){
                             $('tbody').append('<tr>\
                                 <td>'+item.product_name+'</td>\
                                  <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]">\
-                                <td> <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
+                                <td> <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="0" name="purchase_quantity[]"> </td>\
                                 <td> <input type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
                                 <td> <input type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
                                 <td> X </td>\
@@ -202,8 +202,9 @@
                             $.each(response, function(key, item){
                             $('tbody').append('<tr>\
                                 <td>'+item.product_name+'</td>\
-                                 <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]">\
-                                <td> <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="00" name="purchase_quantity[]"> </td>\
+                                <input type="hidden" class="form-control form-control-sm" value="tin" name="tin[]">\
+                                <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]">\
+                                <td> <label for="">How Much Purchase Ton <span class="text-danger">*</span></label>\ <input type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="0" name="purchase_quantity[]"> </td>\
                                 <td> <input type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_total_price+'" name="unit_price[]"></td>\
                                 <td> <input type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="00" name="total_price[]"></td>\
                                 <td> X </td>\

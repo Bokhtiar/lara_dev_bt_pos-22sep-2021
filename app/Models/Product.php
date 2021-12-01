@@ -32,6 +32,7 @@ class Product extends Model
         'tin_unit',
         'mm',
         'fit',
+        'piches',
         'unit_total_price',
         'unit_ban_price',
         'unit_per_pc_price',
