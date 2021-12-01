@@ -191,8 +191,8 @@
                 type:'GET',
                 dataType:'json',
                 success:function(response){
-                    console.log(response.product)
-                    $.each(response.product, function(key, item){
+                    $.each(response.products, function(key, item){
+                        if(item.tin_purchase == null){
                             $('tbody').append('<tr>\
                                 <td>'+item.product.product_name+'</td>\
                                 <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="purchaseProduct_id[]">\
@@ -202,6 +202,19 @@
                                 <td> <input required type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="'+item.total_price+'" name="total_price[]"></td>\
                                 <td> X </td>\
                             </tr>')
+                        }else{
+                            $('tbody').append('<tr>\
+                                <input type="hidden" class="form-control form-control-sm" value="tin" name="tin[]">\
+                                <td>'+item.product.product_name+'</td>\
+                                <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="purchaseProduct_id[]">\
+                                <input required type="hidden" class="form-control form-control-sm" value="'+item.product.id+'" name="product_id[]">\
+                                <td>  <input required type="number" id="qty'+item.id+'"  oninput="sumQty(this.value, '+item.id+');getSumQuantity()" class="form-control form-control-sm qty" value="'+item.tin_purchase+'" name="purchase_quantity[]"> </td>\
+                                <td> <input required type="number" id="unit'+item.id+'" class="form-control form-control-sm unit_price" value="'+item.unit_price+'" name="unit_price[]"></td>\
+                                <td> <input required type="text" id="tot'+item.id+'"  class="form-control form-control-sm total" value="'+item.total_price+'" name="total_price[]"></td>\
+                                <td> X </td>\
+                            </tr>')
+                        }
+
                         })
                 }
             })

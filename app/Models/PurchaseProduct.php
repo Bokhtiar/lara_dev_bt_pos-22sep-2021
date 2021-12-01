@@ -13,7 +13,7 @@ class PurchaseProduct extends Model
     use CrudTrait;
 
     protected $fillable = [
-        'product_id', 'purchase_id', 'unit_price', 'total_price', 'purchase_quantity', 'status',
+        'product_id', 'purchase_id', 'unit_price', 'total_price', 'purchase_quantity', 'tin_purchase', 'status',
     ];
 
     public function product()

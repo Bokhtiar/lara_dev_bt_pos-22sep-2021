@@ -108,8 +108,6 @@
                                 <select name="tin_unit" id="" class="form-control select2">
                                     <option value="">--Select Unit--</option>
                                     <option value="ton" {{ @$edit->tin_unit == 'ton' ? 'selected' : '' }}>Ton</option>
-                                    <option value="ban" {{ @$edit->tin_unit == 'ban' ? 'selected' : '' }}>Ban</option>
-                                    <option value="pc" {{ @$edit->tin_unit == 'pc' ? 'selected' : '' }}>Pc</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-8 col-lg-8">

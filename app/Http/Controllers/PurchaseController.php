@@ -81,8 +81,9 @@ class PurchaseController extends Controller
                             $product = new PurchaseProduct;
                             $product->product_id = $request->product_id[$i];
                             $pro[$i] = Product::find($request->product_id[$i]);
-                            $product->purchase_quantity = $request->purchase_quantity[$i] * $pro[$i]->piches;
+                            $product->purchase_quantity = $request->purchase_quantity[$i] * $pro[$i]->piches; //product find kore jodi tin product hoi tahole tin ar mm onojai je tin hoi ta multiple koralm
                             $product->purchase_id = $purchase_id;
+                            $product->tin_purchase = $request->purchase_quantity[$i];
                             $product->unit_price = $request->unit_price[$i];
                             $product->total_price = $request->total_price[$i];
                             $product->save();
@@ -165,7 +166,14 @@ class PurchaseController extends Controller
                         if(isset($request->purchaseProduct_id[$i])){
                             $product = PurchaseProduct::find($request->purchaseProduct_id[$i]);
                             $product->product_id = $request->product_id[$i];
-                            $product->purchase_quantity = $request->purchase_quantity[$i];
+                            if($product->tin_purchase == null){
+                                $product->purchase_quantity = $request->purchase_quantity[$i];
+                            }else{
+                                $pro[$i] = Product::find($request->product_id[$i]);
+                                $product->purchase_quantity = $request->purchase_quantity[$i] * $pro[$i]->piches;
+                                $product->tin_purchase = $request->purchase_quantity[$i];
+                            }
+
                             $product->purchase_id = $purchase_id;
                             $product->unit_price = $request->unit_price[$i];
                             $product->total_price = $request->total_price[$i];
@@ -179,7 +187,13 @@ class PurchaseController extends Controller
                         else{
                             $product = new PurchaseProduct;
                             $product->product_id = $request->product_id[$i];
-                            $product->purchase_quantity = $request->purchase_quantity[$i];
+                            if($product->tin_purchase == null){
+                                $product->purchase_quantity = $request->purchase_quantity[$i];
+                            }else{
+                                $pro[$i] = Product::find($request->product_id[$i]);
+                                $product->purchase_quantity = $request->purchase_quantity[$i] * $pro[$i]->piches;
+                                $product->tin_purchase = $request->purchase_quantity[$i];
+                            }
                             $product->purchase_id = $purchase_id;
                             $product->unit_price = $request->unit_price[$i];
                             $product->total_price = $request->total_price[$i];
@@ -194,7 +208,7 @@ class PurchaseController extends Controller
                 }
                 if($purchaseU){
                     DB::commit();
-                    Session::flash('insert','Added Sucessfully...');
+                    Session::flash('update','Added Sucessfully...');
                     return redirect()->route('purchase.index');
                 }
                 throw new \Exception('Invalid About Information');
@@ -256,9 +270,9 @@ class PurchaseController extends Controller
 
 
     public function purchase_edit_product($id){
-       $product =  PurchaseProduct::with('product')->where('purchase_id', $id)->get();
+       $products =  PurchaseProduct::with('product')->where('purchase_id', $id)->get();
         return response()->json([
-            'product'=>$product,
+            'products'=>$products,
         ]);
     }
 

@@ -240,7 +240,7 @@
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
                             <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
                             </tr>')
-                            })
+                            })  
                         }else{
                             $('#tin_unit').on('change', function(e){
                                 var ban = e.target.value

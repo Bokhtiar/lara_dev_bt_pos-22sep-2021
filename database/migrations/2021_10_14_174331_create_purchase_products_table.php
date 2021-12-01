@@ -20,6 +20,7 @@ class CreatePurchaseProductsTable extends Migration
             $table->string('unit_price');
             $table->string('total_price');
             $table->integer('purchase_quantity');
+            $table->integer('tin_purchase')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });
