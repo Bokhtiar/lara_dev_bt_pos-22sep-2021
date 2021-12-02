@@ -49,7 +49,6 @@ class PurchaseController extends Controller
         $validated = $request->validate([
             'supplier_id'=>'required',
             'purchase_date'=>'required',
-            'reference_no'=>'required',
             'paid_on_date' => 'required',
             'payment_method'=> 'required'
         ]);
@@ -58,7 +57,7 @@ class PurchaseController extends Controller
                 DB::beginTransaction();
                  $purchase = Purchase::create([
                     'supplier_id' => $request->supplier_id,
-                    'reference_no' => $request->reference_no,
+                    'reference_no' => Purchase::query()->Reference_number(),
                     'purchase_date' => $request->purchase_date,
                     'attech_file' => null,
                     'note' => $request->note,

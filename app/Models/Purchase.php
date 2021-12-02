@@ -29,7 +29,7 @@ class Purchase extends Model
         'status',
     ];
 
-    
+
 
     public function product()
     {
@@ -44,6 +44,14 @@ class Purchase extends Model
     public function supplier()
     {
         return $this->belongsTo(Contact::class);
+    }
+
+    public function scopeReference_number()
+    {
+        $pur = Purchase::latest()->first();
+        $ref = $pur->id + 1;
+        $ref_code = "Rf 00".$ref;
+        return $ref_code;
     }
 
 }

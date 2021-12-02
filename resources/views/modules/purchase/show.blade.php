@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="callout callout-info">
               <h5><i class="fa fa-info"></i> Note:</h5>
-              This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
+              {{ $item->note }}
             </div>
 
 
@@ -69,9 +69,9 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice {{ $item->invoice_no }}</b><br>
+                  <b>Invoice {{ $item->id }}</b><br>
                   <br>
-                  <b>Purchase ID:</b> {{ $item->id }}<br>
+                  <b>Purchase Ref:</b> {{ $item->reference_no }}<br>
                   <b>Account:</b> {{ $item->payment_method }}
                 </div>
                 <!-- /.col -->

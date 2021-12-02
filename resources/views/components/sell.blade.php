@@ -9,7 +9,7 @@
                             List Of SELL</a>
                         @endisset
                         @isset(auth()->user()->role->permission['permission']['sell']['add'])
-                        <a href="@route('sell.create')" class="btn btn-primary"><i class="fas fa-plus"></i> SELL CREATE</a>
+                        <a href="@route('sell.create')" class="btn btn-primary"><i class="fas fa-plus"></i> CREATE SELL</a>
                         @endisset
                     </p>
                 </div>

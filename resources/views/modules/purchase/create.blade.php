@@ -3,9 +3,16 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admin') }}/plugins/select2/select2.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.jqueryui.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.jqueryui.min.css">
 @endsection
 
 @section('admin_content')
+<!-- Button trigger modal -->
+
+
+
     <section class="card">
         <x-purchase></x-purchase>
         <div class="card-body">
@@ -15,22 +22,27 @@
                     <div class="row">
 
                         <div class="col-sm-12 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label for="">Select Supplier <span class="text-danger">*</span></label>
+                            <div class="form-group form-inline">
+                                <label for="">Select Supplier <span class="text-danger">*</span></label><br>
                                 <select class="form-control select2" name="supplier_id" id="" required>
                                     <option value="">--select supplier</option>
                                     @foreach ($suppliers as $item)
                                     <option value="{{ $item->id }}">{{ $item->prefix .' '. $item->f_name .' '. $item->last_name }}</option>
                                     @endforeach
-                                </select>
+                                </select> &nbsp;&nbsp;
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    +
+                                  </button>
                             </div>
+
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4">
+
+                        {{-- <div class="col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="">Reference no <span class="text-danger">*</span></label>
                                 <input required type="number" class="form-control" name="reference_no" placeholder="Enter Reference Number" id="">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="">Date <span class="text-danger">*</span></label>
@@ -156,11 +168,135 @@
                     <input type="submit" class="btn btn-primary" value="Add New Purchase">
                 </div>
             </form>
+
+
+            <!-- Modal supplier add start -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                            <form action="@route('contact.store')" class="form-group" method="POST">
+                            @csrf
+
+                            <div class="form-gorup mb-3">
+                                <label for="">Select Contact <span class="text-danger">*</span> </label>
+                                <select class="form-control" name="contact_info" id="contact_info">
+                                    <option value="">Select Contact</option>
+                                    <option value="Supplier" >Supplier</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">Prefix <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">Last Name <span class="text-danger">*</span> </label>
+                                    <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-3">
+                                    <label for="">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-3">
+                                    <label for="">Phone <span class="text-danger">*</span></label>
+                                    <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">City</label>
+                                    <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">State</label>
+                                    <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">Country</label>
+                                    <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">Zip Code</label>
+                                    <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="supplier_info" style="display: none">
+                                <span class="h4">please More Information:</span>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group mb-3">
+                                        <label for="">Company Name</label>
+                                        <input type="text" class="form-control" placeholder="company name" value="" name="company_name" id="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group mb-3">
+                                        <label for="">Company Phone</label>
+                                        <input type="number" class="form-control" placeholder="company phone" value="" name="company_phone" id="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group mb-3">
+                                        <label for="">Company E-mail</label>
+                                        <input type="email" class="form-control" placeholder="company email" value="" name="company_email" id="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="float-right">
+                                <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
+                                <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--supplier modal end here -->
         </div>
     </section>
 @endsection
 
+
+
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{ asset('admin') }}/plugins/select2/select2.full.min.js"></script>
 <script>
