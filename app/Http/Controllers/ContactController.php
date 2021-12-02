@@ -178,4 +178,16 @@ class ContactController extends Controller
         $contact = Contact::find($id);
         return response()->json($contact, 200);
     }
+
+    public function customer_list()
+    {
+        $customers = Contact::where('contact_info' , "Customer")->get();
+        return view('modules.contact.customer_list', compact('customers'));
+    }
+
+    public function supplier_list()
+    {
+        $suppliers = Contact::where('contact_info' , "Supplier")->get();
+        return view('modules.contact.supplier_list', compact('suppliers'));
+    }
 }

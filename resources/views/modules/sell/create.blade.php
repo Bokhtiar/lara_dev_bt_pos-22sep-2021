@@ -72,7 +72,6 @@
                                             </thead>
                                             <tbody>
                                                 
-
                                             </tbody>
                                             </table>
                                             <div class="row">
@@ -227,28 +226,30 @@
                         console.log(response.product.id)
                         if(response.product.fit == null){
                             $.each(response, function(key, item){
-                            $("tbody").append('<tr>\
+                            $("tbody").append('<tr id="del1 '+item.id+'">\
                             <td>'+item.product_name+'</td>\
                             <input type="hidden" class="form-control form-control-sm" value="" name="tin_unit[]" >\
                             <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
                             <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
                             <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
-                            <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                            <td> <span class="btn  btn-sm btn-danger" onClick="remove()" >X</span> </td>\
                             </tr>')
                             })
                         }else{
                             $.each(response, function(key, item){
-                            $("tbody").append('<tr>\
-                            <td>'+item.product_name+'</td>\
-                            <input type="hidden" class="form-control form-control-sm" value="ton" name="tin_unit[]" >\
-                            <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
-                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
-                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice(); tinprice('+item.id+')" class="form-control form-control-sm" value="'+item.unit_sell_per_pc_price+'" name="unit_selling_price[]" > </td>\
-                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
-                            <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
-                            </tr>')
-                            })
+                                    $("tbody").append('<tr>\
+                                    <td>'+item.product_name+'</td>\
+                                    <input type="hidden" class="form-control form-control-sm" value="ton" name="tin_unit[]" >\
+                                    <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
+                                    <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                                    <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice(); tinprice('+item.id+')" class="form-control form-control-sm" value="'+item.unit_sell_per_pc_price+'" name="unit_selling_price[]" > </td>\
+                                    <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                                    <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                                    </tr>')
+                                    })
+
+
                         }
                     }
                 })
@@ -282,5 +283,12 @@
         var total_price = $qty * price
         $("#total"+n).val(total_price)
     }
+
+    function remove(){
+        $("#del1").remove(id)
+
+    }
     </script>
+
+
     @endsection

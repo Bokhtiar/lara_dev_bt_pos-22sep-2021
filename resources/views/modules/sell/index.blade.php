@@ -27,9 +27,9 @@
             <tr>
                 <th>Action</th>
                 <th>Customer Name</th>
-                <th>Paid Amount</th>
-                <th>Total Amount</th>
-                <th>Due Amonut</th>
+                <th>Paid Amount Tk</th>
+                <th>Total Amount Tk</th>
+                <th>Due Amonut Tk</th>
                 <th>Sell Date</th>
                 <th>Status</th>
             </tr>
@@ -65,9 +65,9 @@
 
                 </td>
                 <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : 'Data Deleted' }}</td>
-                <td>{{ $item->paid_amount }}TK</td>
-                <td>{{ $item->total_amount }}TK</td>
-                <td>{{ $item->total_amount - $item->paid_amount }}TK</td>
+                <td>{{ $item->paid_amount }}</td>
+                <td>{{ $item->total_amount }}</td>
+                <td>{{ $item->total_amount - $item->paid_amount }}</td>
                 <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>
                     @if($item->status == 1)

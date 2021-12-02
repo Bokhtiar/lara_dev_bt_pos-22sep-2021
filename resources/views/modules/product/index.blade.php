@@ -17,6 +17,7 @@
                 <th>Product Image</th>
                 <th>Product Name </th>
                 <th>Category</th>
+                <th>Brand</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
                 <th>Unit Price</th>
@@ -74,6 +75,7 @@
 
                 <td>{!! $item->product_name !!}</td>
                 <td>{!! $item->category? $item->category->category_name : 'Data Not Available' !!}</td>
+                <td>{!! $item->brand? $item->brand->brand_name : 'Data Not Available' !!}</td>
                 <td>{!! $item->product_sku !!}</td>
                 <td>{!! $item->unit ? $item->unit->unit_short_name : $item->tin_unit !!}</td>
                 <td>
@@ -109,6 +111,7 @@
                 <th>Product Image</th>
                 <th>Product Name </th>
                 <th>Category</th>
+                <th>Brand</th>
                 <th>Sku Code</th>
                 <th>Unit</th>
                 <th>Unit Price</th>

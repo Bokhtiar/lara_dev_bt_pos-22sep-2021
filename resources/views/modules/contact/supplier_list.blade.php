@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'List Of Contact')
+@section('title', 'List Of Supplier')
 
 @section('css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -49,7 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($contacts as $item)
+            @foreach ($suppliers as $item)
                 <tr>
                 <td>
                     <div class="btn-group">

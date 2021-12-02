@@ -53,7 +53,7 @@
           @endisset
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-user-tie"></i>
               <p>
                 Contact
                 <i class="right fa fa-angle-left"></i>
@@ -86,7 +86,7 @@
            </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-tasks"></i>
               <p>
                 Products
                 <i class="right fa fa-angle-left"></i>
@@ -101,6 +101,12 @@
                 </a>
               </li>
             @endisset
+            <li class="nav-item">
+                <a href="@route('tin.create')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Tin Product create </p>
+                </a>
+              </li>
             @isset(auth()->user()->role->permission['permission']['product']['list'])
               <li class="nav-item">
                 <a href="@route('product.index')" class="nav-link">
@@ -155,13 +161,14 @@
                 </a>
               </li>
               @endisset
+
             </ul>
            </li>
 
            @isset(auth()->user()->role->permission['permission']['purchase']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-shopping-bag"></i>
               <p>
                 Purchase Products
                 <i class="right fa fa-angle-left"></i>
@@ -202,38 +209,6 @@
             </ul>
            </li>
            @endisset
-
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-               Tin Products
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="@route('fit.index')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Fit Create</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="@route('tinvariant.create')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Tin Variant </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="@route('tin.create')" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Tin create </p>
-                </a>
-              </li>
-            </ul>
-           </li>
-
-
 
            @isset(auth()->user()->role->permission['permission']['permission']['list'])
            <li class="nav-item has-treeview">

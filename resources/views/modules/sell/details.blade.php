@@ -106,7 +106,7 @@
                       <tr>
                         <td>{{ $sell->product ? $sell->product->product_name : 'product Already Deleted' }}</td>
                         @if (!empty($sell->tin_unit))
-                        <td>{{ $sell->sell_quantity}} {{ $sell->tin_unit }}</td>
+                        <td>{{ $sell->sell_quantity}} pc</td>
                         @else
                         <td>{{ $sell->sell_quantity}}pc</td>
                         @endif

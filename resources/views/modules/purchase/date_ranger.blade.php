@@ -28,9 +28,9 @@
             <th>Action</th>
             <th>Product</th>
             <th>Supplier</th>
-            <th>Total Amount</th>
-            <th>Paid Amount</th>
-            <th>Due Amount</th>
+            <th>Total Amount Tk</th>
+            <th>Paid Amount Tk</th>
+            <th>Due Amount Tk</th>
         </tr>
     </thead>
     <tbody>
@@ -64,7 +64,7 @@
 
             <td>
                 @foreach (App\Models\PurchaseProduct::query()->Product_name($item->id) as $p)
-                    <a href="@route('product.show', $p->product_id)">{{ $p->product->product_name }}</a> |
+                    <a href="@route('product.show', $p->product_id)">{{ $p->product ? $p->product->product_name : 'data not found' }}</a> |
                 @endforeach
             </td>
             <td>noyon</td>
@@ -82,9 +82,9 @@
             <th>Action</th>
             <th>Product</th>
             <th>Supplier</th>
-            <th>Total Amount</th>
-            <th>Paid Amount</th>
-            <th>Due Amount</th>
+            <th>Total Amount Tk</th>
+            <th>Paid Amount Tk</th>
+            <th>Due Amount Tk</th>
         </tr>
     </tfoot>
     </table>

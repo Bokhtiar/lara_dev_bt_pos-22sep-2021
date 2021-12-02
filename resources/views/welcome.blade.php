@@ -31,9 +31,9 @@
           <div class="container-fluid">
             <!-- Info boxes -->
             <div class="row">
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
+              <div class="col-12 col-sm-6 col-md-3 ">
+                <div class="info-box p-5">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fa fa-shopping-cart"></i></span>
 
                   <div class="info-box-content">
                     <span class="info-box-text">Product</span>
@@ -48,11 +48,11 @@
               </div>
               <!-- /.col -->
               <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
+                <div class="info-box mb-3 p-5">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-users"></i></span>
 
                   <div class="info-box-content">
-                    <span class="info-box-text">Supplier and Customer</span>
+                    <span class="info-box-text">Customer</span>
                     <span class="info-box-number">{{ $contact }}</span>
                   </div>
                   <!-- /.info-box-content -->
@@ -64,22 +64,9 @@
               <!-- fix for small devices only -->
               <div class="clearfix hidden-md-up"></div>
 
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">User</span>
-                    <span class="info-box-number">{{ $user }}</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
+              <div class="col-12 col-sm-6 col-md-3 ">
+                <div class="info-box mb-3 p-5">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-chart-line"></i></span>
 
                   <div class="info-box-content">
                     <span class="info-box-text">Sell</span>
@@ -90,111 +77,21 @@
                 <!-- /.info-box -->
               </div>
               <!-- /.col -->
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3 p-5">
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Supplier</span>
+                    <span class="info-box-number">{{ $contact }}</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
             </div>
             <!-- /.row -->
-
-
-
-            <section class="card">
-            <div class="card-body">
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Action</th>
-                    <th>Customer Name</th>
-                    <th>Total Amount</th>
-                    <th>Pay Amount</th>
-                    <th>DUE Amonut</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($sells as $item)
-                    <tr>
-                    <td>
-                        <div class="btn-group">
-                        <button type="button" class=" btn-success btn ">Action</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            @if($item->pay_amount == $item->total_amount)
-                            <span class="dropdown-item">no Due</span>
-                            @else
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                                Due Payment
-                              </button>
-                            @endif
-                            <a class="dropdown-item" href="@route('order.show', $item->id)"><i class="btn btn-sm btn-success fas fa-eye"></i></a>
-                            <form action="@route('order.destroy',$item->id)" method="POST">
-                                @csrf
-                            @method('DELETE')
-                            <button type="submit" class="dropdown-item "><i class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
-                            </form>
-                        </div>
-                      </div>
-
-                    </td>
-                    <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : ''}}</td>
-                    <td>{{ $item->total_amount }}TK</td>
-                    <td>{{ $item->paid_amount }}TK</td>
-                    <td>{{ $item->total_amount - $item->paid_amount }}TK</td>
-                    <td>{{ $item->created_at->diffForHumans() }}</td>
-                    <td>
-                        @if($item->status == 1)
-                            <a class="" href="@route('sell.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>
-                            @else
-                            <a class="" href="@route('sell.status',$item->id)" ><span class="badge badge-danger" title="if you click this button chenge the status">pending</span></a>
-                        @endif
-                    </td>
-                    </tr>
-
-                    <!-- payment Modal -->
-                        <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                   <span>Due Amount is :  {{ $item->total_amount - $item->pay_amount }}</span>
-                                        <form action="@route('order.update', $item->id)" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <div class="form-gorup">
-                                                <label for="">How Many pay amount</label>
-                                            <input type="number" name="pay_amount" class="form-control" placeholder="pay amount" id="">
-                                            </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </form>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Action</th>
-                    <th>Customer Name</th>
-                    <th>Pay Amount</th>
-                    <th>Total Amount</th>
-                    <th>DUE Amonut</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                </tr>
-            </tfoot>
-            </table>
-        </div>
-        </section>
-
 
           </div><!--/. container-fluid -->
         </section>

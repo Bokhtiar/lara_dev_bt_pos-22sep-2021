@@ -16,9 +16,9 @@
                 <th>Action</th>
                 <th>Product</th>
                 <th>Supplier</th>
-                <th>Total Amount</th>
-                <th>Paid Amount</th>
-                <th>Due Amount</th>
+                <th>Total Amount Tk</th>
+                <th>Paid Amount Tk</th>
+                <th>Due Amount Tk</th>
             </tr>
         </thead>
         <tbody>
@@ -63,8 +63,8 @@
                     @endforeach
                 </td>
                 <td>noyon</td>
-                <td>{{ $item->total_amount }}</td>
-                <td>{{ $item->paid_amount }}</td>
+                <td>{{ $item->total_amount }} </td>
+                <td>{{ $item->paid_amount }} </td>
                 <td>{{ $item->total_amount - $item->paid_amount }}</td>
                 </tr>
 
@@ -104,9 +104,9 @@
                 <th>Action</th>
                 <th>Product</th>
                 <th>Supplier</th>
-                <th>Total Amount</th>
-                <th>Paid Amount</th>
-                <th>Due Amount</th>
+                <th>Total Amount Tk</th>
+                <th>Paid Amount Tk</th>
+                <th>Due Amount Tk</th>
             </tr>
         </tfoot>
         </table>

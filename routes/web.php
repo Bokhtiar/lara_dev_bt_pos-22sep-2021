@@ -96,6 +96,8 @@ Route::post('/purchase/date/range/search', [PurchaseController::class, 'purchase
 
 //contact controller
 Route::resource('contact', ContactController::class);
+Route::get('/customer/index', [App\Http\Controllers\ContactController::class, 'customer_list'])->name('customer.index');
+Route::get('/supplier/index', [App\Http\Controllers\ContactController::class, 'supplier_list'])->name('supplier.index');
 Route::get('/contact/status/{id}', [App\Http\Controllers\ContactController::class, 'status'])->name('contact.status');
 Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class, 'customer_info']);
 
