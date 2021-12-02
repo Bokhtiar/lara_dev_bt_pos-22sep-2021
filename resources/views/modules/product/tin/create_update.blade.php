@@ -85,14 +85,14 @@
                             <label for="">Tin M.M <span class="text-danger"> * </span></label>
                             <select name="mm" id="" required class="form-control">
                                 <option value="">Select M.M</option>
-                                <option value="120">120</option>
-                                <option value="170">170</option>
-                                <option value="190">190</option>
-                                <option value="220">220</option>
-                                <option value="260">260</option>
-                                <option value="320">320</option>
-                                <option value="340">340</option>
-                                <option value="420">420</option>
+                                <option value="120" {{ @$edit->mm == 120 ? 'selected' : '' }}>120</option>
+                                <option value="170" {{ @$edit->mm == 170 ? 'selected' : '' }}>170</option>
+                                <option value="190" {{ @$edit->mm == 190 ? 'selected' : '' }}>190</option>
+                                <option value="220" {{ @$edit->mm == 220 ? 'selected' : '' }}>220</option>
+                                <option value="260" {{ @$edit->mm == 260 ? 'selected' : '' }}>260</option>
+                                <option value="320" {{ @$edit->mm == 320 ? 'selected' : '' }}>320</option>
+                                <option value="340" {{ @$edit->mm == 340 ? 'selected' : '' }}>340</option>
+                                <option value="420" {{ @$edit->mm == 420 ? 'selected' : '' }}>420</option>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
