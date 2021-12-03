@@ -87,6 +87,8 @@ Route::get('/logout', [App\Http\Controllers\SettingController::class, 'logout'])
 
 //purchase product
 Route::resource('purchase', PurchaseController::class);
+Route::get('alert', [PurchaseController::class, 'alert'])->name('product.alert');
+
 Route::post('/purchase/due/pay//{id}', [PurchaseController::class, 'duePay']);
 Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
 Route::get('/purchae_edit_product/{id}', [PurchaseController::class, 'purchase_edit_product']);

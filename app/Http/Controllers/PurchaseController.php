@@ -63,6 +63,7 @@ class PurchaseController extends Controller
                     'note' => $request->note,
                     'user_id' => Auth::id(),
                     'paid_on_date' => $request->paid_on_date,
+                    'due_paid_date' => $request->due_paid_date,
                     'payment_method' => $request->payment_method,
                     'total_amount' => $request->total_amount,
                     'paid_amount' => $request->paid_amount,
@@ -275,6 +276,12 @@ class PurchaseController extends Controller
         ]);
     }
 
+
+    public function alert()
+    {
+        $products = PurchaseProduct::all();
+        return view('modules.product.alert', compact('products'));
+    }
 
 
 }

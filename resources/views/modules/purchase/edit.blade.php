@@ -39,6 +39,12 @@
                                 <input required type="date" name="purchase_date" value="{{ $purchase->purchase_date }}" class="form-control" id="">
                             </div>
                         </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label for=""> Due Paid Date <span class="text-danger">*</span></label>
+                                <input required type="date" name="due_paid_date" class="form-control" id="">
+                            </div>
+                        </div>
                     </div>
                     {{-- <div class="form-group">
                         <label for="">Attech File</label>

@@ -15,8 +15,7 @@
             <tr>
                 <th>Action</th>
                 <th>Product Name </th>
-                <th>Alert Quantity</th>
-                <th class="bg-danger">In-Stcok</th>
+                <th>Stock Quantity</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -29,9 +28,7 @@
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         </button>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="@route('purchase.edit', $item->purchase->id)"><i
-                                    class="btn btn-info btn-sm far fa-edit"></i></a>
-                            <!-- Start Large modal -->
+
                             <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="btn btn-sm btn-success fas fa-eye"></i>
                             </button>
@@ -46,9 +43,13 @@
                     </div>
 
                 </td>
-                <td>{!! $item->product_name !!}</td>
-                <td>{!! $item->alert_quantity !!}</td>
-                <td class="bg-danger">{!! $item->purchase_quantity !!}</td>
+                <td>{!! $item->product ? $item->product->product_name : 'data not found' !!}</td>
+                @if($item->product->fit == null)
+                <td>{!! $item->purchase_quantity	 !!} {{ $item->product ? $item->product->unit->unit_short_name : 'Data not found' }}</td>
+                @else
+                <td>{!! $item->purchase_quantity	 !!}pc</td>
+                @endif
+
                 <td>
                     @if($item->status == 1)
                     <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"
@@ -59,53 +60,14 @@
                     @endif
                 </td>
             </tr>
-            {{-- start here modal --}}
-            <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $item->product_name }} Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <section>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                     <img src="{{asset('admin')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                                </div>
-                                <div class="col-sm-12 col-md-8 col-lg-8">
-                                    <div class="container card">
-                                        <p class="h4">{{ $item->product_name }}</p>
-                                        <p>Alert Quantity: {{ $item->alert_quantity }}</p>
-                                        <p>Purchase Quantity: {{ $item->purchase->purchase_quantity }}</p>
-                                        <p>Category : {{ $item->category->category_name }}</p>
-                                        <p>SubCategory: {{ $item->subcategory->subcategory_name }}</p>
-                                        <p>brand: {{ $item->brand->brand_name }}</p>
-                                        <p>unit: {{ $item->unit_id }}</p>
-                                        <p>warranty: {{ $item->warrant_id }}</p>
-                                        <p>Description : {!! $item->product_description !!}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Close</button>
-                </div>
-                </div>
-            </div>
-            </div>
-            {{-- end of modal --}}
+
             @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <th>Action</th>
                 <th>Product Name </th>
-                <th>Alert Quantity</th>
-                <th class="bg-danger">In-Stcok</th>
+                <th>Stock Quantity</th>
                 <th>Status</th>
             </tr>
         </tfoot>

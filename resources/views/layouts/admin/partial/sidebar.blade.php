@@ -93,6 +93,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@route('product.alert')" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>Product Alert</p>
+                </a>
+            </li>
             @isset(auth()->user()->role->permission['permission']['product']['add'])
               <li class="nav-item">
                 <a href="@route('product.create')" class="nav-link">
