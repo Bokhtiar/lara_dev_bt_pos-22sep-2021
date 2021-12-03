@@ -19,6 +19,7 @@ class Sell extends Model
         'paid_amount',
         'total_amount',
         'sell_on_date',
+        'due_paid_date',
         'payment_method',
         'user_id',
         'bkash',

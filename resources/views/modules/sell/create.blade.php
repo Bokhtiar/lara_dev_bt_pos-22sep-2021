@@ -44,12 +44,14 @@
                                 <div class="form-group my-3" id="customer_detail">
                                 </div>
                             </div><!--customer site done -->
-                            <div class="col-sm-12 col-md-8 col-lg-8">
-
-                                        <label for="">Invoice Date</label>
-                                        <input type="date" class="form-control" name="invoice_date" id="">
-
-                            </div><!--others information-->
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="">Invoice Date</label>
+                                <input type="date" class="form-control" name="invoice_date" id="">
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="">Due Paid On Date</label>
+                                <input type="due_paid_date" class="form-control" name="due_paid_date" id="">
+                            </div>
                         </div>
 
                         <div class="my-3">

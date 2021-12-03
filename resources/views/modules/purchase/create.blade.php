@@ -94,8 +94,8 @@
                         </div>
                         <div class="col-md-4 col-sm-4 col-lg-4">
                             <input type="number" id="total_amount" name="total_amount" class="form-control mb-2" placeholder="Total Amount" id="">
-                            <input type="number" name="paid_amount" class="form-control mb-2" placeholder="Paid Amount" id="">
-                            <input type="number" class="form-control" placeholder="Due Amount" id="">
+                            <input type="number" name="paid_amount" oninput="pay(this.value)" class="form-control mb-2" placeholder="Paid Amount" id="">
+                            <input type="number" id="due_amount" class="form-control" placeholder="Due Amount" >
                         </div>
                     </div>
                 </div>
@@ -387,5 +387,11 @@
             })
             $('#total_amount').val(sumQuantity);
         }
+
+        function pay(amount){
+        var total = $("#total_amount").val();
+        var paid = total-amount;
+        $("#due_amount").val(paid);
+    }//sum total
 </script>
 @endsection

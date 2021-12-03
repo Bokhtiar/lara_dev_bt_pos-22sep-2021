@@ -22,6 +22,7 @@ class CreateSellsTable extends Migration
             $table->string('paid_amount');
             $table->string('total_amount');
             $table->string('sell_on_date');
+            $table->string('due_paid_date');
             $table->string('user_id');
             $table->string('payment_method');
             $table->string('bkash')->nullable();

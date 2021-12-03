@@ -164,7 +164,31 @@
 
             </ul>
            </li>
-
+           <!--due alert -->
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="fas fa-shopping-bag"></i>
+              <p>
+                Due Alert
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="@route('customer.due.index')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Customer Due</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('purchase.date.filtering')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Supplier Due</p>
+                </a>
+              </li>
+            </ul>
+           </li>
+           <!--due alert end -->
            @isset(auth()->user()->role->permission['permission']['purchase']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
