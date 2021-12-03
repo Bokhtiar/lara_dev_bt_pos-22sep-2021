@@ -16,6 +16,7 @@ class Purchase extends Model
         'reference_no',
         'purchase_date',
         'attech_file',
+        'due_paid_date',
         'note',
         'user_id',
         'paid_on_date',

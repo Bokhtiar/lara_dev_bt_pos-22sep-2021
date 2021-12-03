@@ -181,7 +181,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="@route('purchase.date.filtering')" class="nav-link">
+                <a href="@route('supplier.due.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Supplier Due</p>
                 </a>

@@ -103,6 +103,7 @@ Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class
 
 //due alert
 Route::get('customer/due/index', [App\Http\Controllers\DueController::class, 'customer_due'])->name('customer.due.index');
+Route::get('supplier/due/index', [App\Http\Controllers\DueController::class, 'supplier_due'])->name('supplier.due.index');
 Route::get('/supplier/index', [App\Http\Controllers\ContactController::class, 'supplier_list'])->name('supplier.index');
 
 //sell product

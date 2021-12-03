@@ -24,6 +24,7 @@ class CreatePurchasesTable extends Migration
             $table->string('total_amount');
             $table->string('paid_amount');
             $table->string('paid_on_date');
+            $table->string('due_paid_date');
             $table->string('payment_method');
             $table->string('bkash')->nullable();
             $table->string('rocket')->nullable();
