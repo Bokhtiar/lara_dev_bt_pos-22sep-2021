@@ -284,4 +284,28 @@ class PurchaseController extends Controller
     }
 
 
+    public function duePay(Request $request, $id)
+    {
+        $purchase = Purchase::find($id);
+        $purchase_payment = $purchase->paid_amount + $request->paid_amount;
+        $purchase['paid_amount'] = $purchase_payment;
+        $purchase->save();
+        return back();
+    }
+
+
+    public function purchase_qty_update()
+    {
+        $purchase_products = PurchaseProduct::all();
+        return view('modules.purchase.quantity_update', compact('purchase_products'));
+    }
+
+    public function purchase_qty_update_store(Request $request, $id)
+    {
+        $purchase  = PurchaseProduct::find($id);
+        $store = $purchase->purchase_quantity + $request->product_update_quantity;
+        $purchase->purchase_quantity = $store;
+        $purchase->save();
+        return back();
+    }
 }

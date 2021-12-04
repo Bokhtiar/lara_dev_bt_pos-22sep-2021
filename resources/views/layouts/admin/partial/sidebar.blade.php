@@ -93,12 +93,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="@route('product.alert')" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>Product Alert</p>
-                </a>
-            </li>
+
             @isset(auth()->user()->role->permission['permission']['product']['add'])
               <li class="nav-item">
                 <a href="@route('product.create')" class="nav-link">
@@ -180,6 +175,12 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@route('product.alert')" class="nav-link">
+                        <i class="fa fa-circle-o nav-icon"></i>
+                        <p>Product Alert</p>
+                    </a>
+                </li>
               <li class="nav-item">
                 <a href="@route('customer.due.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
@@ -209,6 +210,12 @@
                 <a href="@route('purchase.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Purchase</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="@route('purchase.quantity.list')" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Quantity Update</p>
                 </a>
               </li>
               <li class="nav-item">

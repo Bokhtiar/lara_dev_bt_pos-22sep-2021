@@ -49,10 +49,19 @@ class Purchase extends Model
 
     public function scopeReference_number()
     {
+
         $pur = Purchase::latest()->first();
-        $ref = $pur->id + 1;
-        $ref_code = "Rf 00".$ref;
-        return $ref_code;
+        if($pur==null){
+            $pur=1;
+            $ref_code = "Rf 00".$pur;
+            return $ref_code;
+        }else{
+            $ref = $pur->id + 1;
+            $ref_code = "Rf 00".$ref;
+            return $ref_code;
+        }
+
+
     }
 
 }

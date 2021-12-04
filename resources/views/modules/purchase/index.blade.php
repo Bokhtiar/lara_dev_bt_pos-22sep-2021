@@ -30,17 +30,14 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        {{-- @if($item->paid_amount == $item->total_amount)
+                        @if($item->paid_amount == $item->total_amount)
                         <span class="dropdown-item">no Due</span>
                         @else
                         <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             Due Payment
                           </button>
-                        @endif --}}
-                        @isset(auth()->user()->role->permission['permission']['purchase']['edit'])
-                         <a class="dropdown-item" href="@route('purchase.edit', $item->id)"><i
-                                    class="btn btn-info btn-sm far fa-edit"></i></a>
-                        @endisset
+                        @endif
+
                         @isset(auth()->user()->role->permission['permission']['purchase']['view'])
                         <a href="@route('purchase.show',$item->id)" class="dropdown-item"> <i class="btn btn-sm btn-success fas fa-eye"></i></a>
                         @endisset
@@ -80,7 +77,7 @@
                             </div>
                             <div class="modal-body">
                                <span>Due Amount is :  {{ $item->total_amount - $item->paid_amount }}</span>
-                                    <form action="{{ url('purchase/due/pay/',$item->id) }}" method="POST">
+                                    <form action="{{ url('purchase/due/pay',$item->id) }}" method="POST">
                                         @csrf
                                         <div class="form-gorup">
                                             <label for="">How Many pay amount</label>

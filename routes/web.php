@@ -87,9 +87,12 @@ Route::get('/logout', [App\Http\Controllers\SettingController::class, 'logout'])
 
 //purchase product
 Route::resource('purchase', PurchaseController::class);
+Route::get('purchase/quantity/list', [PurchaseController::class, 'purchase_qty_update'])->name('purchase.quantity.list');
+Route::post('purchase/quantity/update/{id}', [PurchaseController::class, 'purchase_qty_update_store']);
+
 Route::get('alert', [PurchaseController::class, 'alert'])->name('product.alert');
 
-Route::post('/purchase/due/pay//{id}', [PurchaseController::class, 'duePay']);
+Route::post('/purchase/due/pay/{id}', [PurchaseController::class, 'duePay']);
 Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
 Route::get('/purchae_edit_product/{id}', [PurchaseController::class, 'purchase_edit_product']);
 

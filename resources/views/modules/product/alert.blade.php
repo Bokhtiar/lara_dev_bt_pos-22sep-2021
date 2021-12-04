@@ -16,7 +16,6 @@
                 <th>Action</th>
                 <th>Product Name </th>
                 <th>Stock Quantity</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -29,15 +28,7 @@
                         </button>
                         <div class="dropdown-menu" role="menu">
 
-                            <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                            <i class="btn btn-sm btn-success fas fa-eye"></i>
-                            </button>
-                            <form action="@route('purchase.destroy',$item->id)" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="dropdown-item "><i
-                                        class="btn btn-sm btn-danger fas fa-trash-alt"></i></button>
-                            </form>
+
 
                         </div>
                     </div>
@@ -49,16 +40,6 @@
                 @else
                 <td>{!! $item->purchase_quantity	 !!}pc</td>
                 @endif
-
-                <td>
-                    @if($item->status == 1)
-                    <a class="" href="@route('product.status',$item->id)"><span class="badge badge-success"
-                            title="if you click this button chenge the status">active</span></a>
-                    @else
-                    <a class="" href="@route('product.status',$item->id)"><span class="badge badge-danger"
-                            title="if you click this button chenge the status">inactive</span></a>
-                    @endif
-                </td>
             </tr>
 
             @endforeach
@@ -68,7 +49,6 @@
                 <th>Action</th>
                 <th>Product Name </th>
                 <th>Stock Quantity</th>
-                <th>Status</th>
             </tr>
         </tfoot>
     </table>
