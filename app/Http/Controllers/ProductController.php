@@ -33,8 +33,7 @@ class ProductController extends Controller
     // ajax request all data product
     public function product_all()
     {
-        $purchase = PurchaseProduct::all();
-        $products = Product::whereNotNull('purchase_id')->with('purchase')->Active()->get();
+        $products = PurchaseProduct::with('product')->get();
         return response()->json($products, 200);
     }
 

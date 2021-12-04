@@ -197,17 +197,36 @@
         //end of ajax heaer setup
         function product_show(response){
             response.forEach(item => {
-            $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
-            <div class="card">\
-            <div class="card-body">\
-            <p class="card-text">\
-            '+item.product_name+' <br>\
-            '+item.unit_selling_price+'Tk <br>\
-            <button class="btn btn-sm btn-success" onclick="add('+item.id+')" >+add</button>\
-            </p>\
-            </div>\
-            </div>\
-            </div>')
+            if(item.product.fit == null){
+                if(item.product.alert_quantity < item.purchase_quantity){
+                    $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
+                    <div class="card">\
+                    <div class="card-body">\
+                    <p class="card-text">\
+                    '+item.product.product_name+' <br>\
+                    '+item.product.unit_selling_price+'Tk <br>\
+                    <button class="btn btn-sm btn-success" onclick="add('+item.product.id+')" >+add</button>\
+                    </p>\
+                    </div>\
+                    </div>\
+                    </div>')
+                }
+            }else{
+                if(item.product.alert_quantity < item.purchase_quantity){
+                    $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
+                    <div class="card">\
+                    <div class="card-body">\
+                    <p class="card-text">\
+                    '+item.product.product_name+' <br>\
+                    '+item.product.unit_sell_per_pc_price+'Tk <br>\
+                    <button class="btn btn-sm btn-success" onclick="add('+item.product.id+')" >+add</button>\
+                    </p>\
+                    </div>\
+                    </div>\
+                    </div>')
+                }
+            }
+
         });
         }//html product show
         all_product()

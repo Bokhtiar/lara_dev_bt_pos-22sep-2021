@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Contact;
+use App\Models\Contact; 
 use App\Models\Product;
 use App\Models\PurchaseProduct;
 use Illuminate\Http\Request;
