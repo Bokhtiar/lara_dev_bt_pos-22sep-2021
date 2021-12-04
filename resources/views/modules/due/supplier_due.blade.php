@@ -32,13 +32,13 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     </button>
                     <div class="dropdown-menu" role="menu">
-                        {{-- @if($item->paid_amount == $item->total_amount)
+                        @if($item->paid_amount == $item->total_amount)
                         <span class="dropdown-item">no Due</span>
                         @else
                         <button type="button" class="btn btn-primary dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             Due Payment
                           </button>
-                        @endif --}}
+                        @endif
                         @isset(auth()->user()->role->permission['permission']['purchase']['edit'])
                          <a class="dropdown-item" href="@route('purchase.edit', $item->id)"><i
                                     class="btn btn-info btn-sm far fa-edit"></i></a>

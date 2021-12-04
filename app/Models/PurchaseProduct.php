@@ -20,6 +20,10 @@ class PurchaseProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 
 
     public function scopeProduct_name($query, $id){

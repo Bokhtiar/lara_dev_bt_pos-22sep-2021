@@ -35,7 +35,7 @@ class SellController extends Controller
      */
     public function create()
     {
-        $products = Product::Active()->get();
+        $products = PurchaseProduct::all();
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
         return view('modules.sell.create', compact('products', 'contacts'));
     }
@@ -48,15 +48,15 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'customer_id'=>'required',
-            'invoice_date'=>'required',
-            'payment_method' => 'required',
-            'sell_on_date'=> 'required'
-        ]);
-        if($validated){
-            try{
-                DB::beginTransaction();
+        // $validated = $request->validate([
+        //     'customer_id'=>'required',
+        //     'invoice_date'=>'required',
+        //     'payment_method' => 'required',
+        //     'sell_on_date'=> 'required'
+        // ]);
+        // if($validated){
+        //     try{
+        //         DB::beginTransaction();
                  $sell = Sell::create([
                     'customer_id' => $request->customer_id,
                     'invoice_date' => $request->invoice_date,
@@ -91,24 +91,25 @@ class SellController extends Controller
                         $p = PurchaseProduct::where('product_id', $request->product_id[$i])->first();
                         $p["purchase_quantity"] = $p->purchase_quantity - $request->sell_quantity[$i];
                         $p->save();
-
                         $product->save();
                     }
-                    DB::commit();
-                    Session::flash('insert','Added Sucessfully...');
-                    $current_url = url()->previous();
-                    if($current_url == "http://localhost:8000/pos"){
-                        return redirect('/pos');
-                    }else{
-                        return redirect()->route('sell.index');
-                    }
+                    return redirect()->route('sell.index');
                 }
-                throw new \Exception('Invalid About Information');
-            }catch(\Exception $ex){
-                // DB::rollBack();
-                return redirect()->route('sell.create');
-            }
-        }
+        //             DB::commit();
+        //             Session::flash('insert','Added Sucessfully...');
+        //             $current_url = url()->previous();
+        //             if($current_url == "http://localhost:8000/pos"){
+        //                 return redirect('/pos');
+        //             }else{
+        //                 return redirect()->route('sell.index');
+        //             }
+        //         }
+        //         throw new \Exception('Invalid About Information');
+        //     }catch(\Exception $ex){
+        //         DB::rollBack();
+        //         // return redirect()->route('sell.create');
+        //     }
+        // }
     }
 
     public function sell_author_all()

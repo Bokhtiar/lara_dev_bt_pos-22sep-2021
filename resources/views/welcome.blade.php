@@ -39,7 +39,7 @@
                   <div class="info-box-content">
                     <span class="info-box-text">Product</span>
                     <span class="info-box-number">
-                      {{ $product }} 
+                      {{ $product }}
                     </span>
                   </div>
                   <!-- /.info-box-content -->
@@ -135,9 +135,9 @@
                               <a href="javascript:void(0)" class="product-title">{{ $item->product->product_name }}</a>
                               <span class="product-description">
                                 @if($item->product->fit == null)
-                                <span>Stock Quantity : {{ $item->purchase_quantity }} {{ $item->product->unit->unit_short_name }}</span>
+                                <span class="badge badge-danger float-right" >Stock Quantity : {{ $item->purchase_quantity }} {{ $item->product->unit->unit_short_name }}</span>
                                 @else
-                                <span>Stock Quantity : {{ $item->purchase_quantity }} pc</span>
+                                <span class="badge badge-danger float-right" >Stock Quantity : {{ $item->purchase_quantity }} pc</span>
                                 @endif
                               </span>
                             </div>

@@ -39,9 +39,16 @@ class Sell extends Model
     }
 
     public function scopeInvoice_number(){
+
         $sell = Sell::latest()->first();
-        $inv = $sell->id + 1;
-        $inv_code = "SL 00".$inv;
-        return $inv_code;
+        if($sell==null){
+            $s=1;
+            $inv_code = "Rf 00".$s;
+            return $inv_code;
+        }else{
+            $ref = $sell->id + 1;
+            $inv_code = "Rf 00".$ref;
+            return $inv_code;
+        }
     }
 }

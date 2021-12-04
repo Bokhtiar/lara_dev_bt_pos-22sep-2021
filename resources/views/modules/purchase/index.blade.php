@@ -59,7 +59,7 @@
                         <a href="@route('product.show', $p->product_id)">{{ $p->product ? $p->product->product_name : '' }}</a> |
                     @endforeach
                 </td>
-                <td>noyon</td>
+                <td>{{$item->supplier ? $item->supplier->prefix_name .' '. $item->supplier->f_name .' '. $item->supplier->l_name : 'Data Deleted' }}</td>
                 <td>{{ $item->total_amount }} </td>
                 <td>{{ $item->paid_amount }} </td>
                 <td>{{ $item->total_amount - $item->paid_amount }}</td>

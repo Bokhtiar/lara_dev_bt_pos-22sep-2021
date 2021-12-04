@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\PurchaseProduct;
 use Illuminate\Http\Request;
 
 class PosController extends Controller
@@ -18,7 +19,7 @@ class PosController extends Controller
     {
         $contacts = Contact::where('contact_info', 'Customer')->Active()->get();
         $categories = Category::query()->Active()->get();
-        $products = Product::query()->Active()->get();
+        $products = PurchaseProduct::all();
         return view('modules.pos.index', compact('contacts', 'categories', 'products'));
     }
 

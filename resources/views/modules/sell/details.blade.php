@@ -103,6 +103,7 @@
                     <tbody>
                         <?php $total = 0; ?>
                     @foreach (App\Models\SellProduct::query()->SellProduct($item->id) as $sell)
+                    
                       <tr>
                         <td>{{ $sell->product ? $sell->product->product_name : 'product Already Deleted' }}</td>
                         @if (!empty($sell->tin_unit))

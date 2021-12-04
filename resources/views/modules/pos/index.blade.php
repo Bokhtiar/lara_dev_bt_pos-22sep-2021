@@ -36,7 +36,9 @@
                         <select name="product_id" id="product_id" class="form-control select2">
                             <option value="">--Select Product--</option>
                             @foreach ($products as $item)
-                            <option value="{{ $item->id }}"> {{ $item->product_name }} </option>
+                            @if($item->product->alert_quantity < $item->purchase_quantity)
+                            <option value="{{ $item->product->id }}"> {{ $item->product->product_name }} </option>
+                            @endif
                             @endforeach
                         </select>
                         <div id="wrapper_div">
@@ -51,7 +53,6 @@
                             <thead class="bg-success">
                                 <tr>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Product ID</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Unit Selling Price</th>
                                 <th scope="col">Total Price</th>
@@ -74,7 +75,7 @@
                             </div>
                         <p>
                         <div class="float-right" id="total_amount_show">
-                        
+
                         </div>
                         </p> <br><br><br><br>
 
@@ -99,9 +100,9 @@
                                             <label for="">Invoice Date</label>
                                             <input type="date" class="form-control" name="invoice_date" id="">
                                         </div>
-                                        <div class="col-sm-12 col-lg-6 col-md-6">
-                                            <label for="">Invoice No.</label>
-                                            <input type="number" class="form-control" name="invoice_no" placeholder="Invoice No." id="">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <label for="">Due Paid On Date</label>
+                                            <input type="date" class="form-control" name="due_paid_date" id="">
                                         </div>
                                     </div>
                                 </div><!--others information-->
@@ -229,17 +230,35 @@
                 type: 'GET',
                 dataType: 'Json',
                 success:function(response){
-                    $.each(response, function(key, item){
-                        $("tbody").append('<tr>\
-                        <td>'+item.product_name+'</td>\
-                        <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
-                        <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
-                        <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
-                        <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
-                        <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
-                        </tr>')
-                    })
-                }
+                        console.log(response.product.id)
+                        if(response.product.fit == null){
+                            $.each(response, function(key, item){
+                            $("tbody").append('<tr id="del1 '+item.id+'">\
+                            <td>'+item.product_name+'</td>\
+                            <input type="hidden" class="form-control form-control-sm" value="" name="tin_unit[]" >\
+                            <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                            <td> <span class="btn  btn-sm btn-danger" onClick="remove()" >X</span> </td>\
+                            </tr>')
+                            })
+                        }else{
+                            $.each(response, function(key, item){
+                                    $("tbody").append('<tr>\
+                                    <td>'+item.product_name+'</td>\
+                                    <input type="hidden" class="form-control form-control-sm" value="ton" name="tin_unit[]" >\
+                                    <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
+                                    <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                                    <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice(); tinprice('+item.id+')" class="form-control form-control-sm" value="'+item.unit_sell_per_pc_price+'" name="unit_selling_price[]" > </td>\
+                                    <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                                    <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                                    </tr>')
+                                    })
+
+
+                        }
+                    }
             })
             }//end if condition
         } //add function end
@@ -314,17 +333,35 @@
                 type: 'GET',
                 dataType: 'Json',
                 success:function(response){
-                    $.each(response, function(key, item){
-                        $("tbody").append('<tr>\
-                        <td>'+item.product_name+'</td>\
-                        <td> <input type="number" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" > </td>\
-                        <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
-                        <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
-                        <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
-                        <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
-                        </tr>')
-                    })
-                }
+                        console.log(response.product.id)
+                        if(response.product.fit == null){
+                            $.each(response, function(key, item){
+                            $("tbody").append('<tr id="del1 '+item.id+'">\
+                            <td>'+item.product_name+'</td>\
+                            <input type="hidden" class="form-control form-control-sm" value="" name="tin_unit[]" >\
+                            <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                            <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                            <td> <span class="btn  btn-sm btn-danger" onClick="remove()" >X</span> </td>\
+                            </tr>')
+                            })
+                        }else{
+                            $.each(response, function(key, item){
+                                    $("tbody").append('<tr>\
+                                    <td>'+item.product_name+'</td>\
+                                    <input type="hidden" class="form-control form-control-sm" value="ton" name="tin_unit[]" >\
+                                    <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
+                                    <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                                    <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice(); tinprice('+item.id+')" class="form-control form-control-sm" value="'+item.unit_sell_per_pc_price+'" name="unit_selling_price[]" > </td>\
+                                    <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
+                                    <td> <span class="btn  btn-sm btn-danger">X</span> </td>\
+                                    </tr>')
+                                    })
+
+
+                        }
+                    }
             })
         }
         })//product serach and show

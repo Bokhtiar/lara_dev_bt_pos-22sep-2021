@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">Due Paid On Date</label>
-                                <input type="due_paid_date" class="form-control" name="due_paid_date" id="">
+                                <input type="date" class="form-control" name="due_paid_date" id="">
                             </div>
                         </div>
 
@@ -64,7 +64,9 @@
                                             <select name="product_id" id="product_id" class="form-control select2">
                                                 <option value="">--Select Product--</option>
                                                 @foreach ($products as $item)
-                                                <option value="{{ $item->id }}"> {{ $item->product_name }} </option>
+                                                @if($item->product->alert_quantity < $item->purchase_quantity)
+                                                <option value="{{ $item->product->id }}"> {{ $item->product->product_name }} </option>
+                                                @endif
                                                 @endforeach
                                             </select>
                                         </div>
