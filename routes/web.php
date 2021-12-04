@@ -23,6 +23,8 @@ use App\Http\Controllers\WarrantyController;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\PurchaseProduct;
 use App\Models\Sell;
 use App\Models\Subcategory;
 use App\Models\User;
@@ -35,7 +37,10 @@ Route::get('/', function () {
     $user = User::count();
     $sell = Sell::count();
     $sells = Sell::latest()->get();
-    return view('welcome', compact('product', 'contact', 'user', 'sell', 'sells'));
+    $products = PurchaseProduct::latest()->take(6)->get();
+    $customers = Sell::latest()->take(6)->get(); //customer due
+    $suppliers = Purchase::latest()->take(6)->get();//supplier due
+    return view('welcome', compact('product', 'contact', 'user', 'sell', 'sells','products', 'customers','suppliers'));
 
 })->middleware('auth');
 //register route is disable another route is active
