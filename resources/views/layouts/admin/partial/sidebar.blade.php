@@ -170,17 +170,23 @@
             <a href="#" class="nav-link">
                 <i class="fas fa-shopping-bag"></i>
               <p>
-                Due Alert
+                 Alert
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="@route('product.alert')" class="nav-link">
-                        <i class="fa fa-circle-o nav-icon"></i>
-                        <p>Product Alert</p>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a href="@route('product.stock.alert')" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>Product Stock Alert</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@route('product.alert')" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>All Product Alert</p>
+                </a>
+            </li>
               <li class="nav-item">
                 <a href="@route('customer.due.index')" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>

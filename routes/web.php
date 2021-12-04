@@ -90,7 +90,7 @@ Route::resource('purchase', PurchaseController::class);
 Route::get('purchase/quantity/list', [PurchaseController::class, 'purchase_qty_update'])->name('purchase.quantity.list');
 Route::post('purchase/quantity/update/{id}', [PurchaseController::class, 'purchase_qty_update_store']);
 
-Route::get('alert', [PurchaseController::class, 'alert'])->name('product.alert');
+
 
 Route::post('/purchase/due/pay/{id}', [PurchaseController::class, 'duePay']);
 Route::get('/product_purchase_search/{id}', [PurchaseController::class, 'product_show']);
@@ -110,6 +110,8 @@ Route::get('/customer/info/{id}', [App\Http\Controllers\ContactController::class
 Route::get('customer/due/index', [App\Http\Controllers\DueController::class, 'customer_due'])->name('customer.due.index');
 Route::get('supplier/due/index', [App\Http\Controllers\DueController::class, 'supplier_due'])->name('supplier.due.index');
 Route::get('/supplier/index', [App\Http\Controllers\ContactController::class, 'supplier_list'])->name('supplier.index');
+Route::get('alert', [PurchaseController::class, 'alert'])->name('product.alert');
+Route::get('product/stock/alert', [PurchaseController::class, 'product_stock_alert'])->name('product.stock.alert');
 
 //sell product
 Route::resource('sell', SellController::class);

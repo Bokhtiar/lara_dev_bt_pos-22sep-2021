@@ -308,4 +308,10 @@ class PurchaseController extends Controller
         $purchase->save();
         return back();
     }
+
+    public function product_stock_alert()
+    {
+        $products = PurchaseProduct::all();
+        return view('modules.purchase.alert', compact('products'));
+    }
 }
