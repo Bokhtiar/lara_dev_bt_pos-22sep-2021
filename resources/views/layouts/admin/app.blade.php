@@ -100,6 +100,12 @@
   </script>
 @endif
 
+@if(Session::has('low_stock'))
+  <script type="text/javascript">
+    swal("Product Low Stock Alert","Your Product Low Stock","warning")
+  </script>
+@endif
+
 @if(Session::has('reset_password'))
   <script type="text/javascript">
     swal("Enter your valid Password","Dont matched the password plz inter your valid password...","success")

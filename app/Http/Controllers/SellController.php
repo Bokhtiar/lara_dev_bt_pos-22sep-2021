@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 use Session;
 
 class SellController extends Controller
@@ -48,15 +49,15 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'customer_id'=>'required',
-        //     'invoice_date'=>'required',
-        //     'payment_method' => 'required',
-        //     'sell_on_date'=> 'required'
-        // ]);
-        // if($validated){
-        //     try{
-        //         DB::beginTransaction();
+        $validated = $request->validate([
+            'customer_id'=>'required',
+            'invoice_date'=>'required',
+            'payment_method' => 'required',
+            'sell_on_date'=> 'required'
+        ]);
+        if($validated){
+            try{
+                DB::beginTransaction();
                  $sell = Sell::create([
                     'customer_id' => $request->customer_id,
                     'invoice_date' => $request->invoice_date,
@@ -91,25 +92,31 @@ class SellController extends Controller
                         $p = PurchaseProduct::where('product_id', $request->product_id[$i])->first();
                         $p["purchase_quantity"] = $p->purchase_quantity - $request->sell_quantity[$i];
                         $p->save();
+                        if($p->purchase_quantity < 0 ){
+                            Session::flash('low_stock','Low Stock Alert...');
+                            return back();
+
+                        }
                         $product->save();
                     }
-                    return redirect()->route('sell.index');
+
+
+                    DB::commit();
+
+                    $current_url = url()->previous();
+                    $sell = Sell::latest()->first();
+                    if($current_url == "http://localhost:8000/pos"){
+                        return redirect()->route('sell.show',$sell);
+                    }else{
+                        return redirect()->route('sell.show',$sell);
+                    }
                 }
-        //             DB::commit();
-        //             Session::flash('insert','Added Sucessfully...');
-        //             $current_url = url()->previous();
-        //             if($current_url == "http://localhost:8000/pos"){
-        //                 return redirect('/pos');
-        //             }else{
-        //                 return redirect()->route('sell.index');
-        //             }
-        //         }
-        //         throw new \Exception('Invalid About Information');
-        //     }catch(\Exception $ex){
-        //         DB::rollBack();
-        //         // return redirect()->route('sell.create');
-        //     }
-        // }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+                // return redirect()->route('sell.create');
+            }
+        }
     }
 
     public function sell_author_all()
@@ -200,7 +207,7 @@ class SellController extends Controller
 
     public function sell_product_show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('purchase')->find($id);
         return response()->json([
             'product'=>$product,
         ]);

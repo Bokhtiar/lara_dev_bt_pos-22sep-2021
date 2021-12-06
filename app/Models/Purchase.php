@@ -47,6 +47,11 @@ class Purchase extends Model
         return $this->belongsTo(Contact::class);
     }
 
+    public function purchase_product()
+    {
+        return $this->belongsTo(PurchaseProduct::class);
+    }
+
     public function scopeReference_number()
     {
 

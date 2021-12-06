@@ -82,27 +82,132 @@
 
                             <div class="row">
                                 <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-gorup">
-                                        <label for="">Select Customer <span class="text-danger">*</span></label>
+                                    <div class="form-gorup form-inline">
+                                        <label for="">Select Customer <span class="text-danger">*</span>
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                +
+                                            </button>
+                                        </label>
                                         <select name="customer_id" id="customer_id" class="form-control select2">
                                             <option value="">--select customer--</option>
                                             @foreach ($contacts as $item)
                                             <option value="{{ $item->id }}">{{ $item->prefix_name .' '. $item->f_name .' '. $item->l_name }}</option>
                                             @endforeach
                                         </select>
+                                        &nbsp;&nbsp;
+
                                     </div>
                                     <div class="form-group my-3" id="customer_detail">
                                     </div>
                                 </div><!--customer site done -->
+                                <!-- Modal customer add start -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Customer Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                            <form action="@route('contact.store')" class="form-group" method="POST">
+                            @csrf
+
+                            <div class="form-gorup mb-3">
+                                <label for="">Select Contact <span class="text-danger">*</span> </label>
+                                <select class="form-control" name="contact_info" id="contact_info">
+                                    <option value="">Select Contact</option>
+                                    <option value="Customer" >Customer</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">Prefix <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group mb-3">
+                                    <label for="">Last Name <span class="text-danger">*</span> </label>
+                                    <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-3">
+                                    <label for="">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-3">
+                                    <label for="">Phone <span class="text-danger">*</span></label>
+                                    <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">City</label>
+                                    <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">State</label>
+                                    <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">Country</label>
+                                    <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group mb-3">
+                                    <label for="">Zip Code</label>
+                                    <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="float-right">
+                                <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
+                                <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--cusotmer modal end here -->
                                 <div class="col-sm-12 col-md-8 col-lg-8">
                                     <div class="row">
+                                        @php
+                                            $dt = Carbon\Carbon::now()
+                                        @endphp
                                         <div class="col-sm-12 col-lg-6 col-md-6">
                                             <label for="">Invoice Date</label>
-                                            <input type="date" class="form-control" name="invoice_date" id="">
+                                            <input type="date" value="{{ $dt->toDateString() }}" class="form-control" name="invoice_date" id="">
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <label for="">Due Paid On Date</label>
-                                            <input type="date" class="form-control" name="due_paid_date" id="">
+                                            <input type="date" value="{{ $dt->toDateString() }}" class="form-control" name="due_paid_date" id="">
                                         </div>
                                     </div>
                                 </div><!--others information-->
@@ -116,7 +221,7 @@
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-control">
                                                 <label for="">Payment Methods</label>
-                                                <select class="form-control select2" name="payment_method" id="payment_method">
+                                                <select required class="form-control select2" name="payment_method" id="payment_method">
                                                     <option value="">--select payment method--</option>
                                                     <option value="Handcash">Handcash</option>
                                                     <option value="Bkash">Bkash</option>
@@ -129,7 +234,7 @@
 
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <label for="">Sell on. <span class="text-danger">*</span></label>
-                                            <input type="date" name="sell_on_date" class="form-control" id="">
+                                            <input type="date" value="{{ $dt->toDateString() }}" name="sell_on_date" class="form-control" id="">
                                         </div>
                                     </div>
 
@@ -186,6 +291,7 @@
     @endsection
 
     @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/select2/select2.full.min.js"></script>
      <script>
@@ -353,14 +459,15 @@
                 dataType: 'Json',
                 success:function(response){
                         console.log(response.product.id)
+                        console.log(response.product.purchase.purchase_quantity)
                         if(response.product.fit == null){
                             $.each(response, function(key, item){
                             $("tbody").append('<tr id="del1 '+item.id+'">\
                             <td>'+item.product_name+'</td>\
                             <input type="hidden" class="form-control form-control-sm" value="" name="tin_unit[]" >\
                             <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
-                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
-                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" min="1" max="5"> </td>\
+                            <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]"   > </td>\
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
                             <td> <span class="btn  btn-sm btn-danger" onClick="remove()" >X</span> </td>\
                             </tr>')

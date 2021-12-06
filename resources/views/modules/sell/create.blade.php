@@ -44,13 +44,16 @@
                                 <div class="form-group my-3" id="customer_detail">
                                 </div>
                             </div><!--customer site done -->
+                            @php
+                            $dt = Carbon\Carbon::now()
+                        @endphp
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">Invoice Date</label>
-                                <input type="date" class="form-control" name="invoice_date" id="">
+                                <input type="date" class="form-control" value="{{ $dt->toDateString() }}" name="invoice_date" id="">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <label for="">Due Paid On Date</label>
-                                <input type="date" class="form-control" name="due_paid_date" id="">
+                                <input type="date" class="form-control"  value="{{ $dt->toDateString() }}" name="due_paid_date" id="">
                             </div>
                         </div>
 
@@ -127,7 +130,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="">Sell on. <span class="text-danger">*</span></label>
-                                    <input type="date" name="sell_on_date" class="form-control" id="">
+                                    <input type="date" value="{{ $dt->toDateString() }}" name="sell_on_date" class="form-control" id="">
                                 </div>
                             </div>
 
@@ -181,102 +184,102 @@
 
 
 
-                    <!-- Modal supplier add start -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                    <!-- Modal customer add start -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Customer Info</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
 
-                            <form action="@route('contact.store')" class="form-group" method="POST">
-                            @csrf
+                                        <form action="@route('contact.store')" class="form-group" method="POST">
+                                        @csrf
 
-                            <div class="form-gorup mb-3">
-                                <label for="">Select Contact <span class="text-danger">*</span> </label>
-                                <select class="form-control" name="contact_info" id="contact_info">
-                                    <option value="">Select Contact</option>
-                                    <option value="Customer" >Customer</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">Prefix <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">First Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">Last Name <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <div class="form-group mb-3">
-                                    <label for="">E-mail</label>
-                                    <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <div class="form-group mb-3">
-                                    <label for="">Phone <span class="text-danger">*</span></label>
-                                    <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">City</label>
-                                    <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">State</label>
-                                    <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">Country</label>
-                                    <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">Zip Code</label>
-                                    <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="form-gorup mb-3">
+                                            <label for="">Select Contact <span class="text-danger">*</span> </label>
+                                            <select class="form-control" name="contact_info" id="contact_info">
+                                                <option value="">Select Contact</option>
+                                                <option value="Customer" >Customer</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="form-group mb-3">
+                                                <label for="">Prefix <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="form-group mb-3">
+                                                <label for="">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="form-group mb-3">
+                                                <label for="">Last Name <span class="text-danger">*</span> </label>
+                                                <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group mb-3">
+                                                <label for="">E-mail</label>
+                                                <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group mb-3">
+                                                <label for="">Phone <span class="text-danger">*</span></label>
+                                                <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                                <div class="form-group mb-3">
+                                                <label for="">City</label>
+                                                <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                                <div class="form-group mb-3">
+                                                <label for="">State</label>
+                                                <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                                <div class="form-group mb-3">
+                                                <label for="">Country</label>
+                                                <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                                <div class="form-group mb-3">
+                                                <label for="">Zip Code</label>
+                                                <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-                            <div class="float-right">
-                                <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
-                                <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
+                                        <div class="float-right">
+                                            <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
+                                            <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!--supplier modal end here -->
+                            </div>
+                        </div>
+                    <!--cusotmer modal end here -->
 
 
 
@@ -340,14 +343,13 @@
                     type: 'GET',
                     dataType: 'Json',
                     success:function(response){
-                        console.log(response.product.id)
                         if(response.product.fit == null){
                             $.each(response, function(key, item){
                             $("tbody").append('<tr id="del1 '+item.id+'">\
                             <td>'+item.product_name+'</td>\
                             <input type="hidden" class="form-control form-control-sm" value="" name="tin_unit[]" >\
                             <input type="hidden" class="form-control form-control-sm" value="'+item.id+'" name="product_id[]" >\
-                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value="" name="sell_quantity[]" > </td>\
+                            <td> <input type="number" id="qty'+item.id+'" oninput="getQty(this.value, '+item.id+'); getSumPrice()"  class="form-control form-control-sm" value=""  name="sell_quantity[]" > </td>\
                             <td> <input type="text" id="unit_selling_price'+item.id+'" oninput="unit_price(this.value, '+item.id+'); getSumPrice()" class="form-control form-control-sm" value=" '+item.unit_selling_price+' " name="unit_selling_price[]" > </td>\
                             <td> <input type="text" id="total'+item.id+'" class="form-control form-control-sm total" value="" name="total_price[]" > </td>\
                             <td> <span class="btn  btn-sm btn-danger" onClick="remove()" >X</span> </td>\
