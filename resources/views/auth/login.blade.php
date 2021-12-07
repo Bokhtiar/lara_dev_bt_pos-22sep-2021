@@ -20,73 +20,90 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <style>
-      body{
+      .svg{
 
-        background: url(login.svg);
+      }
+      .svg-logo{
+        background: url(f.svg);
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: center;
       }
+      .btn-color{
+        background-color: red; /* For browsers that do not support gradients */
+        background-image: linear-gradient(to right, rgb(0,85,149),rgb(0,117,184));
+      }
+      input[type="text"], textarea {
+
+        background-color : #d80e0e;
+        border: 0px;
+
+        }
+
+        @media(max-width:576px){
+          .svg-logo{
+            background: url(images/icon.png)
+          }
+        }
+
+
 </style>
-<body class="hold-transition ">
+<body class="hold-transition svg-logo svg">
 
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{ asset('admin') }}/index2.html"><b>Chan mia &</b>Sons</a>
-  </div>
-  <!-- /.login-logo -->
-  <section>
-    <div class="card">
-        <div class="card-body"> <!--csss code login-card-body-->
-          <p class="login-box-msg">Sign in to start your session</p>
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
 
-          <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <div class="form-group has-feedback">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              <span class="fa fa-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              <span class="fa fa-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-              <div class="col-8">
-                <div class="checkbox icheck">
-                  <label>
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                        <label class="form-check-label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                  </label>
-                </div>
-              </div>
-              <!-- /.col -->
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-              </div>
-              <!-- /.col -->
-            </div>
-          </form>
         </div>
-        <!-- /.login-card-body -->
-      </div>
-  </section>
-</div>
-<!-- /.login-box -->
+
+        <div class="col-12 col-sm-12 col-lg-8 col-md-8" style="">
+            <div class="login-box " style="width: 296px;">
+                <div class="login-logo">
+                  <a href="{{ url('/') }}" class="" style="color: #0F344C"> -</a>
+                </div>
+                <!-- /.login-logo -->
+                <section class="login-form  float-right" >
+                  <div class="card" style="background-color:#22719F; border: 3px solid #3494D3;
+                  border-radius: 25px; height: 400px; width:283px;" >
+                      <div class="">
+                          <div class="">
+                             <p class="text-center text-light mt-5">WELCOME</p>
+                          </div>
+                      </div>
+                      <div class="card-body my-2"> <!--csss code login-card-body-->
+                        <form method="POST" action="{{ route('login') }}">
+                          @csrf
+                          <div class="form-group has-feedback">
+                              <input id="email" type="email" style="background-color: #004986; border: 0px;" placeholder="User Name" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                              @error('email')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                            <span class="fa fa-envelope form-control-feedback"></span>
+                          </div>
+                          <div class="form-group has-feedback">
+                              <input id="password" type="password" style="background-color: #004986; border: 0px;" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                              @error('password')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                            <span class="fa fa-lock form-control-feedback"></span>
+                          </div>
+                          <div class="form-group">
+                              <div class="">
+                                  <button  type="submit" style="background-color: #0168AB; color: white" class="btn-color btn btn-block btn-flat">LOGIN</button>
+                                </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /.login-card-body -->
+                    </div>
+                </section>
+              </div>
+        </div>
+    </div>
 
 <!-- jQuery -->
 <script src="{{ asset('admin') }}/plugins/jquery/jquery.min.js"></script>
