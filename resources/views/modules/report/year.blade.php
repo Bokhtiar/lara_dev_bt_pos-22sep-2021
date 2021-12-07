@@ -39,8 +39,8 @@
                 <td>{{$item->customer ? $item->customer->prefix_name .' '. $item->customer->f_name .' '. $item->customer->l_name : '' }}</td>
                 <td>{{ $item->created_at->diffForHumans() }}</td>
                 <td>{{ $item->total_amount }} TK</td>
-                <td>{{ $item->pay_amount }} TK</td>
-                <td>{{ $item->total_amount - $item->pay_amount }}Tk</td>
+                <td>{{ $item->paid_amount }} TK</td>
+                <td>{{ $item->total_amount - $item->paid_amount }}Tk</td>
                 <td>
                     @if($item->status == 1)
                         <a class="" href="@route('sell.status',$item->id)"><span class="badge badge-success" title="if you click this button chenge the status">successfully</span></a>

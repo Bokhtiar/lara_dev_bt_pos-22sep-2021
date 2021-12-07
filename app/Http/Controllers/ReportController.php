@@ -20,7 +20,6 @@ class ReportController extends Controller
         $sells = Sell::whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))
         ->get();
-        dd($sells);
         return view('modules.report.month', compact('sells'));
     }
 

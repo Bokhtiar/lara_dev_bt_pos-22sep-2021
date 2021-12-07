@@ -5,12 +5,12 @@
     @section('admin_content')
     <section class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 @isset(auth()->user()->role->permission['permission']['permission']['add'])
                 <a class="btn btn-success text-light" href="{{url('permission/create')}}">Create Permission </a>
                 @endisset
                 <h2 class="text-center">Permissions</h2>
-                <table class="table">
+                <table class="table text-center">
                     <thead>
                     <tr>
                         <th scope="col">Sl</th>

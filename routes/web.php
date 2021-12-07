@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FitController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -128,6 +129,11 @@ Route::get('sell/delete/{id}', [SellController::class, 'destroy']);
 Route::post('percentage-update/{id}', [SellController::class, 'discount_percentage']);
 Route::get('/sell/product/search/{id}', [SellController::class, 'sell_product_show']);
 Route::get('sell/status/{id}', [SellController::class, 'status'])->name('sell.status');
+
+//pasword change / reset
+Route::get('password/create', [PasswordResetController::class, 'create']);
+Route::post('reset/password', [PasswordResetController::class, 'store']);
+
 
 //order
 Route::resource('order', OrderController::class);
