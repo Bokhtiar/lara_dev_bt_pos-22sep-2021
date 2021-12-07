@@ -17,6 +17,8 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('admin') }}/plugins/iCheck/square/blue.css">
   <!-- Google Font: Source Sans Pro -->
+  <link href="http://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <style>
@@ -24,7 +26,8 @@
 
       }
       .svg-logo{
-        background: url(f.svg);
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background: url(sm.svg);
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -39,11 +42,24 @@
 
         }
 
-        @media(max-width:576px){
-          .svg-logo{
-            background: url(images/icon.png)
-          }
+       @media (max-width:576px) {
+            .svg-logo{
+                font-family: Gilroy;
+                background: url(xtrasm.svg);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .login-form{
+                width: 305px;
+            }
+       }
+
+       @font-face {
+        font-family: Gilroy;
+        weight: 400;
+        src: url(/fonts/gilroy-regular.woff) format("woff");
         }
+        @import url('http://fonts.cdnfonts.com/css/gilroy-bold');
 
 
 </style>
@@ -62,10 +78,10 @@
                 <!-- /.login-logo -->
                 <section class="login-form  float-right" >
                   <div class="card" style="background-color:#22719F; border: 3px solid #3494D3;
-                  border-radius: 25px; height: 400px; width:283px;" >
+                  border-radius: 25px; height: 400px; width:309px;" >
                       <div class="">
                           <div class="">
-                             <p class="text-center text-light mt-5">WELCOME</p>
+                             <p class="text-center text-light mt-5 " style="font-family: 'Gilroy-Regular', sans-serif;">Welcome</p>
                           </div>
                       </div>
                       <div class="card-body my-2"> <!--csss code login-card-body-->

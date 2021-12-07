@@ -108,7 +108,13 @@
 
 @if(Session::has('reset_password'))
   <script type="text/javascript">
-    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","success")
+    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","warning")
+  </script>
+@endif
+
+@if(Session::has('confirm-password'))
+  <script type="text/javascript">
+    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","error")
   </script>
 @endif
 

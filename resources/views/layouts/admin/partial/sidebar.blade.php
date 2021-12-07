@@ -44,7 +44,7 @@
           @isset(auth()->user()->role->permission['permission']['pos']['list'])
           <li class="nav-item">
             <a href="{{url('/pos')}}" class="nav-link">
-                <i class="nav-icon fa fa-dashboard"></i>
+                <i class="fas fa-shopping-basket"></i>
               <p>
                 POS
               </p>
@@ -236,7 +236,7 @@
            @isset(auth()->user()->role->permission['permission']['sell']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-cart-arrow-down"></i>
               <p>
                 Sell Products
                 <i class="right fa fa-angle-left"></i>
@@ -256,7 +256,7 @@
            @isset(auth()->user()->role->permission['permission']['permission']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-lock"></i>
               <p>
                 Permission
                 <i class="right fa fa-angle-left"></i>
@@ -275,7 +275,7 @@
            @isset(auth()->user()->role->permission['permission']['role']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-key"></i>
               <p>
                 Role
                 <i class="right fa fa-angle-left"></i>
@@ -294,7 +294,7 @@
            @isset(auth()->user()->role->permission['permission']['report']['list'])
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="fas fa-file"></i>
               <p>
                 Reports
                 <i class="right fa fa-angle-left"></i>
@@ -341,7 +341,7 @@
            @isset(auth()->user()->role->permission['permission']['setting']['list'])
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tree"></i>
+                <i class="fas fa-cogs"></i>
               <p>
                 Settings
                 <i class="fa fa-angle-left right"></i>
@@ -366,7 +366,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tree"></i>
+                <i class="fas fa-sign-out-alt"></i>
               <p>
                 Logout
                 <i class="fa fa-angle-left right"></i>

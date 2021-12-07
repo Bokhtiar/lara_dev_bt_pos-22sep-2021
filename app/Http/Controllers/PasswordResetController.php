@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
@@ -52,11 +53,12 @@ class PasswordResetController extends Controller
                   return redirect()->route('login');
                 }
                 else {
-                  return redirect()->route('/');
+                    Session::flash('confirm-password','Confirm Password is not Match please...');
+                  return back();
                 }
             }else {
-
-              return redirect()->route('/');
+                Session::flash('reset_password','Old Passowrd is Wrong...');
+              return back();
             }
     }
 
