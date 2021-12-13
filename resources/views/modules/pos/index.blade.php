@@ -100,102 +100,7 @@
                                     <div class="form-group my-3" id="customer_detail">
                                     </div>
                                 </div><!--customer site done -->
-                                <!-- Modal customer add start -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Customer Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
 
-                            <form action="@route('contact.store')" class="form-group" method="POST">
-                            @csrf
-
-                            <div class="form-gorup mb-3">
-                                <label for="">Select Contact <span class="text-danger">*</span> </label>
-                                <select class="form-control" name="contact_info" id="contact_info">
-                                    <option value="">Select Contact</option>
-                                    <option value="Customer" >Customer</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">Prefix <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">First Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4">
-                                    <div class="form-group mb-3">
-                                    <label for="">Last Name <span class="text-danger">*</span> </label>
-                                    <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <div class="form-group mb-3">
-                                    <label for="">E-mail</label>
-                                    <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <div class="form-group mb-3">
-                                    <label for="">Phone <span class="text-danger">*</span></label>
-                                    <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">City</label>
-                                    <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">State</label>
-                                    <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">Country</label>
-                                    <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group mb-3">
-                                    <label for="">Zip Code</label>
-                                    <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="float-right">
-                                <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
-                                <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!--cusotmer modal end here -->
                                 <div class="col-sm-12 col-md-8 col-lg-8">
                                     <div class="row">
                                         @php
@@ -284,6 +189,103 @@
                                 <input type="submit" class="btn btn-primary" value="Order Confirm">
                             </div>
                     </form>
+
+                    <!-- Modal customer add start -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Customer Info</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                    <form action="@route('contact.store')" class="form-group" method="POST">
+                                    @csrf
+
+                                    <div class="form-gorup mb-3">
+                                        <label for="">Select Contact <span class="text-danger">*</span> </label>
+                                        <select class="form-control" name="contact_info" id="contact_info">
+                                            <option value="">Select Contact</option>
+                                            <option value="Customer" >Customer</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group mb-3">
+                                            <label for="">Prefix <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="mr/ms" value="" name="prefix_name" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group mb-3">
+                                            <label for="">First Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="first name" value="" name="f_name" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group mb-3">
+                                            <label for="">Last Name <span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" placeholder="last name" value="" name="l_name" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group mb-3">
+                                            <label for="">E-mail</label>
+                                            <input type="email" class="form-control" placeholder="email" name="email" value="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group mb-3">
+                                            <label for="">Phone <span class="text-danger">*</span></label>
+                                            <input type="phone" class="form-control" placeholder="phone" name="phone" value="" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group mb-3">
+                                            <label for="">City</label>
+                                            <input type="text" class="form-control" placeholder="city" name="city" value="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group mb-3">
+                                            <label for="">State</label>
+                                            <input type="text" class="form-control" placeholder="state" name="state" value="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group mb-3">
+                                            <label for="">Country</label>
+                                            <input type="text" class="form-control" placeholder="country" name="country" value="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group mb-3">
+                                            <label for="">Zip Code</label>
+                                            <input type="text" class="form-control" placeholder="Zip Code" value="" name="zip" id="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="float-right">
+                                        <span class="btn-sm btn btn-danger"><i class="far fa-times-circle"></i><input class="btn-sm btn btn-danger"  type="reset" name="" id=""></span>
+                                        <span class="btn-sm btn btn-primary"><i class="fas fa-share-square"></i><input class="btn-sm btn btn-primary" type="submit" name="" value="Add New Contact" id=""></span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--cusotmer modal end here -->
                 </div>
             </div>
         </div>
@@ -304,7 +306,7 @@
         function product_show(response){
             response.forEach(item => {
             if(item.product.fit == null){
-                if(item.product.alert_quantity < item.purchase_quantity){
+                if(item.product.alert_quantity > item.purchase_quantity){
                     $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
                     <div class="card">\
                     <div class="card-body">\
@@ -318,7 +320,7 @@
                     </div>')
                 }
             }else{
-                if(item.product.alert_quantity < item.purchase_quantity){
+                if(item.product.alert_quantity > item.purchase_quantity){
                     $('#product_row').append('<div class="col-sm-6 col-md-4 col-lg-4">\
                     <div class="card">\
                     <div class="card-body">\
